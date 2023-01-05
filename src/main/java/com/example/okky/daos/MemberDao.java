@@ -1,6 +1,6 @@
 package com.example.okky.daos;
 
-import com.example.okky.dtos.MemberDto;
+import com.example.okky.dtos.members.MemberDto;
 
 import java.sql.*;
 
@@ -25,6 +25,7 @@ public class MemberDao {
         try {
             String sql = "insert into `okky`.`users` (`email`, `password`, `name`, `nickName`, `telecom`, `contact`, `contactCountryValue`, `policyEmailSend`) values (?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
+
             pstmt.setString(1, mdto.getEmail());
             pstmt.setString(2, mdto.getPassword());
             pstmt.setString(3, mdto.getName());
@@ -33,6 +34,7 @@ public class MemberDao {
             pstmt.setString(6, mdto.getContact());
             pstmt.setString(7, mdto.getcontactCountryValue());
             pstmt.setBoolean(8, mdto.isPolicyEmailSend());
+
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

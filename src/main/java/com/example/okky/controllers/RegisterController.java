@@ -1,7 +1,7 @@
 package com.example.okky.controllers;
 
 import com.example.okky.daos.MemberDao;
-import com.example.okky.dtos.MemberDto;
+import com.example.okky.dtos.members.MemberDto;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +24,10 @@ public class RegisterController extends HttpServlet {
     }
 
     protected void action(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        req.setCharacterEncoding("utf-8");
+
+
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String passwordCheck = req.getParameter("passwordCheck");
@@ -34,6 +38,19 @@ public class RegisterController extends HttpServlet {
         String contactCountryValue = req.getParameter("contactCountryValue");
         String contactAuthCode = req.getParameter("contactAuthCode");
         String policyEmailSend = req.getParameter("policyEmailSend");
+
+
+        System.out.println(email);
+        System.out.println(password);
+        System.out.println(passwordCheck);
+        System.out.println(name);
+        System.out.println(nickName);
+        System.out.println(telecom);
+        System.out.println(contact);
+        System.out.println(contactCountryValue);
+        System.out.println(contactAuthCode);
+        System.out.println(policyEmailSend);
+
 
         MemberDao mdao = new MemberDao();
         MemberDto mdto = new MemberDto();
@@ -49,14 +66,11 @@ public class RegisterController extends HttpServlet {
         mdto.setPolicyEmailSend(Boolean.valueOf(policyEmailSend));
 
 
-
-
-
-
         mdao.insertUser(mdto);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/members/userLogin.jsp");
-        dispatcher.forward(req,resp);
+        dispatcher.forward(req, resp);
+//        resp.sendRedirect("/members/userLogin.jsp");
 
     }
 }

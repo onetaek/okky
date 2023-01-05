@@ -1,4 +1,4 @@
-package com.example.okky.dtos;
+package com.example.okky.dtos.members;
 
 import java.util.Date;
 import java.util.Objects;

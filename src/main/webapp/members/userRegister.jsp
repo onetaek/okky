@@ -1,5 +1,21 @@
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@include file="../basic.jsp"%>
+<%@include file="../dbConn.jsp"%>
+
+<%
+    String sql = "select * from `okky`.`telecoms`";
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+
+    ArrayList<String> list = new ArrayList<>();
+
+    while (rs.next()) {
+        list.add(rs.getString("value"));
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,6 +28,7 @@
 </head>
 <body>
 <!-- ----------------------------------------로고-------------------------------------------- -->
+
 <div id="headerWrap">
     <a href="../index.jsp"><img class="logo" src="../resources/img/okky.svg" alt="OKKY Logo"></a>
     <h2>OKKY에 오신것을 환영합니다.</h2>
@@ -38,6 +55,7 @@
         </div>
     </div>
     <!-- ---------------------------------------회원가입정보--------------------------------------------- -->
+
     <div id="signUptitle">
         <span>회원가입에 필요한 기본정보를 입력해주세요.</span>
     </div>
@@ -73,10 +91,9 @@
                     <div class="boxbundle">
                         <div id="phoneinfo">
                             <select name="telecom" id="telecom">
-                                <option value="SKT" selected>SKT</option>
-                                <option value="KT">KT</option>
-                                <option value="LGU+">LGU+</option>
-                                <option value="알뜰폰">알뜰폰</option>
+                                <c:forEach var="l" items="<%=list%>">
+                                    <option value="${l}"> ${l} </option>
+                                </c:forEach>
                             </select>
                             <input type="hidden" name="contactCountryValue" value="082">
                             <input name="contact" id="contact" class="phoneBox" type="text"
