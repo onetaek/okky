@@ -2,6 +2,7 @@
 
 ### [디자인 패턴 참고 github경로](https://github.com/benjimr/Converge-Social-Media-Website-Backend.git)
 ### [notion team work space](https://www.notion.so/invite/e71a006af10126121f97bea8e33adb04cc3e06fd)
+### [성낙현의 JSP 자바 웹 프로그래밍책 소스 코드](https://github.com/goldenrabbit2020/musthave_jsp.git)
 
 <hr>
 <hr>
