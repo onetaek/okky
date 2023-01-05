@@ -1,5 +1,11 @@
 ## 커뮤니 케이션 사이트 프로젝트
 
+### [디자인 패턴 참고 github경로](https://github.com/benjimr/Converge-Social-Media-Website-Backend.git)
+### [notion team work space](https://www.notion.so/invite/e71a006af10126121f97bea8e33adb04cc3e06fd)
+
+<hr>
+<hr>
+
 소스코드 블록은 다음과 같이 작성할 수 있습니다. 
 
 ```java
@@ -34,8 +40,6 @@ System.out.println(data);
  **치킨** 먹다가 ~~두드러기~~ 났어요.ㅠㅠ
 
 ====================================================================
-
-[디자인 패턴 참고 github경로](https://github.com/benjimr/Converge-Social-Media-Website-Backend.git)
 
 
 
