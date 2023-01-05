@@ -32,3 +32,10 @@ System.out.println(data);
  
  강조는 다음과 같이 할 수 있습니다.
  **치킨** 먹다가 ~~두드러기~~ 났어요.ㅠㅠ
+
+====================================================================
+
+[디자인 패턴 참고 github경로](https://github.com/benjimr/Converge-Social-Media-Website-Backend.git)
+
+
+
