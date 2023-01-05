@@ -26,8 +26,8 @@
                         </label>
                     </form>
                 </li>
-                <li class="login admin"><a href="./members/userLogin.jsp">로그인</a></li>
-                <li class="join admin"><a href="./members/userRegister.jsp">회원가입</a></li>
+                <li class="login admin"><a href="../members/userLogin.jsp">로그인</a></li>
+                <li class="join admin"><a href="/registerView.do">회원가입</a></li>
             </ul>
         </nav>
     </header>
