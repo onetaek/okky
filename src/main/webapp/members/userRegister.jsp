@@ -1,9 +1,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%--
 <%@include file="../basic.jsp"%>
 <%@include file="../dbConn.jsp"%>
-
 <%
     String sql = "select * from `okky`.`telecoms`";
     pstmt = conn.prepareStatement(sql);
@@ -15,7 +16,7 @@
         list.add(rs.getString("value"));
     }
 %>
-
+--%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,14 +24,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Okky</title>
-    <link rel="stylesheet" href="../resources/css/reset.css">
-    <link rel="stylesheet" href="resources/css/userRegister.css">
+    <jsp:include page="../layouts/head2.jsp"/>
+    <link rel="stylesheet" href="../members/resources/css/userRegister.css">
 </head>
 <body>
 <!-- ----------------------------------------로고-------------------------------------------- -->
-
 <div id="headerWrap">
-    <a href="../index.jsp"><img class="logo" src="../resources/img/okky.svg" alt="OKKY Logo"></a>
+    <a href="../main/welcome.jsp"><img class="logo" src="../resources/img/okky.svg" alt="OKKY Logo"></a>
     <h2>OKKY에 오신것을 환영합니다.</h2>
     <p class="Explanation">OKKY는 소프트웨어 개발자를 위한 지식공유 플랫폼입니다.</p>
     <!-- --------------------------------------SNS로그인----------------------------------------------- -->
@@ -91,8 +91,13 @@
                     <div class="boxbundle">
                         <div id="phoneinfo">
                             <select name="telecom" id="telecom">
+                                <%--
                                 <c:forEach var="l" items="<%=list%>">
                                     <option value="${l}"> ${l} </option>
+                                </c:forEach>
+                                --%>
+                                <c:forEach var="telecomDto" items="${telecomDtoList}">
+                                    <option>${telecomDto.value}</option>
                                 </c:forEach>
                             </select>
                             <input type="hidden" name="contactCountryValue" value="082">
@@ -130,5 +135,4 @@
     </div>
 </div>
 </body>
-
 </html>
