@@ -27,6 +27,7 @@ public class CryptoUtils {
         }
     }
 
+
     public static String hashSha512Unsafe(String i) throws NoSuchAlgorithmException {
         return CryptoUtils.hashSha512Unsafe(i, CryptoUtils.DEFAULT_CHARSET);
     }
