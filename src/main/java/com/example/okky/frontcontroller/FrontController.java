@@ -1,7 +1,6 @@
 package com.example.okky.frontcontroller;
 
-import com.example.okky.command.Command;
-import com.example.okky.command.RegisterViewCommand;
+import com.example.okky.command.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,11 +36,24 @@ public class FrontController extends HttpServlet {
         System.out.println("conPath: "+conPath);
         System.out.println("com: "+com);
 
-        if(com.equals("/registerView.do")){
+        if(com.equals("/main/registerView.do")){
             System.out.println("registerView.do equals!!");
             command = new RegisterViewCommand();
             command.execute(req,resp);
-            viewPage = "members/userRegister.jsp";
+            viewPage = "../members/userRegister.jsp";
+        }else if(com.equals("/members/login.do")){
+            command = new UserLoginCommand();
+            command.execute(req, resp);
+            viewPage = "../main/welcome.jsp";
+        }else if(com.equals("/main/userRegister.do")){
+            command = new RegisterCommand();
+            command.execute(req, resp);
+            viewPage = "../members/userLogin.jsp";
+        }else if(com.equals("/members/logout.do")){
+            System.out.println("/main/logout.do 왔다!");
+            command = new UserLogoutCommand();
+            command.execute(req, resp);
+            viewPage = "../main/welcome.jsp";
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);

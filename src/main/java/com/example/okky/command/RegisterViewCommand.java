@@ -14,10 +14,10 @@ public class RegisterViewCommand implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
 
         MemberDao memberDao = new MemberDao();
-        List<ContactCountryDto> contactCountryDtoList = memberDao.selectContactCountry();
+//        List<ContactCountryDto> contactCountryDtoList = memberDao.selectContactCountry();
         List<TelecomDto> telecomDtoList = memberDao.selectTelecom();
 
-        req.setAttribute("contactCountryDtoList",contactCountryDtoList);
+//        req.setAttribute("contactCountryDtoList",contactCountryDtoList);
         req.setAttribute("telecomDtoList",telecomDtoList);
 
     }

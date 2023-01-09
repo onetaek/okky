@@ -13,10 +13,11 @@ public class MemberDao {
     ResultSet rs;
     Connection conn;
 
+
     public MemberDao() {
         String url = "jdbc:mariadb://localhost:3306/okky";
-        String user = "root";
-        String password = "dpdlvldzm419!";
+        String user = "kjh";
+        String password = "9172";
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, password);
@@ -30,7 +31,7 @@ public class MemberDao {
     public void insertUser(MemberDto mdto) {
         System.out.println("insertUser method start");
         try {
-            String sql = "insert into `okky`.`users` (`email`, `password`, `name`, `nickName`, `telecom`, `contact`, `contact`, `policyEmailSend`) values (?,?,?,?,?,?,?,?)";
+            String sql = "insert into `okky`.`users` (`email`, `password`, `name`, `nickName`, `telecom`, `contact`, `contactCountryValue`, `policyEmailSend`) values (?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, mdto.getEmail());
@@ -39,7 +40,7 @@ public class MemberDao {
             pstmt.setString(4, mdto.getNickName());
             pstmt.setString(5, mdto.getTelecom());
             pstmt.setString(6, mdto.getContact());
-            pstmt.setString(7, mdto.getcontactCountryValue());
+            pstmt.setString(7, mdto.getContactCountryValue());
             pstmt.setBoolean(8, mdto.isPolicyEmailSend());
 
             pstmt.executeUpdate();
@@ -84,25 +85,56 @@ public class MemberDao {
 
     public List<TelecomDto> selectTelecom() {
         System.out.println("selectTelecom method start");
-        List<TelecomDto> telecomDtoList = new ArrayList<TelecomDto>();
+        List<TelecomDto> telecomDtoList = new ArrayList<>();
         try {
             String sql = "select * from `okky`.`telecoms`";
             pstmt = conn.prepareStatement(sql);
-            pstmt.executeQuery();
+            rs = pstmt.executeQuery();
             while(rs.next()){
                 TelecomDto telecomDto = new TelecomDto();
                 telecomDto.setText(rs.getString(1));
                 telecomDto.setValue(rs.getString(2));
                 telecomDtoList.add(telecomDto);
             }
-            if(conn!=null)
-                conn.close();
-            if(pstmt !=null)
-                pstmt.close();
+
         }catch (Exception e){
             System.out.println("selectTelecom method ERROR");
             e.printStackTrace();
         }
         return telecomDtoList;
     }
+
+    public MemberDto selectUserById(String id, String password) {
+        MemberDto dto = null;
+        String sql = "select * from `okky`.`users` where `email` = ? and password = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,id);
+            pstmt.setString(2,password);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                dto = new MemberDto(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getBoolean(8),
+                        rs.getDate(9),
+                        rs.getString(10),
+                        rs.getBoolean(11)
+                );
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
+
+
+
+
 }

@@ -1,32 +1,15 @@
-package com.example.okky.controllers;
+package com.example.okky.command;
 
 import com.example.okky.daos.MemberDao;
 import com.example.okky.dtos.members.MemberDto;
+import com.example.okky.utils.CryptoUtils;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-@WebServlet(value = "/userRegister")
-public class RegisterController extends HttpServlet {
+public class RegisterCommand implements Command{
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        action(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        action(req, resp);
-    }
-
-    protected void action(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        req.setCharacterEncoding("utf-8");
-
+    public void execute(HttpServletRequest req, HttpServletResponse resp) {
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
@@ -39,7 +22,12 @@ public class RegisterController extends HttpServlet {
         String contactAuthCode = req.getParameter("contactAuthCode");
         String policyEmailSend = req.getParameter("policyEmailSend");
 
-
+        boolean policy = false;
+        if (policyEmailSend.equals("on")) {
+            policy = true;
+        } else if (policyEmailSend == null) {
+            policy= false;
+        }
         System.out.println(email);
         System.out.println(password);
         System.out.println(passwordCheck);
@@ -49,28 +37,25 @@ public class RegisterController extends HttpServlet {
         System.out.println(contact);
         System.out.println(contactCountryValue);
         System.out.println(contactAuthCode);
-        System.out.println(policyEmailSend);
-
+        System.out.println(policy);
 
         MemberDao mdao = new MemberDao();
         MemberDto mdto = new MemberDto();
 
+        String hashPassword = CryptoUtils.hashSha512(password);
+        System.out.println(hashPassword);
 
         mdto.setEmail(email);
-        mdto.setPassword(password);
+        mdto.setPassword(hashPassword);
         mdto.setName(name);
         mdto.setNickName(nickName);
         mdto.setTelecom(telecom);
         mdto.setContact(contact);
         mdto.setcontactCountryValue(contactCountryValue);
-        mdto.setPolicyEmailSend(Boolean.valueOf(policyEmailSend));
+//        System.out.println(Boolean.valueOf(policyEmailSend));
+        mdto.setPolicyEmailSend(policy);
 
 
         mdao.insertUser(mdto);
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/members/userLogin.jsp");
-        dispatcher.forward(req, resp);
-//        resp.sendRedirect("/members/userLogin.jsp");
-
     }
 }

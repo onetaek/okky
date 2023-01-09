@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@include file="../basic.jsp"%>
 <div id="headerWrap">
     <header id="header">
         <div class="left-nav">
@@ -26,8 +27,16 @@
                         </label>
                     </form>
                 </li>
-                <li class="login admin"><a href="../members/userLogin.jsp">로그인</a></li>
-                <li class="join admin"><a href="/registerView.do">회원가입</a></li>
+                <c:if test="${user == null}">
+                    <li class="login admin"><a href="../members/userLogin.jsp">로그인</a></li>
+                    <li class="join admin"><a href="registerView.do">회원가입</a></li>
+                </c:if>
+
+                <c:if test="${user != null}">
+                    <li class="login admin"><a href="../members/userLogin.jsp">${user.nickName} 님</a></li>
+                    <li class="join admin"><a href="logout.do">로그 아웃</a></li>
+                </c:if>
+
             </ul>
         </nav>
     </header>

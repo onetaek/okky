@@ -17,6 +17,9 @@ public class MemberDto {
     private boolean isAdmin;
 
 
+    public MemberDto build() {
+        return new MemberDto();
+    }
     public MemberDto() {
     }
 
@@ -88,7 +91,7 @@ public class MemberDto {
         this.telecom = telecom;
     }
 
-    public String getcontactCountryValue() {
+    public String getContactCountryValue() {
         return contactCountryValue;
     }
 
