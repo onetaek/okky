@@ -1,5 +1,6 @@
 package com.example.okky.daos;
 
+import com.example.okky.DBConntection.JDBCConnection;
 import com.example.okky.dtos.members.ContactCountryDto;
 import com.example.okky.dtos.members.MemberDto;
 import com.example.okky.dtos.members.TelecomDto;
@@ -9,21 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDao {
-    PreparedStatement pstmt;
-    ResultSet rs;
+
+    PreparedStatement pstmt = null;
     Connection conn;
+    ResultSet rs = null;
 
-
-    public MemberDao() {
-        String url = "jdbc:mariadb://localhost:3306/okky";
-        String user = "kjh";
-        String password = "9172";
+    void connect() {
         try {
-            Class.forName("org.mariadb.jdbc.Driver");
-            conn = DriverManager.getConnection(url, user, password);
-            System.out.println("db connect success!");
-        } catch (Exception e) {
-            System.out.println("db connect failed");
+            conn = JDBCConnection.getConnection();
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
