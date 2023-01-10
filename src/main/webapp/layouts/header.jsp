@@ -8,9 +8,9 @@
             <nav>
                 <h2 class="hidden">주요이용메뉴</h2>
                 <ul class="gnb">
-                    <li><a href="../articles/QandA.jsp">Q&A</a></li>
-                    <li class="left-line"><a href="../articles/community.jsp">커뮤니티</a></li>
-                    <li class="left-line"><a href="../articles/notice.jsp">공지사항</a></li>
+                    <li><a href="../articles/articleView.do?boardId=1">Q&A</a></li>
+                    <li class="left-line"><a href="../articles/articleView.do?boardId=2">커뮤니티</a></li>
+                    <li class="left-line"><a href="../articles/articleView.do?boardId=3">공지사항</a></li>
                 </ul>
             </nav>
         </div>

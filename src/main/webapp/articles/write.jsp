@@ -3,14 +3,14 @@
 <html lang="ko">
 <head>
   <title>글쓰기 페이지</title>
-  <jsp:include page="../layouts/head2.jsp"/>
+  <jsp:include page="../layouts/head.jsp"/>
   <link rel="stylesheet" href="resources/css/write.css">
 </head>
 <body>
 <jsp:include page="/layouts/header.jsp"/>
 <section class="section" id="community">
   <div id="write">
-    <form method="post">
+    <form action="write.do" method="post">
       <h3>글작성하기</h3>
       <p>***님 지식공유 플랫폼 OKKY에서 최고의 개발자들과 함께 궁금증을 해결하세요.</p>
       <div id="wrap">

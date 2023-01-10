@@ -50,8 +50,17 @@ public class FrontController extends HttpServlet {
             command.execute(req, resp);
             viewPage = "../members/userLogin.jsp";
         }else if(com.equals("/members/logout.do")){
-            System.out.println("/main/logout.do 왔다!");
             command = new UserLogoutCommand();
+            command.execute(req, resp);
+            viewPage = "../main/welcome.jsp";
+        }else if(com.equals("/articles/articleView.do")){
+            System.out.println("들어왔나?");
+            command = new ArticleViewCommand();
+            command.execute(req, resp);
+            viewPage = "/articles/board.jsp";
+            System.out.println("last line!");
+        }else if(com.equals("/articles/write.do")){
+            command = new ArticleWriteCommand();
             command.execute(req, resp);
             viewPage = "../main/welcome.jsp";
         }

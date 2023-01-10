@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>JSP - Hello World</title>
-    <jsp:include page="../layouts/head2.jsp"/>
+    <jsp:include page="../layouts/head.jsp"/>
     <link rel="stylesheet" href="../resources/css/aside.css" />
     <link rel="stylesheet" href="../resources/css/main.css">
 </head>
