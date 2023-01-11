@@ -13,12 +13,12 @@
   <div id="sectionWrap">
     <section id="section1">
       <div class="title">
-        <span>Q&A</span>
+        <span>${boardDto.text}</span>
         <span>좋은 질문과 답변으로 동료의 시간을 아껴주세요.</span>
       </div>
       <div id="top-container">
         <div class="container">
-          <a class="w_btn" href="write.jsp">
+          <a class="w_btn" href="writeView.do?boardId=${boardDto.value}">
             <i class="icon fa-regular fa-pen-to-square"></i>
             작성하기
           </a>

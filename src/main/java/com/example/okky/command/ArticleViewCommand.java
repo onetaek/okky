@@ -15,11 +15,16 @@ public class ArticleViewCommand implements Command{
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
         String boardId = req.getParameter("boardId");
         System.out.println("ArticleViewCommand에서 받은 boardId: "+boardId);
-        ArticleDao adao = new ArticleDao();
-        ArrayList<ArticleDto> articleDtoList = adao.selectArticleByBoardId(boardId);
 
         BoardDao bdao = new BoardDao();
+        //어떤 게시판 인지(ex 공지사항, 커뮤니티...)
         BoardDto boardDto = bdao.selectBoardById(boardId);
+
+        ArticleDao adao = new ArticleDao();
+        //게시글 가져오기(ex
+        ArrayList<ArticleDto> articleDtoList = adao.selectArticleByBoardId(boardId);
+
+
 
         req.setAttribute("articleDtoList",articleDtoList);
         req.setAttribute("boardDto",boardDto);

@@ -6,7 +6,6 @@ import java.util.Objects;
 public class ArticleDto {
     private int index;
     private String boardId;
-    private String tag;
     private String userEmail;
     private String title;
     private String content;
@@ -16,10 +15,9 @@ public class ArticleDto {
     public ArticleDto() {
     }
 
-    public ArticleDto(int index, String boardId, String tag, String userEmail, String title, String content, long view, Date createdAt) {
+    public ArticleDto(int index, String boardId, String userEmail, String title, String content, long view, Date createdAt) {
         this.index = index;
         this.boardId = boardId;
-        this.tag = tag;
         this.userEmail = userEmail;
         this.title = title;
         this.content = content;
@@ -56,13 +54,6 @@ public class ArticleDto {
         this.boardId = boardId;
     }
 
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
 
     public String getUserEmail() {
         return userEmail;

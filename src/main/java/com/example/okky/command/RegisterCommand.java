@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RegisterCommand implements Command{
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
-
+        System.out.println("회원가입 command");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String passwordCheck = req.getParameter("passwordCheck");

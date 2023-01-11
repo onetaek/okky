@@ -30,11 +30,8 @@ public class FrontController extends HttpServlet {
 
         String uri = req.getRequestURI();
         String path = uri.substring(uri.lastIndexOf("/"));
-//        String conPath = req.getContextPath();
-//        String com = uri.substring(conPath.length());
 
         System.out.println("uri: "+uri);
-//        System.out.println("conPath: "+conPath);
         System.out.println("com: "+path);
 
         if(path.equals("/registerView.do")){
@@ -60,10 +57,14 @@ public class FrontController extends HttpServlet {
             command.execute(req, resp);
             viewPage = "/articles/board.jsp";
             System.out.println("last line!");
+        }else if(path.equals("/writeView.do")){
+            command = new ArticleWriteViewCommand();
+            command.execute(req, resp);
+            viewPage = "/articles/write.jsp";
         }else if(path.equals("/write.do")){
             command = new ArticleWriteCommand();
             command.execute(req, resp);
-            viewPage = "/main/welcome.jsp";
+            viewPage = "articleView.do";
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
