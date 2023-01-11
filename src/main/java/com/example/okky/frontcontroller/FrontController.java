@@ -29,31 +29,41 @@ public class FrontController extends HttpServlet {
         Command command = null;
 
         String uri = req.getRequestURI();
-        String conPath = req.getContextPath();
-        String com = uri.substring(conPath.length());
+        String path = uri.substring(uri.lastIndexOf("/"));
+//        String conPath = req.getContextPath();
+//        String com = uri.substring(conPath.length());
 
         System.out.println("uri: "+uri);
-        System.out.println("conPath: "+conPath);
-        System.out.println("com: "+com);
+//        System.out.println("conPath: "+conPath);
+        System.out.println("com: "+path);
 
-        if(com.equals("/main/registerView.do")){
+        if(path.equals("/registerView.do")){
             System.out.println("registerView.do equals!!");
             command = new RegisterViewCommand();
             command.execute(req,resp);
-            viewPage = "../members/userRegister.jsp";
-        }else if(com.equals("/members/login.do")){
+            viewPage = "/members/userRegister.jsp";
+        }else if(path.equals("/login.do")){
             command = new UserLoginCommand();
             command.execute(req, resp);
-            viewPage = "../main/welcome.jsp";
-        }else if(com.equals("/main/userRegister.do")){
+            viewPage = "/main/welcome.jsp";
+        }else if(path.equals("/userRegister.do")){
             command = new RegisterCommand();
             command.execute(req, resp);
-            viewPage = "../members/userLogin.jsp";
-        }else if(com.equals("/members/logout.do")){
-            System.out.println("/main/logout.do 왔다!");
+            viewPage = "/members/userLogin.jsp";
+        }else if(path.equals("/logout.do")){
             command = new UserLogoutCommand();
             command.execute(req, resp);
-            viewPage = "../main/welcome.jsp";
+            viewPage = "/main/welcome.jsp";
+        }else if(path.equals("/articleView.do")){
+            System.out.println("들어왔나?");
+            command = new ArticleViewCommand();
+            command.execute(req, resp);
+            viewPage = "/articles/board.jsp";
+            System.out.println("last line!");
+        }else if(path.equals("/write.do")){
+            command = new ArticleWriteCommand();
+            command.execute(req, resp);
+            viewPage = "/main/welcome.jsp";
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);

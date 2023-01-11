@@ -11,6 +11,9 @@ import java.util.List;
 
 public class MemberDao {
 
+    public MemberDao(){
+        connect();
+    }
     PreparedStatement pstmt = null;
     Connection conn;
     ResultSet rs = null;

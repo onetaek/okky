@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Okky</title>
-    <jsp:include page="../layouts/head2.jsp"/>
+    <jsp:include page="../layouts/head.jsp"/>
     <link rel="stylesheet" href="../members/resources/css/userRegister.css">
     <script defer src="../members/resources/js/userRegister.js"></script>
 </head>
