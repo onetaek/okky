@@ -23,6 +23,10 @@ public class MemberDao {
         }
     }
 
+    public MemberDao() {
+        connect();
+    }
+
     public void insertUser(MemberDto mdto) {
         System.out.println("insertUser method start");
         try {
