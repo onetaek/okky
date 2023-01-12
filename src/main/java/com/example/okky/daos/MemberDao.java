@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MemberDao {
 
-    public MemberDao(){
+    public MemberDao() {
         connect();
     }
     PreparedStatement pstmt = null;
@@ -26,9 +26,7 @@ public class MemberDao {
         }
     }
 
-    public MemberDao() {
-        connect();
-    }
+
 
     public void insertUser(MemberDto mdto) {
         System.out.println("insertUser method start");

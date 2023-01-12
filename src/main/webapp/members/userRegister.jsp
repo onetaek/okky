@@ -11,7 +11,7 @@
     <title>Okky</title>
     <jsp:include page="../layouts/head.jsp"/>
     <link rel="stylesheet" href="../members/resources/css/userRegister.css">
-    <script defer src="../members/resources/js/userRegister.js"></script>
+<%--    <script defer src="../members/resources/js/userRegister.js"></script>--%>
 </head>
 <body>
 <!-- ----------------------------------------로고-------------------------------------------- -->

@@ -6,7 +6,7 @@ public class JDBCConnection {
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection conn = null;
-        String url = "jdbc:mariadb://localhost:3306/WebMarketDB";
+        String url = "jdbc:mariadb://localhost:3306/okky";
         String user= "kjh";
         String password = "9172";
 
