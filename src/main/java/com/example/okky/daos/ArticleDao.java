@@ -88,34 +88,21 @@ public class ArticleDao {
             pstmt.executeUpdate();
 
 
-
-
-
-
             int articleIndex = 0;
-            System.out.println("articleIndex1: "+articleIndex);
-            sql = "select max(`index`) from `okky`.`articles`";
-            System.out.println("articleIndex2: "+articleIndex);
+            sql = "select max(`index`) from `okky`.`articles` where userEmail = ?";
             pstmt = conn.prepareStatement(sql);
-            System.out.println("000000000000000");
+            pstmt.setString(1,userEmail);
             rs = pstmt.executeQuery();
-            System.out.println("01010101010101010");
             if(rs.next()){
                 articleIndex = rs.getInt(1);
-                System.out.println("articleIndex: "+articleIndex);
             }
             sql = "insert into `okky`.`tagofarticle` (articleIdx,tagValue) " +
                     "values(?,?)";
             for(String tag:tags){
-                System.out.println("tag: "+tag);
                 pstmt = conn.prepareStatement(sql);
-                System.out.println("1111111111");
                 pstmt.setInt(1,articleIndex);
-                System.out.println("22222222222");
                 pstmt.setString(2,tag);
-                System.out.println("333333333333");
                 pstmt.executeUpdate();
-                System.out.println("4444444444444");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
