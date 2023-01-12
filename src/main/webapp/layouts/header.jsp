@@ -4,13 +4,13 @@
 <div id="headerWrap">
     <header id="header">
         <div class="left-nav">
-            <h1><a href="index.jsp">로고</a></h1>
+            <h1><a href="/index.do">로고</a></h1>
             <nav>
                 <h2 class="hidden">주요이용메뉴</h2>
                 <ul class="gnb">
-                    <li><a href="../articles/articleView.do?boardId=1">Q&A</a></li>
-                    <li class="left-line"><a href="../articles/articleView.do?boardId=2">커뮤니티</a></li>
-                    <li class="left-line"><a href="../articles/articleView.do?boardId=3">공지사항</a></li>
+                    <li><a href="articleListView.do?boardId=1">Q&A</a></li>
+                    <li class="left-line"><a href="articleListView.do?boardId=2">커뮤니티</a></li>
+                    <li class="left-line"><a href="articleListView.do?boardId=3">공지사항</a></li>
                 </ul>
             </nav>
         </div>
@@ -28,12 +28,12 @@
                     </form>
                 </li>
                 <c:if test="${user == null}">
-                    <li class="login admin"><a href="../members/userLogin.jsp">로그인</a></li>
-                    <li class="join admin"><a href="registerView.do">회원가입</a></li>
+                    <li class="login admin"><a href="userLoginView.do">로그인</a></li>
+                    <li class="join admin"><a href="userRegisterView.do">회원가입</a></li>
                 </c:if>
 
                 <c:if test="${user != null}">
-                    <li class="login admin"><a href="../members/userLogin.jsp">${user.nickName} 님</a></li>
+                    <li class="login admin"><a href="#">${user.nickName} 님</a></li>
                     <li class="join admin"><a href="logout.do">로그 아웃</a></li>
                 </c:if>
 

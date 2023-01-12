@@ -23,21 +23,11 @@
     <div class="SNSlogin">
         <span>SNS 회원가입</span>
         <div class="SNSimages">
-            <a
-                    href="#"><svg
-                    class="im1"></svg></a>
-            <a
-                    href="#"><svg
-                    class="im2"></svg></a>
-            <a
-                    href="#"><svg
-                    class="im3"></svg></a>
-            <a
-                    href="#"><svg
-                    class="im4"></svg></a>
-            <a
-                    href="#"><svg
-                    class="im5"></svg></a>
+            <a href="#"><svg class="im1"></svg></a>
+            <a href="#"><svg class="im2"></svg></a>
+            <a href="#"><svg class="im3"></svg></a>
+            <a href="#"><svg class="im4"></svg></a>
+            <a href="#"><svg class="im5"></svg></a>
         </div>
     </div>
     <!-- ---------------------------------------회원가입정보--------------------------------------------- -->
@@ -122,7 +112,7 @@
             </div>
             <p class="loginbox">
                 <span>이미 회원이신가요?</span>
-                <a href="./userLogin.jsp">로그인</a>
+                <a href="./userLoginView.do">로그인</a>
             </p>
         </form>
     </div>

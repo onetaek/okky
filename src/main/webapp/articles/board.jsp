@@ -3,8 +3,25 @@
 <head>
   <title>Q&A게시판</title>
   <jsp:include page="../layouts/head.jsp"/>
-  <link rel="stylesheet" href="resources/css/community.css">
+  <link rel="stylesheet" href="/articles/resources/css/community.css">
 </head>
+<script type="text/javascript">
+  let searchRequest = new XMLHttpRequest();
+  function articleSearchFunction(){
+    //let boardId = document.getElementById("boardId").value;
+    //let searchItem = document.getElementById("searchItem").value;
+    searchRequest.open("POST","articleSearch.do?boardId",true);
+    searchRequest.onreadystatechange = articleSearchProcess;
+  }
+
+  function articleSearchProcess(){
+    if(searchRequest.readyState == 4 && searchRequest.status == 200){
+      let object = eval('(' + searchRequest.responseText + ')');
+      let result = object.result;
+    }
+
+  }
+</script>
 <body>
 <jsp:include page="../layouts/header.jsp"/>
 <main id="main">
@@ -44,9 +61,11 @@
         </div>
 
         <form class="search-c focus">
+          <input type="hidden" name="boardId" id="boardId" value="${boardDto.value}" />
           <i class="icon fa-solid fa-magnifying-glass"></i>
-          <input class="search-input" type="search" placeholder="Q&A 내에서 검색">
-          <input class="s-btn" type="submit" value="검색">
+          <input class="search-input" type="search" id="searchItem" name="searchItem" placeholder="Q&A 내에서 검색">
+          <!--<input class="s-btn" type="submit" value="검색">-->
+          <button class="s-btn" onclick="articleSearchFunction();" type="button">검색</button>
         </form>
 
         <div class="page-container">

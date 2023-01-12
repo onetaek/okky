@@ -34,37 +34,41 @@ public class FrontController extends HttpServlet {
         System.out.println("uri: "+uri);
         System.out.println("com: "+path);
 
-        if(path.equals("/registerView.do")){
-            System.out.println("registerView.do equals!!");
+        if(path.equals("/index.jsp") || path.equals("/") || path.equals("/index.do")) {//메인 페이지로 이동
+            viewPage = "/main/welcome.jsp";
+        }else if(path.equals("/userRegisterView.do")){//회원가입 페이지 보여주기
+            System.out.println("userRegisterView.do equals!!");
             command = new RegisterViewCommand();
             command.execute(req,resp);
             viewPage = "/members/userRegister.jsp";
-        }else if(path.equals("/login.do")){
+        }else if(path.equals("/userLoginView.do")){//사용자 로그인 화면 처리
+            viewPage = "/members/userLogin.jsp";
+        } else if(path.equals("/login.do")){//사용자 로그인 처리
             command = new UserLoginCommand();
             command.execute(req, resp);
             viewPage = "/main/welcome.jsp";
-        }else if(path.equals("/userRegister.do")){
+        }else if(path.equals("/userRegister.do")){//사용자 회원가입 처리
             command = new RegisterCommand();
             command.execute(req, resp);
             viewPage = "/members/userLogin.jsp";
-        }else if(path.equals("/logout.do")){
+        }else if(path.equals("/logout.do")){//사용자 로그아웃 처리
             command = new UserLogoutCommand();
             command.execute(req, resp);
             viewPage = "/main/welcome.jsp";
-        }else if(path.equals("/articleView.do")){
+        }else if(path.equals("/articleListView.do")){//게시글 전체 보여주기
             System.out.println("들어왔나?");
-            command = new ArticleViewCommand();
+            command = new ArticleListViewCommand();
             command.execute(req, resp);
             viewPage = "/articles/board.jsp";
             System.out.println("last line!");
-        }else if(path.equals("/writeView.do")){
+        }else if(path.equals("/writeView.do")){//글쓰기 페이지 보여주기
             command = new ArticleWriteViewCommand();
             command.execute(req, resp);
             viewPage = "/articles/write.jsp";
-        }else if(path.equals("/write.do")){
+        }else if(path.equals("/write.do")){//글쓰기 처리
             command = new ArticleWriteCommand();
             command.execute(req, resp);
-            viewPage = "articleView.do";
+            viewPage = "articleListView.do";
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
