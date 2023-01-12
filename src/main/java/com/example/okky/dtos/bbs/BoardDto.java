@@ -3,14 +3,14 @@ package com.example.okky.dtos.bbs;
 import java.util.Objects;
 
 public class BoardDto {
-    private String id;
+    private String value;
     private String text;
 
     public BoardDto() {
     }
 
-    public BoardDto(String id, String text) {
-        this.id = id;
+    public BoardDto(String value, String text) {
+        this.value = value;
         this.text = text;
     }
 
@@ -19,20 +19,20 @@ public class BoardDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BoardDto boardDto = (BoardDto) o;
-        return Objects.equals(id, boardDto.id);
+        return Objects.equals(value, boardDto.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(value);
+    }
+    
+    public String getValue() {
+        return value;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getText() {

@@ -1,5 +1,5 @@
-// const form = window.document.getElementById('form');
-// console.log(form)
+const form = window.document.getElementById('form');
+console.log(form)
 // form.onsubmit = e => {
 //     e.preventDefault();
 //     if (form['email'].value === '') {
