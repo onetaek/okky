@@ -46,7 +46,7 @@
             <!-- -----------------------------------회원가입----------------------------------- -->
             <p class="SignUp">
                 <span>아직 회원이 아니신가요?</span>
-                <a href="userRegister.do">회원가입</a>
+                <a href="userRegisterView.do">회원가입</a>
             </p>
         </form>
     </div>
