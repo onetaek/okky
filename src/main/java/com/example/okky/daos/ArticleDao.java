@@ -3,6 +3,7 @@ package com.example.okky.daos;
 import com.example.okky.DBConntection.JDBCConnection;
 import com.example.okky.dtos.bbs.ArticleDto;
 import com.example.okky.dtos.bbs.TagDto;
+import com.example.okky.dtos.bbs.TagOfArticleDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -107,5 +108,26 @@ public class ArticleDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public ArrayList<TagOfArticleDto> selectTagsByBoardId(String boardId) {
+        ArrayList<TagOfArticleDto> dtos = new ArrayList<>();
+        String sql = "select `A`.index, `T`.tagValue\n" +
+                "from `okky`.`articles` as `A`\n" +
+                "    join `okky`.`tagofarticle` as `T` on `A`.`index`  = `T`.`articleIdx` where boardId = ?";
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,boardId);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                TagOfArticleDto dto = new TagOfArticleDto();
+                dto.setArticleIdx(rs.getInt(1));
+                dto.setTagValue(rs.getString(2));
+                dtos.add(dto);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dtos;
     }
 }

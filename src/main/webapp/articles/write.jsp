@@ -5,7 +5,7 @@
 <head>
   <title>글쓰기 페이지</title>
   <jsp:include page="../layouts/head.jsp"/>
-  <link rel="stylesheet" href="resources/css/write.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/articles/resources/css/write.css">
 </head>
 <body>
 <jsp:include page="/layouts/header.jsp"/>
