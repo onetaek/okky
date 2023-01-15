@@ -4,6 +4,8 @@ import com.example.okky.daos.ArticleDao;
 import com.example.okky.daos.BoardDao;
 import com.example.okky.dtos.bbs.ArticleDto;
 import com.example.okky.dtos.bbs.BoardDto;
+import com.example.okky.dtos.bbs.TagDto;
+import com.example.okky.dtos.bbs.TagOfArticleDto;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +26,9 @@ public class ArticleListViewCommand implements Command{
         //게시글 가져오기(ex
         ArrayList<ArticleDto> articleDtoList = adao.selectArticleByBoardId(boardId);
 
+         ArrayList<TagOfArticleDto> tagOfArticleDtos = adao.selectTagsByBoardId(boardId);
 
-
+        req.setAttribute("tagsList",tagOfArticleDtos);
         req.setAttribute("articleDtoList",articleDtoList);
         req.setAttribute("boardDto",boardDto);
     }
