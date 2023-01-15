@@ -1,0 +1,223 @@
+@charset "utf-8";
+
+/*.warning {*/
+/*    color: rgb(231, 76, 60);*/
+/*    display: none;*/
+/*    margin: 0.2rem 0;*/
+/*    padding-bottom: 0.5rem;*/
+/*}*/
+
+/*.warning.visible {*/
+/*    display: block;*/
+/*}*/
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+body > .h2 {
+    width: 75%;
+    height: 100%;
+    margin: 1rem auto;
+    padding: 1rem 0;
+
+    /*border: 1px solid #0F0;*/
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+.myContainer {
+    border: 0.125rem solid rgb(180,180,180);
+    border-radius: 0.5rem;
+    width: 75%;
+    height: 100%;
+    margin: 1rem auto;
+    padding: 1.5rem 0;
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.myContainer > .explanation {
+    width: 450px;
+    /*height: 550px;*/
+    /*height: 100%;*/
+    display: flex;
+    flex-direction: column;
+    /*align-content: space-between;*/
+    justify-content: space-between;
+    /*border: 0.0625rem solid rgb(200,200,200);*/
+    border-radius: 0.5rem;
+
+    margin: 0 2rem;
+    /*border: 2px solid #f00;*/
+}
+
+.myContainer > .explanation > .chr-container {
+    width: 100%;
+    height: 40%;
+    /*border: 1px solid #f00;*/
+    position: relative;
+}
+
+.myContainer > .explanation > .chr-container > .chr {
+    position: absolute;
+    padding: 4rem;
+    margin: 1rem 0;
+    background-color: purple;
+    border-radius: 50%;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-image: url("/resources/img/elmo.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*background-position-x: center;*/
+    /*background-position-y: top;*/
+    /*border: 1px solid #0f0;*/
+}
+
+.myContainer > .explanation > .user {
+    text-align: center;
+    margin-top:1rem;
+}
+
+.myContainer > .explanation > .text-container {
+    width: 100%;
+    height: 20%;
+    /*border: 1px solid #f00;*/
+
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    /*text-align: center;*/
+}
+.changePwCheckBox {
+    margin: 1rem 0;
+}
+.checkLabel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.inputContainer {
+    width: 450px;
+    margin: 0 2rem;
+    /*border-left: 1px solid rgb(200,200,200);*/
+}
+
+._input {
+    border:0.125rem solid rgb(150,150,150);
+    margin: 0.5rem 0;
+    width: 100%;
+    padding: 0.25rem 0;
+    border-radius: 0.25rem;
+}
+._input:disabled {
+    background-color: rgb(230,230,230);
+}
+._input:read-only {
+    background-color: rgb(230,230,230);
+}
+
+
+
+.pwCheck-container {
+    display: flex;
+    flex-direction: row;
+    /*border: 1px solid #f00;*/
+    align-content: center;
+    justify-content: center;
+}
+.pwCheck-container > .btn-check {
+    border: 1px solid rgb(102, 124, 206);
+    border-radius: 0.5rem;
+    background-color: rgb(102,124,206);
+    color: white;
+
+    margin: 0.5rem 0.2rem;
+    width: 150px;
+    line-height: 250%;
+    text-align: center;
+}
+.pwCheck-container > .btn-check:hover {
+    filter: brightness(90%);
+}
+
+.btn-container {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.btn {
+    /*border: 1px solid rgb(102, 124, 206);*/
+    border-radius: 0.5rem;
+    background-color: var(--main-color);
+    color: white;
+
+    margin: 0.5rem 0.2rem;
+    width: 150px;
+    height: 40px;
+    line-height: 250%;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn:hover {
+    filter: brightness(90%);
+}
+
+/*.btn.btn-reset {*/
+/*    background-color: rgb(229, 126, 96);*/
+/*}*/
+
+.btn.btn-rollBack {
+    background-color: rgb(82, 133, 81);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.btn-container {
+    width: 75%;
+    /*height: 100%;*/
+    margin: 3rem auto;
+    padding: 1rem 0;
+    /*border: 1px solid #00F;*/
+    display: flex;
+    flex-direction: row;
+    /*align-content: center;*/
+    /*align-content: flex-end;*/
+    /*justify-content: flex-end;*/
+}
+
+
