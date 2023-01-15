@@ -40,6 +40,11 @@
                 </div>
             </div>
             <div class="find"><a class="findlink" href="#">계정찾기</a></div>
+
+            <div class="warning-container" id="warning-container">
+                <span class="warning" id="warning"></span>
+            </div>
+
             <div>
                 <input class="loginbutton" type="submit"  value="로그인"></input>
             </div>

@@ -10,8 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Okky</title>
     <jsp:include page="../layouts/head.jsp"/>
+<%--    /layout/head--%>
     <link rel="stylesheet" href="../members/resources/css/userRegister.css">
-<%--    <script defer src="../members/resources/js/userRegister.js"></script>--%>
+    <script defer src="../members/resources/js/userRegister.js"></script>
 </head>
 <body>
 <!-- ----------------------------------------로고-------------------------------------------- -->
@@ -57,6 +58,7 @@
                     <label for="name">이름</label>
                     <input name="name" id="name" type="text" class="box" placeholder="이름을 입력해 주세요.">
                 </div>
+
                 <div class="nickname">
                     <label for="nickName">닉네임</label>
                     <input name="nickName" id="nickName" type="text" class="box"
@@ -77,7 +79,9 @@
                                     <option>${telecomDto.value}</option>
                                 </c:forEach>
                             </select>
+
                             <input type="hidden" name="contactCountryValue" value="082">
+
                             <input name="contact" id="contact" class="phoneBox" type="text"
                                    placeholder="전화번호 입력.(숫자만 입력해주세요)">
                         </div>
@@ -93,6 +97,13 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="warning-container" id="warning-container">
+                <span class="warning" id="warning"></span>
+            </div>
+
+
             <!-- -------------------------------이메일수신 동의 및 가입----------------------------------------------- -->
             <div class="emailbox">
                 <div class="email">
@@ -101,6 +112,9 @@
                 </div>
                 <p>OKKY에서 주최하는 다양한 이벤트, 정보성 뉴스레터 및 광고 수신여부를 설정할 수 있습니다.</p>
             </div>
+
+
+
             <div>
                 <input class="submit" type="submit" value="회원가입"/>
                 <script>
