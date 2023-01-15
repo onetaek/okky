@@ -91,7 +91,7 @@
                         </li>
                     </ul>
                     <div class="title-container">
-                        <a href="#"><p><c:out value="${article.title}"/></p></a>
+                        <a href="articleView.do?articleIndex=${article.index}&boardId=${boardDto.value}"><p><c:out value="${article.title}"/></p></a>
                     </div>
                     <ul class="tag-container">
                         <c:forEach var="t" items="${tagsList}">

@@ -130,4 +130,86 @@ public class ArticleDao {
         }
         return dtos;
     }
+
+    public ArticleDto selectArticleByIndex(int articleIndex) {
+        ArticleDto dto = null;
+
+        String sql = "select * from `okky`.`articles` where `index` = ?";
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,articleIndex);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                dto = new ArticleDto(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDate(7)
+                );
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
+    public ArrayList<String> selectTagsByArticleIdxAndBoardId(int articleIndex, String boardId) {
+        ArrayList<String> tags = new ArrayList<>();
+        String sql = "select  t.tagValue from `okky`.`articles` as `a`, `okky`.tagOfArticle as `t`" +
+                " where `a`.`index` = `t`.articleIdx and a.`index` = ? and boardId = ?";
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,articleIndex);
+            pstmt.setString(2,boardId);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                System.out.println("rs.getSting: "+rs.getString(1));
+                tags.add(rs.getString(1));
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return tags;
+    }
+
+    public void updateArticle(int articleIndex,String userEmail, String title, String content, String[] tags) {
+        String sql = "update `okky`.`articles` set title = ?, content = ? where `index` = ?";
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,title);
+            pstmt.setString(2,content);
+            pstmt.setInt(3,articleIndex);
+            pstmt.executeUpdate();
+
+            sql = "delete from `okky`.`tagofarticle` where articleIdx = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, articleIndex);
+            pstmt.executeUpdate();
+
+            for(String tag: tags){
+                sql = "insert into `okky`.`tagofarticle`(articleIdx, tagValue) values (?,?)";
+                pstmt.setInt(1,articleIndex);
+                pstmt.setString(2,tag);
+                pstmt.executeUpdate();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteArticle(int articleIndex) {
+        String sql = "delete from articles where `index` = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,articleIndex);
+            pstmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

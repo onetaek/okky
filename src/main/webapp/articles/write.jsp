@@ -24,7 +24,7 @@
         <div id="writeTag">
           <label>태그 <span> - 내용을 대표하는 태그 3개 정도 입력해주세요</span></label>
           <c:forEach var="tag" items="${tags}">
-            <input type="checkbox" name="tags" value="${tag.value}"/>${tag.text}
+            <input type="checkbox" name="tags" value="${tag.value}"/>${tag.value}
           </c:forEach>
 
         </div>
