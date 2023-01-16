@@ -6,6 +6,7 @@ import com.example.okky.utils.CryptoUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Type;
 
 public class RegisterCommand implements Command{
     @Override
@@ -21,23 +22,12 @@ public class RegisterCommand implements Command{
         String contactCountryValue = req.getParameter("contactCountryValue");
         String contactAuthCode = req.getParameter("contactAuthCode");
         String policyEmailSend = req.getParameter("policyEmailSend");
+        boolean policyEmailSendTobool = true;
 
-        boolean policy = false;
-        if (policyEmailSend.equals("on")) {
-            policy = true;
-        } else if (policyEmailSend == null) {
-            policy= false;
+        if(policyEmailSend == null){
+            policyEmailSendTobool = false;
         }
-        System.out.println(email);
-        System.out.println(password);
-        System.out.println(passwordCheck);
-        System.out.println(name);
-        System.out.println(nickName);
-        System.out.println(telecom);
-        System.out.println(contact);
-        System.out.println(contactCountryValue);
-        System.out.println(contactAuthCode);
-        System.out.println(policy);
+        System.out.println("policyEmailSendTobool = " + policyEmailSendTobool);
 
         MemberDao mdao = new MemberDao();
         MemberDto mdto = new MemberDto();
@@ -52,9 +42,7 @@ public class RegisterCommand implements Command{
         mdto.setTelecom(telecom);
         mdto.setContact(contact);
         mdto.setcontactCountryValue(contactCountryValue);
-//        System.out.println(Boolean.valueOf(policyEmailSend));
-        mdto.setPolicyEmailSend(policy);
-
+        mdto.setPolicyEmailSend(policyEmailSendTobool);
 
         mdao.insertUser(mdto);
     }
