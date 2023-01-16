@@ -80,10 +80,11 @@
     align-items: center;
 }
 .article-bottom .tag-wrap{
-
+    display: flex;
+    flex-wrap:wrap;
 }
 .article-bottom .tag-wrap a{
-    margin:0 5px;
+    margin:2px 5px;
 }
 .article-bottom .tag-wrap a:hoveR{
     color:var(--main-color);
