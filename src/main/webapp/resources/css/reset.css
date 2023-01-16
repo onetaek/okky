@@ -7,6 +7,9 @@
     --main-color: rgb(243, 60, 60);
     --footer-color:rgb(131, 131, 131);
     --header-color:rgb(169, 169, 169);
+    --light-gray-color:rgb(214, 214, 214);
+    --tag-color:rgb(70, 70, 70);
+    --tag-bg-color:rgb(236, 236, 236);
 }
 body {
     width: 100%;
