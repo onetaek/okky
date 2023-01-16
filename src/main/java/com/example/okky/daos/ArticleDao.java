@@ -2,6 +2,7 @@ package com.example.okky.daos;
 
 import com.example.okky.DBConntection.JDBCConnection;
 import com.example.okky.dtos.bbs.ArticleDto;
+import com.example.okky.dtos.bbs.BoardDto;
 import com.example.okky.dtos.bbs.TagDto;
 import com.example.okky.dtos.bbs.TagOfArticleDto;
 
@@ -213,5 +214,27 @@ public class ArticleDao {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<ArticleDto> selectAllArticle() {
+        ArrayList<ArticleDto> dtos = new ArrayList<>();
+        String sql = "select * from `okky`.`articles` where boardId = 1 order by createdAt desc limit 5";
+        try{
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return dtos;
+    }
+
+    public ArrayList<BoardDto> selectAllBoard() {
+        return null;
+    }
+
+    public ArrayList<TagOfArticleDto> selectAllTag() {
+        return null;
     }
 }

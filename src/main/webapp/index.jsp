@@ -5,7 +5,8 @@
 </head>
 <body>
 <%
-    response.sendRedirect("./main/welcome.jsp");
+//    response.sendRedirect("./main/welcome.jsp");
+    response.sendRedirect("welcome.do");
 %>
 </body>
 </html>

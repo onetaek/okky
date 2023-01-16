@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>게시글</title>
@@ -33,7 +34,7 @@
                 </div>
                 <div class="btn-like">
                     <button class="btn-left"><i class="fa-solid fa-chevron-down"></i></button>
-                    <div class="like-cnt">3</div>
+                    <div class="like-cnt">0</div>
                     <button class="btn-right"><i class="fa-solid fa-chevron-up"></i></button>
                 </div>
             </div>

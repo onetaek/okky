@@ -34,7 +34,9 @@ public class FrontController extends HttpServlet {
         System.out.println("uri: "+uri);
         System.out.println("com: "+path);
 
-        if(path.equals("/index.jsp") || path.equals("/") || path.equals("/index.do")) {//메인 페이지로 이동
+        if(path.equals("/welcome.do")||path.equals("/index.do")){//메인 페이지로 이동
+            command = new WelcomeViewCommand();
+            command.execute(req, resp);
             viewPage = "/main/welcome.jsp";
         }else if(path.equals("/userRegisterView.do")){//회원가입 페이지 보여주기
             command = new RegisterViewCommand();
