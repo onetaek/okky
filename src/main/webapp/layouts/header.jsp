@@ -33,7 +33,7 @@
                 </c:if>
 
                 <c:if test="${user != null}">
-                    <li class="login admin"><a href="#">${user.nickName} 님</a></li>
+                    <li class="login admin"><a href="userMy.do">${user.nickName} 님</a></li>
                     <li class="join admin"><a href="logout.do">로그 아웃</a></li>
                 </c:if>
 
