@@ -191,7 +191,9 @@ public class ArticleDao {
             pstmt.executeUpdate();
 
             for(String tag: tags){
+                System.out.println("tag = " + tag);
                 sql = "insert into `okky`.`tagofarticle`(articleIdx, tagValue) values (?,?)";
+                pstmt = conn.prepareStatement(sql);
                 pstmt.setInt(1,articleIndex);
                 pstmt.setString(2,tag);
                 pstmt.executeUpdate();
@@ -203,7 +205,7 @@ public class ArticleDao {
     }
 
     public void deleteArticle(int articleIndex) {
-        String sql = "delete from articles where `index` = ?";
+        String sql = "delete from `okky`.articles where `index` = ?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,articleIndex);

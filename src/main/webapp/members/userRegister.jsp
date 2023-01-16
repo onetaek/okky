@@ -117,12 +117,6 @@
 
             <div>
                 <input class="submit" type="submit" value="회원가입"/>
-                <script>
-                    let btn = document.querySelector(".submit");
-                    btn.addEventListener("click",()=>{
-                        console.log("회원가입 클릭!");
-                    })
-                </script>
             </div>
             <p class="loginbox">
                 <span>이미 회원이신가요?</span>
