@@ -37,7 +37,6 @@ public class FrontController extends HttpServlet {
         if(path.equals("/index.jsp") || path.equals("/") || path.equals("/index.do")) {//메인 페이지로 이동
             viewPage = "/main/welcome.jsp";
         }else if(path.equals("/userRegisterView.do")){//회원가입 페이지 보여주기
-            System.out.println("userRegisterView.do equals!!");
             command = new RegisterViewCommand();
             command.execute(req,resp);
             viewPage = "/members/userRegister.jsp";
@@ -56,7 +55,6 @@ public class FrontController extends HttpServlet {
             command.execute(req, resp);
             viewPage = "/main/welcome.jsp";
         }else if(path.equals("/articleListView.do")){//게시글 전체 보여주기
-            System.out.println("들어왔나?");
             command = new ArticleListViewCommand();
             command.execute(req, resp);
             viewPage = "/articles/board.jsp";
@@ -69,6 +67,22 @@ public class FrontController extends HttpServlet {
             command = new ArticleWriteCommand();
             command.execute(req, resp);
             viewPage = "articleListView.do";
+        }else if(path.equals("/articleView.do")){//하나의 게시글 보여주기
+            command = new ArticleViewCommand();
+            command.execute(req, resp);
+            viewPage = "/articles/article.jsp";
+        }else if(path.equals("/articleUpdateView.do")){//게시글 수정 페이지 보여주기
+            command = new ArticleUpdateViewCommand();
+            command.execute(req, resp);
+            viewPage = "/articles/update.jsp";
+        }else if(path.equals("/articleUpdate.do")){//게시글 수정 처리
+            command = new ArticleUpdateCommand();
+            command.execute(req, resp);
+            viewPage = "/articleView.do";
+        }else if(path.equals("/articleDelete.do")){
+            command = new ArticleDeleteCommand();
+            command.execute(req, resp);
+            viewPage = "/articleListView.do";
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
