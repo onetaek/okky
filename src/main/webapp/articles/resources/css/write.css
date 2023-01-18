@@ -1,9 +1,11 @@
 .section#community {
+    padding-top:64px;
 }
 #write{
     width: 840px;
     margin: 0 auto;
     padding:10px 0px;
+
 }
 #wrap{
     margin-top: 2.2rem;

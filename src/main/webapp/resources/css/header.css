@@ -1,10 +1,9 @@
 @charset "UTF-8";
-
 /*-----------header------------*/
 #headerWrap {
+  position:fixed;
   width: 100%;
-  border-bottom: var(--header-color) 1px solid;
-
+  border-bottom: 1px solid var(--header-color);
   background:#fff;
   z-index:9999;
 }
@@ -68,7 +67,7 @@
   justify-content: flex-end;
   align-items: center;
 }
-.right-nav .gnb li.search {
+#headerWrap .right-nav .gnb li.search {
   display: flex;
   width:200px;
   height: 35px;

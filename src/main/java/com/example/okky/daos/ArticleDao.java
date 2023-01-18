@@ -2,6 +2,7 @@ package com.example.okky.daos;
 
 import com.example.okky.DBConntection.JDBCConnection;
 import com.example.okky.dtos.bbs.ArticleDto;
+import com.example.okky.dtos.bbs.BoardDto;
 import com.example.okky.dtos.bbs.TagDto;
 import com.example.okky.dtos.bbs.TagOfArticleDto;
 
@@ -191,7 +192,9 @@ public class ArticleDao {
             pstmt.executeUpdate();
 
             for(String tag: tags){
+                System.out.println("tag = " + tag);
                 sql = "insert into `okky`.`tagofarticle`(articleIdx, tagValue) values (?,?)";
+                pstmt = conn.prepareStatement(sql);
                 pstmt.setInt(1,articleIndex);
                 pstmt.setString(2,tag);
                 pstmt.executeUpdate();
@@ -203,7 +206,7 @@ public class ArticleDao {
     }
 
     public void deleteArticle(int articleIndex) {
-        String sql = "delete from articles where `index` = ?";
+        String sql = "delete from `okky`.articles where `index` = ?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,articleIndex);
@@ -211,5 +214,27 @@ public class ArticleDao {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<ArticleDto> selectAllArticle() {
+        ArrayList<ArticleDto> dtos = new ArrayList<>();
+        String sql = "select * from `okky`.`articles` where boardId = 1 order by createdAt desc limit 5";
+        try{
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return dtos;
+    }
+
+    public ArrayList<BoardDto> selectAllBoard() {
+        return null;
+    }
+
+    public ArrayList<TagOfArticleDto> selectAllTag() {
+        return null;
     }
 }

@@ -5,6 +5,5 @@
     <file url="file://$PROJECT_DIR$/src/main/java/com/example/okky/daos/MemberDao.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/main/welcome.jsp" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/members/userRegister.jsp" dialect="MariaDB" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/test.jsp" dialect="MariaDB" />
   </component>
 </project>
