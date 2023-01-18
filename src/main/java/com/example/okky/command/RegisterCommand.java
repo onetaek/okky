@@ -2,6 +2,7 @@ package com.example.okky.command;
 
 import com.example.okky.daos.MemberDao;
 import com.example.okky.dtos.members.MemberDto;
+import com.example.okky.frontcontroller.View;
 import com.example.okky.utils.CryptoUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RegisterCommand implements Command{
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println("회원가입 command");
+    public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String passwordCheck = req.getParameter("passwordCheck");
@@ -28,22 +28,11 @@ public class RegisterCommand implements Command{
         } else if (policyEmailSend == null) {
             policy= false;
         }
-        System.out.println(email);
-        System.out.println(password);
-        System.out.println(passwordCheck);
-        System.out.println(name);
-        System.out.println(nickName);
-        System.out.println(telecom);
-        System.out.println(contact);
-        System.out.println(contactCountryValue);
-        System.out.println(contactAuthCode);
-        System.out.println(policy);
 
         MemberDao mdao = new MemberDao();
         MemberDto mdto = new MemberDto();
 
         String hashPassword = CryptoUtils.hashSha512(password);
-        System.out.println(hashPassword);
 
         mdto.setEmail(email);
         mdto.setPassword(hashPassword);
@@ -57,5 +46,7 @@ public class RegisterCommand implements Command{
 
 
         mdao.insertUser(mdto);
+
+        return new View("/members/userLogin.jsp");
     }
 }

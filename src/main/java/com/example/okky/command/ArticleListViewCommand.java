@@ -6,6 +6,7 @@ import com.example.okky.dtos.bbs.ArticleDto;
 import com.example.okky.dtos.bbs.BoardDto;
 import com.example.okky.dtos.bbs.TagDto;
 import com.example.okky.dtos.bbs.TagOfArticleDto;
+import com.example.okky.frontcontroller.View;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class ArticleListViewCommand implements Command{
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String boardId = req.getParameter("boardId");
         System.out.println("ArticleViewCommand에서 받은 boardId: "+boardId);
 
@@ -31,5 +32,7 @@ public class ArticleListViewCommand implements Command{
         req.setAttribute("tagsList",tagOfArticleDtos);
         req.setAttribute("articleDtoList",articleDtoList);
         req.setAttribute("boardDto",boardDto);
+
+        return new View("/articles/board.jsp");
     }
 }

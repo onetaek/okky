@@ -2,6 +2,7 @@ package com.example.okky.command;
 
 import com.example.okky.daos.MemberDao;
 import com.example.okky.dtos.members.MemberDto;
+import com.example.okky.frontcontroller.View;
 import com.example.okky.utils.CryptoUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ public class UserLoginCommand implements Command {
 
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String id = req.getParameter("id");
         String password = req.getParameter("password");
 
@@ -22,6 +23,8 @@ public class UserLoginCommand implements Command {
         MemberDto user = memberDao.selectUserById(id, hashPw);
 
         req.getSession().setAttribute("user", user);
+
+        return new View("/main/welcome.jsp");
 
     }
 }

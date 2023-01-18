@@ -1,13 +1,14 @@
 package com.example.okky.command;
 
 import com.example.okky.daos.ArticleDao;
+import com.example.okky.frontcontroller.View;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ArticleUpdateCommand implements Command {
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String boardId = req.getParameter("boardId");
         int articleIndex =Integer.parseInt(req.getParameter("articleIndex"));
         String userEmail = req.getParameter("userEmail");
@@ -21,6 +22,6 @@ public class ArticleUpdateCommand implements Command {
 
         req.setAttribute("boardId",boardId);
         req.setAttribute("articleIndex",articleIndex);
-
+        return new View("/articleView.do");
     }
 }

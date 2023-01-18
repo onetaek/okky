@@ -3,6 +3,7 @@ package com.example.okky.command;
 import com.example.okky.daos.ArticleDao;
 import com.example.okky.dtos.bbs.ArticleDto;
 import com.example.okky.dtos.bbs.TagDto;
+import com.example.okky.frontcontroller.View;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,7 @@ import java.util.List;
 public class ArticleUpdateViewCommand implements Command{
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) {
         //request값 받기
         System.out.println("articleIndex???????: "+req.getParameter("articleIndex"));
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
@@ -31,5 +32,7 @@ public class ArticleUpdateViewCommand implements Command{
         req.setAttribute("boardId",boardId);//게시판 Id
         req.setAttribute("tagOfArticle",tagOfArticle);//작성자가 입력한 tag값들
         req.setAttribute("tags",tagDtoList);//전체 tag값들
+
+        return new View("/articles/update.jsp");
     }
 }
