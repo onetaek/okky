@@ -1,5 +1,6 @@
-package com.example.okky.command;
+package com.example.okky.command.article;
 
+import com.example.okky.command.Command;
 import com.example.okky.daos.ArticleDao;
 import com.example.okky.dtos.bbs.ArticleDto;
 import com.example.okky.dtos.bbs.BoardDto;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
-public class WelcomeViewCommand implements Command{
+public class WelcomeViewCommand implements Command {
     ArticleDao adao = ArticleDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {

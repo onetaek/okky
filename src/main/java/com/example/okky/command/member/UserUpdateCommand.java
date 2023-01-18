@@ -1,5 +1,6 @@
-package com.example.okky.command;
+package com.example.okky.command.member;
 
+import com.example.okky.command.Command;
 import com.example.okky.daos.MemberDao;
 import com.example.okky.dtos.members.MemberDto;
 import com.example.okky.frontcontroller.View;
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class UserUpdateCommand implements Command{
+public class UserUpdateCommand implements Command {
     MemberDao mdao = MemberDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {

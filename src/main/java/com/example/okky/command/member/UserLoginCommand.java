@@ -1,5 +1,6 @@
-package com.example.okky.command;
+package com.example.okky.command.member;
 
+import com.example.okky.command.Command;
 import com.example.okky.daos.MemberDao;
 import com.example.okky.dtos.members.MemberDto;
 import com.example.okky.frontcontroller.View;

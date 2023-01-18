@@ -1,8 +1,9 @@
 package com.example.okky.frontcontroller;
 
 import com.example.okky.command.*;
+import com.example.okky.command.article.*;
+import com.example.okky.command.member.*;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 
 import javax.servlet.annotation.WebServlet;
@@ -38,14 +39,7 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doAction(req, resp);
-    }
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doAction(req, resp);
-    }
-    protected void doAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         String uri = req.getRequestURI(); //localhost:8080/ >>  members/userLogin.jsp
         String path = uri.substring(uri.lastIndexOf("/")); //  /*.do
@@ -58,6 +52,6 @@ public class FrontController extends HttpServlet {
             return;
         }
         View view = command.execute(req, resp);
-        view.render(req, resp);
+        if(view != null) view.render(req, resp);
     }
 }
