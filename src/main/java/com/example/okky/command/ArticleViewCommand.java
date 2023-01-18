@@ -10,13 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 public class ArticleViewCommand implements Command{
-
+    ArticleDao adao = ArticleDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
         String boardId = req.getParameter("boardId");
         System.out.println("ArticleView Command boardId = " + boardId);
-        ArticleDao adao = new ArticleDao();
         ArticleDto articleDto = adao.selectArticleByIndex(articleIndex);
 
         //where 조건절어 articleIndex와 boardId를 사용해서 게시글을 가져옴

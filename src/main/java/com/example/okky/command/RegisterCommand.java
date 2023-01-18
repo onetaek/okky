@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class RegisterCommand implements Command{
+    MemberDao mdao = MemberDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String email = req.getParameter("email");
@@ -29,7 +30,6 @@ public class RegisterCommand implements Command{
             policy= false;
         }
 
-        MemberDao mdao = new MemberDao();
         MemberDto mdto = new MemberDto();
 
         String hashPassword = CryptoUtils.hashSha512(password);

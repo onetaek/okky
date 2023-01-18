@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class RegisterViewCommand implements Command {
+    MemberDao mdao = MemberDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
 
-        MemberDao memberDao = new MemberDao();
 //        List<ContactCountryDto> contactCountryDtoList = memberDao.selectContactCountry();
-        List<TelecomDto> telecomDtoList = memberDao.selectTelecom();
+        List<TelecomDto> telecomDtoList = mdao.selectTelecom();
 
 //        req.setAttribute("contactCountryDtoList",contactCountryDtoList);
         req.setAttribute("telecomDtoList",telecomDtoList);

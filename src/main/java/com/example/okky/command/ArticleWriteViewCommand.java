@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class ArticleWriteViewCommand implements Command{
+    ArticleDao adao = ArticleDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String boardId = req.getParameter("boardId");
-        ArticleDao adao = new ArticleDao();
 
         List<TagDto> tagDtoList = adao.selectTags();
         req.setAttribute("tags",tagDtoList);
