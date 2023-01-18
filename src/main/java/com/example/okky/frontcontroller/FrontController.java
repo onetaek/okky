@@ -19,6 +19,7 @@ public class FrontController extends HttpServlet {
     private Map<String,Command> commandMap = new HashMap<>();
 
     public FrontController() {
+        commandMap.put("/welcome.do", new WelcomeViewCommand());
         commandMap.put("/login.do",new UserLoginCommand());
         commandMap.put("/userRegisterView.do",new RegisterViewCommand());
         commandMap.put("/userRegister.do",new RegisterCommand());
