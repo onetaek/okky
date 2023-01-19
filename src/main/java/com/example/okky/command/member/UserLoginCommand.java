@@ -41,9 +41,9 @@ public class UserLoginCommand implements Command {
             return new View("/members/userLogin.jsp");
         } else if (user.getStatusValue().equals("RES")) {
 
-            out.print("<script>");
-            out.print("alert('해당 회원은 탈퇴 [ SUS ] 회원입니다.')");
-            out.print("</script>");
+            out.write("<script>");
+            out.write("alert('해당 회원은 탈퇴 [ SUS ] 회원입니다.')");
+            out.write("</script>");
             out.flush();
             out.close();
             return new View("/members/userLogin.jsp");

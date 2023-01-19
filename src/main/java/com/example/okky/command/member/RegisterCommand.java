@@ -13,6 +13,7 @@ public class RegisterCommand implements Command {
     MemberDao mdao = MemberDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
+        System.out.println("RegisterCommand Method : execute Start!!!!!!!!!!!!!!!!");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String passwordCheck = req.getParameter("passwordCheck");
@@ -24,12 +25,8 @@ public class RegisterCommand implements Command {
         String contactAuthCode = req.getParameter("contactAuthCode");
         String policyEmailSend = req.getParameter("policyEmailSend");
 
-        boolean policy = false;
-        if (policyEmailSend.equals("on")) {
-            policy = true;
-        } else if (policyEmailSend == null) {
-            policy= false;
-        }
+        System.out.println("policyEmailSend : " + policyEmailSend);
+        boolean policy = policyEmailSend.equals("on");
 
         MemberDto mdto = new MemberDto();
 
@@ -47,7 +44,7 @@ public class RegisterCommand implements Command {
 
 
         mdao.insertUser(mdto);
-
+        System.out.println("RegisterCommand Method : execute End!!!!!!!!!!!!!!!!");
         return new View("/members/userLogin.jsp");
     }
 }
