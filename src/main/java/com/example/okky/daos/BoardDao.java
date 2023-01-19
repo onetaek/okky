@@ -10,7 +10,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BoardDao {
-    public BoardDao(){
+    private static final BoardDao INSTANCE = new BoardDao();
+    public static BoardDao getInstance(){
+        return INSTANCE;
+    }
+
+
+    private BoardDao(){
         connect();
     }
     PreparedStatement pstmt = null;
@@ -27,7 +33,7 @@ public class BoardDao {
 
     public BoardDto selectBoardById(String boardId) {
         BoardDto dto = null;
-        String sql ="select * from boards where id = ?";
+        String sql ="select * from `okky`.`boards` where id = ?";
         try{
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,boardId);

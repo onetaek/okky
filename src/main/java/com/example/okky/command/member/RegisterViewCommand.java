@@ -1,5 +1,6 @@
-package com.example.okky.command;
+package com.example.okky.command.member;
 
+import com.example.okky.command.Command;
 import com.example.okky.daos.MemberDao;
 import com.example.okky.dtos.members.ContactCountryDto;
 import com.example.okky.dtos.members.TelecomDto;
@@ -11,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class RegisterViewCommand implements Command {
+    MemberDao mdao = MemberDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
 
-        MemberDao memberDao = new MemberDao();
 //        List<ContactCountryDto> contactCountryDtoList = memberDao.selectContactCountry();
-        List<TelecomDto> telecomDtoList = memberDao.selectTelecom();
+        List<TelecomDto> telecomDtoList = mdao.selectTelecom();
 
 //        req.setAttribute("contactCountryDtoList",contactCountryDtoList);
         req.setAttribute("telecomDtoList",telecomDtoList);

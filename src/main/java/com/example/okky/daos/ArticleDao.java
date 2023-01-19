@@ -14,9 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleDao {
-    public ArticleDao(){
+    private static final ArticleDao INSTANCE = new ArticleDao();
+    public static ArticleDao getInstance(){
+        return INSTANCE;
+    }
+    private ArticleDao(){
         connect();
     }
+
     PreparedStatement pstmt = null;
     Connection conn;
     ResultSet rs = null;
@@ -32,7 +37,7 @@ public class ArticleDao {
     public ArrayList<ArticleDto> selectArticleByBoardId(String boardId) {
         ArrayList<ArticleDto> dtos = new ArrayList<>();
 
-        String sql = "select * from `okky`.`articles` where boardId = ?";
+        String sql = "select * from `okky`.`articles` where boardId = ? order by `index` desc";
 
         try {
             pstmt = conn.prepareStatement(sql);

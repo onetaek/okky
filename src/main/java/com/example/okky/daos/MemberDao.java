@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDao {
-
-    public MemberDao() {
+    private static final MemberDao INSTANCE = new MemberDao();
+    public static MemberDao getInstance(){
+        return INSTANCE;
+    }
+    private MemberDao() {
         connect();
     }
     PreparedStatement pstmt = null;
@@ -134,7 +137,46 @@ public class MemberDao {
     }
 
 
+    public MemberDto selectUser(String email) {
+        MemberDto dto = null;
+        String sql = "select * from `okky`.`users` where email = ?";
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,email);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                dto = new MemberDto(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getBoolean(8),
+                        rs.getDate(9),
+                        rs.getString(10),
+                        rs.getBoolean(11)
+                        );
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dto;
+    }
 
+    public void updateUser(MemberDto existingUser) {
+        String sql = "update `okky`.`users` set name = ?, nickName = ?, contact =? where email = ?";
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,existingUser.getName());
+            pstmt.setString(2,existingUser.getNickName());
+            pstmt.setString(3,existingUser.getContact());
+            pstmt.setString(4,existingUser.getEmail());
+            pstmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-
+    }
 }

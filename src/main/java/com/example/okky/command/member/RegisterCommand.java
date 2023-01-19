@@ -1,5 +1,6 @@
-package com.example.okky.command;
+package com.example.okky.command.member;
 
+import com.example.okky.command.Command;
 import com.example.okky.daos.MemberDao;
 import com.example.okky.dtos.members.MemberDto;
 import com.example.okky.frontcontroller.View;
@@ -8,7 +9,8 @@ import com.example.okky.utils.CryptoUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RegisterCommand implements Command{
+public class RegisterCommand implements Command {
+    MemberDao mdao = MemberDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String email = req.getParameter("email");
@@ -29,7 +31,6 @@ public class RegisterCommand implements Command{
             policy= false;
         }
 
-        MemberDao mdao = new MemberDao();
         MemberDto mdto = new MemberDto();
 
         String hashPassword = CryptoUtils.hashSha512(password);

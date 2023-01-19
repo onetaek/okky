@@ -4,8 +4,10 @@ body {
     display: flex;
     flex-direction: column;
 }
-
-body > .h2 {
+.full-container{
+    padding-top:64px;
+}
+body .h2 {
     width: 75%;
     height: 100%;
     margin: 1rem auto;
@@ -109,6 +111,10 @@ body > .h2 {
 }
 
 ._input:disabled {
+    background-color: rgb(230,230,230);
+}
+
+.btn-check:disabled {
     background-color: rgb(230,230,230);
 }
 

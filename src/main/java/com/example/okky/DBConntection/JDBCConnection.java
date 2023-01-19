@@ -8,7 +8,7 @@ public class JDBCConnection {
         Connection conn = null;
         String url = "jdbc:mariadb://localhost:3306/okky";
         String user= "root";
-        String password = "dpdlvldzm419!";
+        String password = "7517";
 
         Class.forName("org.mariadb.jdbc.Driver");
 

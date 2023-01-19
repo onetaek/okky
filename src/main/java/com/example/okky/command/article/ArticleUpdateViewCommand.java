@@ -1,5 +1,6 @@
-package com.example.okky.command;
+package com.example.okky.command.article;
 
+import com.example.okky.command.Command;
 import com.example.okky.daos.ArticleDao;
 import com.example.okky.dtos.bbs.ArticleDto;
 import com.example.okky.dtos.bbs.TagDto;
@@ -10,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticleUpdateViewCommand implements Command{
-
+public class ArticleUpdateViewCommand implements Command {
+    ArticleDao adao = ArticleDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         //request값 받기
@@ -19,8 +20,7 @@ public class ArticleUpdateViewCommand implements Command{
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
         String boardId = req.getParameter("boardId");
 
-        //DAO객체 생성
-        ArticleDao adao = new ArticleDao();
+
 
         //DAO메서드 실행
         ArticleDto articleDto = adao.selectArticleByIndex(articleIndex);//게시글 하나 가져오기

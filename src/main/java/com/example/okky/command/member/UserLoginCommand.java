@@ -1,5 +1,6 @@
-package com.example.okky.command;
+package com.example.okky.command.member;
 
+import com.example.okky.command.Command;
 import com.example.okky.daos.MemberDao;
 import com.example.okky.dtos.members.MemberDto;
 import com.example.okky.frontcontroller.View;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 public class UserLoginCommand implements Command {
 
-
+    MemberDao mdao = MemberDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String id = req.getParameter("id");
@@ -19,8 +20,7 @@ public class UserLoginCommand implements Command {
 
         String hashPw = CryptoUtils.hashSha512(password);
 
-        MemberDao memberDao = new MemberDao();
-        MemberDto user = memberDao.selectUserById(id, hashPw);
+        MemberDto user = mdao.selectUserById(id, hashPw);
 
         req.getSession().setAttribute("user", user);
 

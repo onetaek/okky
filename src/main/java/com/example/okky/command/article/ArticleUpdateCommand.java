@@ -1,12 +1,19 @@
-package com.example.okky.command;
+package com.example.okky.command.article;
 
+import com.example.okky.command.Command;
 import com.example.okky.daos.ArticleDao;
 import com.example.okky.frontcontroller.View;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class ArticleUpdateCommand implements Command {
+    ArticleDao adao = ArticleDao.getInstance();
+
+
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String boardId = req.getParameter("boardId");
@@ -17,7 +24,7 @@ public class ArticleUpdateCommand implements Command {
         String content = req.getParameter("content");
 
 
-        ArticleDao adao = new ArticleDao();
+
         adao.updateArticle(articleIndex,userEmail, title, content, tags);
 
         req.setAttribute("boardId",boardId);
