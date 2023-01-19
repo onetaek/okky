@@ -16,23 +16,21 @@ import java.util.Map;
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
 
-    private Map<String,Command> commandMap = new HashMap<>();
+    private Map<String,Command> cm = new HashMap<>();
 
     public FrontController() {
-        commandMap.put("/welcome.do", new WelcomeViewCommand());
-        commandMap.put("/login.do",new UserLoginCommand());
-        commandMap.put("/userRegisterView.do",new RegisterViewCommand());
-        commandMap.put("/userRegister.do",new RegisterCommand());
-        commandMap.put("/logout.do",new UserLogoutCommand());
-        commandMap.put("/articleListView.do",new ArticleListViewCommand());
-        commandMap.put("/writeView.do",new ArticleWriteViewCommand());
-        commandMap.put("/write.do",new ArticleWriteCommand());
-        commandMap.put("/articleView.do",new ArticleViewCommand());
-        commandMap.put("/articleUpdateView.do",new ArticleUpdateViewCommand());
-        commandMap.put("/articleUpdate.do",new ArticleUpdateCommand());
-        commandMap.put("/articleDelete.do",new ArticleDeleteCommand());
-
-
+        cm.put("/welcome.do", new WelcomeViewCommand());
+        cm.put("/login.do",new UserLoginCommand());
+        cm.put("/userRegisterView.do",new RegisterViewCommand());
+        cm.put("/userRegister.do",new RegisterCommand());
+        cm.put("/logout.do",new UserLogoutCommand());
+        cm.put("/articleListView.do",new ArticleListViewCommand());
+        cm.put("/writeView.do",new ArticleWriteViewCommand());
+        cm.put("/write.do",new ArticleWriteCommand());
+        cm.put("/articleView.do",new ArticleViewCommand());
+        cm.put("/articleUpdateView.do",new ArticleUpdateViewCommand());
+        cm.put("/articleUpdate.do",new ArticleUpdateCommand());
+        cm.put("/articleDelete.do",new ArticleDeleteCommand());
     }
 
     @Override
@@ -51,7 +49,7 @@ public class FrontController extends HttpServlet {
         System.out.println("com: "+path);
 
         String viewPage = null;
-        Command command = commandMap.get(path);
+        Command command = cm.get(path);
         if(command == null){
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
