@@ -12,10 +12,20 @@ public class ArticleDto {
     private long view;
     private Date createdAt;
 
+    private boolean status;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     public ArticleDto() {
     }
 
-    public ArticleDto(int index, String boardId, String userEmail, String title, String content, long view, Date createdAt) {
+    public ArticleDto(int index, String boardId, String userEmail, String title, String content, long view, Date createdAt, boolean status) {
         this.index = index;
         this.boardId = boardId;
         this.userEmail = userEmail;
@@ -23,6 +33,7 @@ public class ArticleDto {
         this.content = content;
         this.view = view;
         this.createdAt = createdAt;
+        this.status = status;
     }
 
     @Override

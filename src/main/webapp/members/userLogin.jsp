@@ -27,6 +27,7 @@
         <span>OKKY 아이디로 로그인</span>
     </div>
     <div id="login">
+
         <form action="login.do" method="post">
             <div>
                 <div class="idbox">

@@ -51,7 +51,8 @@ public class ArticleDao {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getInt(6),
-                        rs.getDate(7)
+                        rs.getDate(7),
+                        rs.getBoolean(8)
                 );
                 dtos.add(dto);
             }
@@ -153,7 +154,8 @@ public class ArticleDao {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getInt(6),
-                        rs.getDate(7)
+                        rs.getDate(7),
+                        rs.getBoolean(8)
                 );
             }
         }catch (Exception e){
@@ -211,10 +213,11 @@ public class ArticleDao {
     }
 
     public void deleteArticle(int articleIndex) {
-        String sql = "delete from `okky`.articles where `index` = ?";
+        String sql = "update `okky`.`articles` set `status` = ? where `index` = ?";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,articleIndex);
+            pstmt.setBoolean(1,false);
+            pstmt.setInt(2,articleIndex);
             pstmt.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();

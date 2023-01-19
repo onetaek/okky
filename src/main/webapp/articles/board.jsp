@@ -73,6 +73,7 @@
             </div>
 
             <c:forEach var="article" items="${articleDtoList}">
+                <c:if test="${article.status == true}">
 
 
                 <div class="board-container">
@@ -104,6 +105,7 @@
 
                 <%--        <c:if  article.index == tagifarticle.index>--%>
                 <%--        tags.value--%>
+                </c:if>
             </c:forEach>
 
 
