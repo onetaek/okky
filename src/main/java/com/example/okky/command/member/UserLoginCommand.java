@@ -32,6 +32,7 @@ public class UserLoginCommand implements Command {
         if (user.isAdmin()) {
             return null; // 관리자 주소 들어가는곳
         } else if (user.getStatusValue().equals("SUS")) {
+
             out.print("suspended");
             out.flush();
             out.close();
