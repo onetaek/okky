@@ -4,6 +4,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="../resources/css/reset.css">
     <link rel="stylesheet" href="../members/resources/css/userLogin.css">
+    <script defer src="resources/js/userLogin.js"></script>
 </head>
 <body>
 <div id="headerWrap">
@@ -28,11 +29,11 @@
     </div>
     <div id="login">
 
-        <form action="login.do" method="post">
+        <form action="login.do" id="form" method="post">
             <div>
                 <div class="idbox">
                     <label>아이디</label>
-                    <input type="text" name="id" class="box" placeholder="아이디를 입력해 주세요."></input>
+                    <input type="text" name="email" class="box" placeholder="아이디를 입력해 주세요."></input>
 
                 </div>
                 <div class="pwbox">

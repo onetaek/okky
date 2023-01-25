@@ -40,8 +40,20 @@ form.onsubmit = e => {
     }
 
 
-
-
-
 //     ajax
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', `login.do?email=${form['email'].value}&password=${form['password'].value}`);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+        if (xhr.status >=200 && xhr.status < 300) {
+            const responseJson = xhr.responseText;
+            if (responseJson === "success") {
+                alert("로그인에 성공하였습니다.");
+            } else {
+                alert("해당 계정은 휴면상태입니다.");
+            }
+        }
+    }
 }
