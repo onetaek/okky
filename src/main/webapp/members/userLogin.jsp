@@ -4,7 +4,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="../resources/css/reset.css">
     <link rel="stylesheet" href="../members/resources/css/userLogin.css">
-    <script defer src="resources/js/userLogin.js"></script>
+    <script src="${pageContext.request.contextPath}/members/resources/js/userLogin.js" defer></script>
 </head>
 <body>
 <div id="headerWrap">
@@ -29,7 +29,7 @@
     </div>
     <div id="login">
 
-        <form action="login.do" id="form" method="post">
+        <form id="form">
             <div>
                 <div class="idbox">
                     <label>아이디</label>
@@ -48,7 +48,7 @@
             </div>
 
             <div>
-                <input class="loginbutton" type="submit"  value="로그인"></input>
+                <input class="loginbutton" type="submit"  value="로그인"/>
             </div>
             <!-- -----------------------------------회원가입----------------------------------- -->
             <p class="SignUp">

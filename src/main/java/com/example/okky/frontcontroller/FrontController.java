@@ -52,7 +52,6 @@ public class FrontController extends HttpServlet {
             return;
         }
 
-        System.out.println("제발염..................넘어오세여");
         View view = command.execute(req, resp);
         System.out.println("접선 실패 ㅠㅜ");
         if(view != null) view.render(req, resp);

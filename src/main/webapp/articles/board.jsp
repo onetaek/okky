@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Q&A게시판</title>
+    <title>${boardDto.text}</title>
     <jsp:include page="../layouts/head.jsp"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/articles/resources/css/community.css">
 </head>
@@ -56,13 +56,13 @@
                 <form class="search-c focus">
                     <input type="hidden" name="boardId" id="boardId" value="${boardDto.value}"/>
                     <i class="icon fa-solid fa-magnifying-glass"></i>
-                    <input class="search-input" type="search" placeholder="Q&A 내에서 검색">
+                    <input class="search-input" name="keyWord" type="search" placeholder="Q&A 내에서 검색">
                     <!--<input class="s-btn" type="submit" value="검색">-->
-                    <button class="s-btn" type="button">검색</button>
+                    <button class="s-btn" type="submit">검색</button>
                 </form>
 
                 <div class="page-container">
-                    <span>1 / 11800 페이지</span>
+                    <span>${pageNum} / ${totalPage}</span>
                     <a href="#" class="left">
                         <i class="icon fa-solid fa-arrow-left"></i>
                     </a>
@@ -107,10 +107,16 @@
                 <%--        tags.value--%>
                 </c:if>
             </c:forEach>
-
-
         </section>
     </div>
+
+
+    <div>
+
+    </div>
+
+
+
 </main>
 <jsp:include page="../layouts/footer.jsp"/>
 </body>

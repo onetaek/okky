@@ -213,7 +213,7 @@ public class ArticleDao {
     }
 
     public void deleteArticle(int articleIndex) {
-        String sql = "update `okky`.`articles` set `status` = ? where `index` = ?";
+        String sql = "update `okky`.`articles` set status = ? where `index` = ?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setBoolean(1,false);
@@ -223,26 +223,121 @@ public class ArticleDao {
             e.printStackTrace();
         }
     }
-
-    public ArrayList<ArticleDto> selectAllArticle() {
+    public List<ArticleDto> selectAllArticle() {
         ArrayList<ArticleDto> dtos = new ArrayList<>();
-        String sql = "select * from `okky`.`articles` where boardId = 1 order by createdAt desc limit 5";
         try{
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
-            
+            for(int i = 1 ; i <= 3; i++){
+                String sql = "select * from `okky`.`articles`" +
+                        " where boardId = "+ i + " order by `index` desc limit 5";
+                pstmt = conn.prepareStatement(sql);
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    ArticleDto dto = new ArticleDto(
+                            rs.getInt("index"),
+                            rs.getString("boardId"),
+                            rs.getString("userEmail"),
+                            rs.getString("title"),
+                            rs.getString("content"),
+                            rs.getInt("view"),
+                            rs.getDate("createdAt"),
+                            rs.getBoolean("status")
+                    );
+                    dtos.add(dto);
+                }
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return dtos;
     }
 
-    public ArrayList<BoardDto> selectAllBoard() {
-        return null;
+    public List<BoardDto> selectAllBoard() {
+        String sql = "select * from `okky`.boards";
+        ArrayList<BoardDto> dtos = new ArrayList<>();
+        try{
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                BoardDto dto = new BoardDto(
+                        rs.getString(1),
+                        rs.getString(2)
+                );
+                dtos.add(dto);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dtos;
     }
 
-    public ArrayList<TagOfArticleDto> selectAllTag() {
-        return null;
+    public List<TagOfArticleDto> selectAllTag() {
+        String sql = "select * from tagofarticle";
+        ArrayList<TagOfArticleDto> dtos = new ArrayList<>();
+        try{
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                TagOfArticleDto dto = new TagOfArticleDto(
+                        rs.getInt("index"),
+                        rs.getInt("articleIdx"),
+                        rs.getString("tagValue"),
+                        rs.getDate("writtenAt")
+                );
+                dtos.add(dto);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dtos;
+    }
+
+    public int selectArticleTotalCount(String boardId) {
+        String sql = "select count(*) from articles where boardId = ?";
+        int count = 0;
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,boardId);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public List<ArticleDto> selectArticleByPageNum(String boardId,int startNum, int countListPerPage,String keyWord) {
+        List<ArticleDto> dtos = new ArrayList<>();
+        String sql = null;
+        if(keyWord == null){
+            sql = "select * from `okky`.articles where boardId = ? limit ? , ?";
+        }else{
+            sql = "select * from `okky`.articles where boardId = ? and " +
+                    "(title like concat('%',"+keyWord+",'%') or content like concat('%',"+keyWord+",'%')) limit ? , ?";
+        }
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,boardId);
+            pstmt.setInt(2,startNum);
+            pstmt.setInt(3,countListPerPage);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                ArticleDto dto = new ArticleDto(
+                        rs.getInt("index"),
+                        rs.getString("boardId"),
+                        rs.getString("userEmail"),
+                        rs.getString("title"),
+                        rs.getString("content"),
+                        rs.getInt("view"),
+                        rs.getDate("createdAt"),
+                        rs.getBoolean("status")
+                );
+                dtos.add(dto);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dtos;
     }
 }

@@ -116,19 +116,34 @@ public class MemberDao {
             pstmt.setString(2,password);
             rs = pstmt.executeQuery();
             if(rs.next()){
-                dto = new MemberDto(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getBoolean(8),
-                        rs.getDate(9),
-                        rs.getString(10),
-                        rs.getBoolean(11)
-                );
+                System.out.println("rs.getString(1) = " + rs.getString(1));
+                System.out.println("rs.getString(11) = " + rs.getString(11));
+//                dto = new MemberDto(
+//                        rs.getString(1),
+//                        rs.getString(2),
+//                        rs.getString(3),
+//                        rs.getString(4),
+//                        rs.getString(5),
+//                        rs.getString(6),
+//                        rs.getString(7),
+//                        rs.getBoolean(8),
+//                        rs.getDate(9),
+//                        rs.getString(10),
+//                        rs.getBoolean(11)
+//                );
+                dto = new MemberDto();
+                dto.setEmail(rs.getString(1));
+                dto.setPassword(rs.getString(2));
+                dto.setName(rs.getString(3));
+                dto.setNickName(rs.getString(4));
+                dto.setTelecom(rs.getString(5));
+                dto.setcontactCountryValue(rs.getString(6));
+                dto.setContact(rs.getString(7));
+                dto.setPolicyEmailSend(rs.getBoolean(8));
+                dto.setCreatedAt(rs.getDate(9));
+                dto.setStatusValue(rs.getString(10));
+                dto.setAdmin(rs.getBoolean(11));
+
             }
         }catch(Exception e){
             e.printStackTrace();

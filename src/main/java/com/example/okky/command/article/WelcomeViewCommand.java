@@ -10,14 +10,15 @@ import com.example.okky.frontcontroller.View;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 public class WelcomeViewCommand implements Command {
     ArticleDao adao = ArticleDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
-        ArrayList<ArticleDto> articleDtoArrayList = adao.selectAllArticle();
-        ArrayList<BoardDto> boardDtoArrayList = adao.selectAllBoard();
-        ArrayList<TagOfArticleDto> tagOfArticleDtoArraylist = adao.selectAllTag();
+        List<ArticleDto> articleDtoArrayList = adao.selectAllArticle();
+        List<BoardDto> boardDtoArrayList = adao.selectAllBoard();
+        List<TagOfArticleDto> tagOfArticleDtoArraylist = adao.selectAllTag();
 
         req.setAttribute("articleList",articleDtoArrayList);
         req.setAttribute("boardList",boardDtoArrayList);

@@ -138,4 +138,21 @@ public class MemberDto {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+
+    @Override
+    public String toString() {
+        return "MemberDto{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", telecom='" + telecom + '\'' +
+                ", contactCountryValue='" + contactCountryValue + '\'' +
+                ", contact='" + contact + '\'' +
+                ", policyEmailSend=" + policyEmailSend +
+                ", createdAt=" + createdAt +
+                ", statusValue='" + statusValue + '\'' +
+                ", isAdmin=" + isAdmin +
+                '}';
+    }
 }
