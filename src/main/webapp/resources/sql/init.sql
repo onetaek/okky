@@ -28,10 +28,7 @@ CREATE TABLE `okky`.`contactCountries`
 CREATE TABLE `okky`.`telecoms`
 (
     `value` VARCHAR(10) NOT NULL,
-    #SKT,
-    KT,
-    LGU,
-    알뜰폰
+    #SKT,KT,LGU,알뜰폰
             `text` VARCHAR(20) NOT NULL,
     CONSTRAINT PRIMARY KEY (`value`)
 ) engine = InnoDB
@@ -40,9 +37,7 @@ CREATE TABLE `okky`.`telecoms`
 CREATE TABLE `okky`.`statuses`
 (
     `value` VARCHAR(3) NOT NULL,
-    #       OKY,
-    SUS,
-    RES
+    #       OKY,SUS,RES
             `text` VARCHAR(20) NOT NULL,
     CONSTRAINT PRIMARY KEY (`value`)
 ) engine = InnoDB
@@ -83,8 +78,7 @@ CREATE TABLE `okky`.`users`
     `telecom`         VARCHAR(10)  NOT NULL,
     #                 0FK
         `contactCountryValue` VARCHAR (3) NOT NULL,
-    # 082,
-    0FK
+    # 082,0FK
                       `contact` VARCHAR(20) NOT NULL,
     `policyEmailSend` boolean      NOT NULL DEFAULT FALSE,
     `createdAt`       DATETIME     NOT NULL DEFAULT NOW(),

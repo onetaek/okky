@@ -105,4 +105,18 @@ public class ArticleDto {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "ArticleDto{" +
+                "index=" + index +
+                ", boardId='" + boardId + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", view=" + view +
+                ", createdAt=" + createdAt +
+                ", status=" + status +
+                '}';
+    }
 }

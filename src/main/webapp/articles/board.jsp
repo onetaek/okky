@@ -5,6 +5,7 @@
     <title>${boardDto.text}</title>
     <jsp:include page="../layouts/head.jsp"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/articles/resources/css/community.css">
+<%--    <script src="${pageContext.request.contextPath}/articles/resources/js/board.js" defer></script>--%>
 </head>
 <body>
 <jsp:include page="../layouts/header.jsp"/>
@@ -16,7 +17,6 @@
             <div class="title">
                 <span>${boardDto.text}</span>
                 <c:set var="boardId" value="${boardDto.value}"/>
-
                 <c:choose>
                     <c:when test="${boardId == 1}">
                         <span>좋은 질문과 답변으로 동료의 시간을 아껴주세요.</span>
@@ -28,8 +28,6 @@
                         <span>OKKY의 새소식, 이벤트, 행사 정보를 공유하는 공간입니다.</span>
                     </c:when>
                 </c:choose>
-
-
             </div>
             <div id="top-container">
                 <div class="container">
@@ -38,8 +36,6 @@
                         작성하기
                     </a>
                 </div>
-
-
                 <ul class="select">
                     <li class="item">
                         <i class="icon fa-solid fa-bars"></i>
@@ -53,8 +49,12 @@
                     <i class="icon fa-solid fa-repeat"></i>
                 </div>
 
-                <form class="search-c focus">
+                <form class="search-c focus" name="searchForm" action="articleListView.do">
                     <input type="hidden" name="boardId" id="boardId" value="${boardDto.value}"/>
+                    <input type="hidden" name="pageNum" class="p-page-num" value="${p.pageNum}"/>
+<%--                    <input type="hidden" class="p-start-page" value="${p.startPage}"/>--%>
+<%--                    <input type="hidden" class="p-end-page" value="${p.endPage}"/>--%>
+<%--                    <input type="hidden" class="p-total-count" value="${p.totalCount}">--%>
                     <i class="icon fa-solid fa-magnifying-glass"></i>
                     <input class="search-input" name="keyWord" type="search" placeholder="Q&A 내에서 검색">
                     <!--<input class="s-btn" type="submit" value="검색">-->
@@ -62,7 +62,7 @@
                 </form>
 
                 <div class="page-container">
-                    <span>${pageNum} / ${totalPage}</span>
+                    <span>${p.pageNum} / ${p.totalCount}</span>
                     <a href="#" class="left">
                         <i class="icon fa-solid fa-arrow-left"></i>
                     </a>
@@ -74,8 +74,6 @@
 
             <c:forEach var="article" items="${articleDtoList}">
                 <c:if test="${article.status == true}">
-
-
                 <div class="board-container">
                     <ul class="view-container">
                         <li>
@@ -102,21 +100,34 @@
                         </c:forEach>
                     </ul>
                 </div>
-
                 <%--        <c:if  article.index == tagifarticle.index>--%>
                 <%--        tags.value--%>
                 </c:if>
             </c:forEach>
         </section>
+        <div>
+            <a href="articleListView.do?pageNum=1&boardId=${boardId}" class="most-prev-btn">[쩰앞]</a>
+            <c:if test="${p.prev}">
+                <a href="articleListView.do?pageNum=${p.startPage-1}&boardId=${boardId}" class="prev-btn">[이전]</a>
+            </c:if>
+            <c:forEach var="i" begin="${p.startPage}" end="${p.endPage}">
+                <c:choose>
+                    <c:when test="${p.pageNum==i}">
+                        <a href="articleListView.do?pageNum=${i}&boardId=${boardId}" class="page-num-btn" style="color:red;">
+                            [<span class="page-num-value">${i}</span>]
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="articleListView.do?pageNum=${i}&boardId=${boardId}" class="page-num-btn">[<span class="page-num-value">${i}</span>]</a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <c:if test="${p.next}">
+                <a href="articleListView.do?pageNum=${p.endPage+1}&boardId=${boardId}" class="next-btn">[다음]</a>
+            </c:if>
+            <a href="articleListView.do?pageNum=${p.totalCount}&boardId=${boardId}" class="most-next-btn">[쩰뒤]</a>
+        </div>
     </div>
-
-
-    <div>
-
-    </div>
-
-
-
 </main>
 <jsp:include page="../layouts/footer.jsp"/>
 </body>

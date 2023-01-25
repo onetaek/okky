@@ -292,7 +292,7 @@ public class ArticleDao {
     }
 
     public int selectArticleTotalCount(String boardId) {
-        String sql = "select count(*) from articles where boardId = ?";
+        String sql = "select count(*) from `okky`.articles where boardId = ?";
         int count = 0;
         try{
             pstmt = conn.prepareStatement(sql);
@@ -307,11 +307,11 @@ public class ArticleDao {
         return count;
     }
 
-    public List<ArticleDto> selectArticleByPageNum(String boardId,int startNum, int countListPerPage,String keyWord) {
-        List<ArticleDto> dtos = new ArrayList<>();
+    public ArrayList<ArticleDto> selectArticleByPageNum(String boardId,int startRow, int pageSize,String keyWord) {
+        ArrayList<ArticleDto> dtos = new ArrayList<>();
         String sql = null;
         if(keyWord == null){
-            sql = "select * from `okky`.articles where boardId = ? limit ? , ?";
+            sql = "select * from `okky`.articles where boardId = ? order by `index` desc limit ? , ?";
         }else{
             sql = "select * from `okky`.articles where boardId = ? and " +
                     "(title like concat('%',"+keyWord+",'%') or content like concat('%',"+keyWord+",'%')) limit ? , ?";
@@ -319,8 +319,8 @@ public class ArticleDao {
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,boardId);
-            pstmt.setInt(2,startNum);
-            pstmt.setInt(3,countListPerPage);
+            pstmt.setInt(2,startRow);
+            pstmt.setInt(3,pageSize);
             rs = pstmt.executeQuery();
             while(rs.next()){
                 ArticleDto dto = new ArticleDto(
