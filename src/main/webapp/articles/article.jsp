@@ -48,6 +48,14 @@
                 </div>
             </c:if>
         </div>
+        <form action="/CommentInsert.do" method="post">
+            <input type="text" name="content">
+            <input type="hidden" name="boardId" value="${boardId}">
+            <input type="hidden" name="articleIndex" value="${articleDto.index}">
+            <input type="hidden" name="userEmail" value="${user.email}">
+            <input type="hidden" name="userNickName" value="${user.nickName}">
+            <input type="submit" value="전송">
+        </form>
     </main>
 </div>
 <jsp:include page="/layouts/footer.jsp"/>

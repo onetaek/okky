@@ -11,7 +11,7 @@
 <jsp:include page="/layouts/header.jsp"/>
 <section class="section" id="community">
   <div id="write">
-    <form action="write.do" method="post">
+    <form id="form" action="/write.do" method="post">
       <input type="hidden" name="email" value="${user.email}" >
       <input type="hidden" name="boardId" value="${boardId}"/>
       <h3>글작성하기</h3>
@@ -35,7 +35,7 @@
       </div>
       <div id="btnWrap">
         <button type="button">취소</button>
-        <button type="submit">등록</button>
+        <button id="subBtn" type="submit">등록</button>
       </div>
     </form>
   </div>

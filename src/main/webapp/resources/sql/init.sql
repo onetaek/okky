@@ -172,6 +172,33 @@ create table `okky`.`tagOfArticle`
 ) engine = InnoDB
   default charset = utf8;
 
+CREATE TABLE `okky`.`comment`
+(
+    `index`        INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `group`        int unsigned not null ,
+    `sequence`     int unsigned not null default 0,
+    `level`        int unsigned not null default 0,
+    `boardId`      VARCHAR(10)  NOT NULL,
+    `articleIndex` INT UNSIGNED NOT NULL,
+    `userEmail`    VARCHAR(100) NOT NULL,
+    `userNickName` VARCHAR(20)  NOT NULL,
+    `content`      VARCHAR(200) NOT NULL,
+    `createdAt`    DATETIME     NOT NULL DEFAULT NOW(),
+    CONSTRAINT PRIMARY KEY (`index`),
+    constraint foreign key (`boardId`) references `okky`.`boards` (`id`)
+        on update cascade
+        on delete cascade,
+    constraint foreign key (`userNickName`) references `okky`.`users` (`nickName`)
+        on update cascade
+        on delete cascade,
+    CONSTRAINT FOREIGN KEY (`articleIndex`) REFERENCES `okky`.`articles` (`index`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`userEmail`) REFERENCES `okky`.`users` (`email`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+) engine = InnoDB
+  default charset = utf8;
 
 insert into `okky`.`telecoms` (value, text)
 values ('KT', 'KT');

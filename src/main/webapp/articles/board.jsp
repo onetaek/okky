@@ -29,9 +29,13 @@
                     </c:when>
                 </c:choose>
             </div>
+
+
+
+
             <div id="top-container">
                 <div class="container">
-                    <a class="w_btn" href="writeView.do?boardId=${boardDto.value}">
+                    <a class="w_btn" href="writeView.do?boardId=${boardId}">
                         <i class="icon fa-regular fa-pen-to-square"></i>
                         작성하기
                     </a>

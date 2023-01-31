@@ -4,36 +4,32 @@ import java.util.Date;
 import java.util.Objects;
 
 public class CommentDto {
-    private int index;
-    private int commentIndex;
-    private int articleIndex;
-    private String userEmail;
-    private String contact;
-    private Date createdAt;
+   private int index;
+   private int group;
+   private int sequence;
+   private int level;
+   private String boardId;
+   private int articleIndex;
+   private String userEmail;
+   private String userNickName;
+   private String content;
+   private Date createdAt;
+
 
     public CommentDto() {
     }
 
-    public CommentDto(int index, int commentIndex, int articleIndex, String userEmail, String contact, Date createdAt) {
+    public CommentDto(int index, int group, int sequence, int level, String boardId, int articleIndex, String userEmail, String userNickName, String content, Date createdAt) {
         this.index = index;
-        this.commentIndex = commentIndex;
+        this.group = group;
+        this.sequence = sequence;
+        this.level = level;
+        this.boardId = boardId;
         this.articleIndex = articleIndex;
         this.userEmail = userEmail;
-        this.contact = contact;
+        this.userNickName = userNickName;
+        this.content = content;
         this.createdAt = createdAt;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CommentDto that = (CommentDto) o;
-        return index == that.index;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(index);
     }
 
     public int getIndex() {
@@ -44,12 +40,36 @@ public class CommentDto {
         this.index = index;
     }
 
-    public int getCommentIndex() {
-        return commentIndex;
+    public int getGroup() {
+        return group;
     }
 
-    public void setCommentIndex(int commentIndex) {
-        this.commentIndex = commentIndex;
+    public void setGroup(int group) {
+        this.group = group;
+    }
+
+    public int getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(String boardId) {
+        this.boardId = boardId;
     }
 
     public int getArticleIndex() {
@@ -68,12 +88,20 @@ public class CommentDto {
         this.userEmail = userEmail;
     }
 
-    public String getContact() {
-        return contact;
+    public String getUserNickName() {
+        return userNickName;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setUserNickName(String userNickName) {
+        this.userNickName = userNickName;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getCreatedAt() {
