@@ -26,12 +26,11 @@ public class RegisterCommand implements Command {
         String policyEmailSend = req.getParameter("policyEmailSend");
 
         System.out.println("policyEmailSend : " + policyEmailSend);
-        boolean policy = policyEmailSend.equals("on");
+//        boolean policy = policyEmailSend.equals("on");
 
         MemberDto mdto = new MemberDto();
 
         String hashPassword = CryptoUtils.hashSha512(password);
-
         mdto.setEmail(email);
         mdto.setPassword(hashPassword);
         mdto.setName(name);
@@ -39,8 +38,14 @@ public class RegisterCommand implements Command {
         mdto.setTelecom(telecom);
         mdto.setContact(contact);
         mdto.setcontactCountryValue(contactCountryValue);
-//        System.out.println(Boolean.valueOf(policyEmailSend));
-        mdto.setPolicyEmailSend(policy);
+        if (policyEmailSend == null) {
+            //        System.out.println(Boolean.valueOf(policyEmailSend));
+            mdto.setPolicyEmailSend(false);
+        } else {
+            //        System.out.println(Boolean.valueOf(policyEmailSend));
+            mdto.setPolicyEmailSend(true);
+        }
+
 
 
         mdao.insertUser(mdto);

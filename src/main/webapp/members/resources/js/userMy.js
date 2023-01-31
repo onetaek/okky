@@ -17,8 +17,13 @@ pwCheck.addEventListener("click", () => {
     }
     isChecked = !isChecked;
 });
+
 let OLDPW = form['OldPw'].value;
 console.log(OLDPW);
+
+
+const NewPw = form['NewPw'];
+const NewPwC = form['NewPwCheck'];
 checkBtn.addEventListener("click", (e) => {
     e.preventDefault();
     // console.log("클릭!");
@@ -39,6 +44,8 @@ checkBtn.addEventListener("click", (e) => {
                     alert("success")
                     oldPw.setAttribute("disabled", "disabled");
                     checkBtn.setAttribute("disabled", "disabled");
+                    NewPw.removeAttribute("disabled", "disabled");
+                    NewPwC.removeAttribute("disabled", "disabled");
                 } else {
                     alert("failure")
                 }

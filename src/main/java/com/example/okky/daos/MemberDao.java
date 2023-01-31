@@ -109,7 +109,7 @@ public class MemberDao {
 
     public MemberDto selectUserById(String id, String password) {
         MemberDto dto = null;
-        String sql = "select * from `okky`.`users` where `email` = ? and password = ?";
+        String sql = "select * from `okky`.`users` where `email` = ? and `password` = ?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
@@ -181,13 +181,19 @@ public class MemberDao {
     }
 
     public void updateUser(MemberDto existingUser) {
-        String sql = "update `okky`.`users` set name = ?, nickName = ?, contact =? where email = ?";
+        String sql = "update `okky`.`users` " +
+                "set `name` = ?, " +
+                "nickName = ?, " +
+                "contact = ?," +
+                "`password` = ? " +
+                "where email = ?";
         try{
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,existingUser.getName());
             pstmt.setString(2,existingUser.getNickName());
             pstmt.setString(3,existingUser.getContact());
             pstmt.setString(4,existingUser.getEmail());
+            pstmt.setString(5,existingUser.getPassword());
             pstmt.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
