@@ -27,6 +27,7 @@ public class ArticleListViewCommand implements Command {
         int totalCount = adao.selectArticleTotalCount(boardId);
 
         Pagination p = new Pagination(pageNum, totalCount);
+        System.out.println("p = " + p);
         BoardDto boardDto = bdao.selectBoardById(boardId);//어떤 게시판 인지(ex 공지사항, 커뮤니티...)
         List<ArticleDto> articleDtoList = adao.selectArticleByPageNum(boardId, p.getStartRow(), p.getPageSize(),null);//페이지에 해당하는 aritcle만 가져오기
 //        ArrayList<TagOfArticleDto> tagOfArticleDtos = adao.selectTagsByBoardId(boardId);
