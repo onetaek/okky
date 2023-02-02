@@ -319,7 +319,7 @@ public class ArticleDao {
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,boardId);
-            pstmt.setInt(2,startRow);
+            pstmt.setInt(2,startRow-1);
             pstmt.setInt(3,pageSize);
             rs = pstmt.executeQuery();
             while(rs.next()){
