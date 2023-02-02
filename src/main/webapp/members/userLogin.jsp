@@ -9,7 +9,7 @@
 <body>
 <div id="headerWrap">
     <!-- --------------------------------------로고----------------------------------- -->
-    <a href="../main/welcome.jsp"><img class="logo" src="../resources/img/okky.svg" alt="OKKY Logo"></a>
+    <a href="../main/welcome.do"><img class="logo" src="../resources/img/okky.svg" alt="OKKY Logo"></a>
     <h2>OKKY에 오신것을 환영합니다.</h2>
     <p class="Explanation">OKKY는 소프트웨어 개발자를 위한 지식공유 플랫폼입니다.</p>
     <!-- ------------------------------------SNS로그인----------------------------------- -->

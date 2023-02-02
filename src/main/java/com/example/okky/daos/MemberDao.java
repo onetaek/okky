@@ -192,8 +192,8 @@ public class MemberDao {
             pstmt.setString(1,existingUser.getName());
             pstmt.setString(2,existingUser.getNickName());
             pstmt.setString(3,existingUser.getContact());
-            pstmt.setString(4,existingUser.getEmail());
-            pstmt.setString(5,existingUser.getPassword());
+            pstmt.setString(4,existingUser.getPassword());
+            pstmt.setString(5,existingUser.getEmail());
             pstmt.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();

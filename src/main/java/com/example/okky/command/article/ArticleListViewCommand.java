@@ -21,6 +21,7 @@ public class ArticleListViewCommand implements Command {
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String boardId = req.getParameter("boardId");
+        System.out.println("jaklsdjfiiioio"+boardId);
         String pageNum = req.getParameter("pageNum");
         String keyWord = req.getParameter("keyWord");
         int totalCount = adao.selectArticleTotalCount(boardId);
@@ -35,5 +36,6 @@ public class ArticleListViewCommand implements Command {
         req.setAttribute("boardDto",boardDto);
         req.setAttribute("articleDtoList",articleDtoList);
         return new View("/articles/board.jsp");
+
     }
 }

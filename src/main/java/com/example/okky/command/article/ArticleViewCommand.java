@@ -26,6 +26,8 @@ public class ArticleViewCommand implements Command {
         req.setAttribute("boardId",boardId);
         req.setAttribute("tagOfArticle",tagOfArticle);
 
+
+
         return new View("/articles/article.jsp");
     }
 }

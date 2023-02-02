@@ -22,6 +22,7 @@ public class WelcomeViewCommand implements Command {
 
         req.setAttribute("articleList",articleDtoArrayList);
         req.setAttribute("boardList",boardDtoArrayList);
+        System.out.println("asdkljfk"+boardDtoArrayList);
         req.setAttribute("tagList",tagOfArticleDtoArraylist);
 
         return new View("/main/welcome.jsp");

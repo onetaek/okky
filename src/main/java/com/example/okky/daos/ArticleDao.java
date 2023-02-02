@@ -84,7 +84,7 @@ public class ArticleDao {
 
     public void insertArticle(String boardId,String title,String content,
                               String userEmail,String[] tags ) {
-        System.out.println("insertArticles의 boardId: "+boardId);
+        System.out.println("insertArticles의 boardId: " + boardId);
         String sql = "insert into `okky`.`articles` (boardId,userEmail," +
                 "title,content ) values(?,?,?,?)";
         try {
@@ -340,4 +340,6 @@ public class ArticleDao {
         }
         return dtos;
     }
+
+
 }
