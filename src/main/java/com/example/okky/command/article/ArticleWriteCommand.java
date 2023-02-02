@@ -16,7 +16,6 @@ public class ArticleWriteCommand implements Command {
         System.out.println("boardId!boardId :" + boardId);
         String userEmail = req.getParameter("email");
         String[] tags = req.getParameterValues("tags");
-
         String content = req.getParameter("content");
         adao.insertArticle(boardId,title,content,userEmail,tags);
 

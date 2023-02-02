@@ -49,13 +49,27 @@ form.onsubmit = e => {
         if (xhr.status >=200 && xhr.status < 300) {
 
             const responseJson = xhr.responseText;
-            console.log(responseJson);
-            if (responseJson === "success") {
-                alert("로그인에 성공하였습니다.");
-                window.location.href ="/main/welcome.do";
-            } else {
-                alert("해당 계정은 휴면상태입니다.");
+            console.log(responseJson , typeof responseJson);
+
+            switch (responseJson) {
+                case "success":
+                    alert("로그인에 성공하였습니다.");
+                    window.location.href ="/main/welcome.do";
+                    break;
+                case "failure":
+                    alert("아이디 혹은 비밀번호를 잘못입력하였습니다. 확인후 다시 시도해 주세요.");
+                    break;
+                case "suspended":
+                    alert("해당 계정은 휴면상태입니다.");
+                    break;
+                case "resigned":
+                    alert("해당 계정은 탈퇴된 회원입니다..");
+                    break;
+                default:
+                    alert("알수 없는 이유로 로그인에 실패하였습니다. 잠시후 다시 시도해 주세요.");
+                    break;
             }
+
         }
     }
 }

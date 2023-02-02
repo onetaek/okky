@@ -3,6 +3,7 @@ package com.example.okky.command.article;
 import com.example.okky.command.Command;
 import com.example.okky.daos.ArticleDao;
 import com.example.okky.dtos.bbs.ArticleDto;
+import com.example.okky.dtos.bbs.BoardDto;
 import com.example.okky.dtos.bbs.TagOfArticleDto;
 import com.example.okky.frontcontroller.View;
 
@@ -14,16 +15,19 @@ public class ArticleViewCommand implements Command {
     ArticleDao adao = ArticleDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
+
+
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
         String boardId = req.getParameter("boardId");
         System.out.println("ArticleView Command boardId = " + boardId);
         ArticleDto articleDto = adao.selectArticleByIndex(articleIndex);
-
+        BoardDto board = adao.selectBoardById(boardId);
         //where 조건절어 articleIndex와 boardId를 사용해서 게시글을 가져옴
         ArrayList<String> tagOfArticle = adao.selectTagsByArticleIdxAndBoardId(articleIndex,boardId);
 
         req.setAttribute("articleDto",articleDto);
         req.setAttribute("boardId",boardId);
+        req.setAttribute("board",board);
         req.setAttribute("tagOfArticle",tagOfArticle);
 
 

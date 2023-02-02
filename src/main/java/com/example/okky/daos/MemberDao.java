@@ -118,19 +118,7 @@ public class MemberDao {
             if(rs.next()){
                 System.out.println("rs.getString(1) = " + rs.getString(1));
                 System.out.println("rs.getString(11) = " + rs.getString(11));
-//                dto = new MemberDto(
-//                        rs.getString(1),
-//                        rs.getString(2),
-//                        rs.getString(3),
-//                        rs.getString(4),
-//                        rs.getString(5),
-//                        rs.getString(6),
-//                        rs.getString(7),
-//                        rs.getBoolean(8),
-//                        rs.getDate(9),
-//                        rs.getString(10),
-//                        rs.getBoolean(11)
-//                );
+
                 dto = new MemberDto();
                 dto.setEmail(rs.getString(1));
                 dto.setPassword(rs.getString(2));

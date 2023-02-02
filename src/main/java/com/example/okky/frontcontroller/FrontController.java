@@ -37,6 +37,7 @@ public class FrontController extends HttpServlet {
         commandMap.put("/userUpdate.do",new UserUpdateCommand());
         commandMap.put("/userMyPwCheck.do",new UserMyPwCheckCommand());
         commandMap.put("/CommentInsert.do",new CommentInsertCommand());
+        commandMap.put("/ArticleLikeView.do",new ArticleLikeViewCommand());
     }
 
     @Override

@@ -20,7 +20,7 @@
                     <div class="cute-cat"></div>
                 </div>
                 <c:forEach var="article" items="${articleList}">
-                    <c:if test="${article.boardId == board.value}">
+                    <c:if test="${article.boardId == board.id}">
                 <div class="board-container">
                     <ul class="view-container">
                         <li><a href="#"> <img src="../resources/img/logo.svg" alt="profile" />
@@ -29,7 +29,7 @@
                         <li><span>${article.createdAt}</span></li>
                     </ul>
                     <div class="title-container">
-                        <a href="articleView.do?articleIndex=${article.index}&boardId=${board.value}"><p>${article.title}</p></a>
+                        <a href="articleView.do?articleIndex=${article.index}&boardId=${board.id}"><p>${article.title}</p></a>
                     </div>
                     <ul class="tag-container">
                         <c:forEach var="tag" items="${tagList}" >

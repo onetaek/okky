@@ -15,10 +15,12 @@ import java.util.List;
 
 public class ArticleDao {
     private static final ArticleDao INSTANCE = new ArticleDao();
-    public static ArticleDao getInstance(){
+
+    public static ArticleDao getInstance() {
         return INSTANCE;
     }
-    private ArticleDao(){
+
+    private ArticleDao() {
         connect();
     }
 
@@ -41,9 +43,9 @@ public class ArticleDao {
 
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,boardId);
+            pstmt.setString(1, boardId);
             rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 ArticleDto dto = new ArticleDto(
                         rs.getInt(1),
                         rs.getString(2),
@@ -69,47 +71,48 @@ public class ArticleDao {
         try {
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 TagDto dto = new TagDto(
-                  rs.getString(1),
-                  rs.getString(2)
+                        rs.getString(1),
+                        rs.getString(2)
                 );
                 dtos.add(dto);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dtos;
     }
 
-    public void insertArticle(String boardId,String title,String content,
-                              String userEmail,String[] tags ) {
+    public void insertArticle(String boardId, String title, String content,
+                              String userEmail, String[] tags) {
         System.out.println("insertArticles의 boardId: " + boardId);
         String sql = "insert into `okky`.`articles` (boardId,userEmail," +
                 "title,content ) values(?,?,?,?)";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,boardId);
-            pstmt.setString(2,userEmail);
-            pstmt.setString(3,title);
-            pstmt.setString(4,content);
+            pstmt.setString(1, boardId);
+            pstmt.setString(2, userEmail);
+            pstmt.setString(3, title);
+            pstmt.setString(4, content);
             pstmt.executeUpdate();
 
 
             int articleIndex = 0;
             sql = "select max(`index`) from `okky`.`articles` where userEmail = ?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,userEmail);
+            pstmt.setString(1, userEmail);
             rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 articleIndex = rs.getInt(1);
             }
             sql = "insert into `okky`.`tagofarticle` (articleIdx,tagValue) " +
                     "values(?,?)";
-            for(String tag:tags){
+            if (tags == null) return;
+            for (String tag : tags) {
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setInt(1,articleIndex);
-                pstmt.setString(2,tag);
+                pstmt.setInt(1, articleIndex);
+                pstmt.setString(2, tag);
                 pstmt.executeUpdate();
             }
         } catch (SQLException e) {
@@ -122,17 +125,17 @@ public class ArticleDao {
         String sql = "select `A`.index, `T`.tagValue\n" +
                 "from `okky`.`articles` as `A`\n" +
                 "    join `okky`.`tagofarticle` as `T` on `A`.`index`  = `T`.`articleIdx` where boardId = ?";
-        try{
+        try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,boardId);
+            pstmt.setString(1, boardId);
             rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 TagOfArticleDto dto = new TagOfArticleDto();
                 dto.setArticleIdx(rs.getInt(1));
                 dto.setTagValue(rs.getString(2));
                 dtos.add(dto);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dtos;
@@ -142,11 +145,11 @@ public class ArticleDao {
         ArticleDto dto = null;
 
         String sql = "select * from `okky`.`articles` where `index` = ?";
-        try{
+        try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,articleIndex);
+            pstmt.setInt(1, articleIndex);
             rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 dto = new ArticleDto(
                         rs.getInt(1),
                         rs.getString(2),
@@ -158,7 +161,7 @@ public class ArticleDao {
                         rs.getBoolean(8)
                 );
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dto;
@@ -168,29 +171,29 @@ public class ArticleDao {
         ArrayList<String> tags = new ArrayList<>();
         String sql = "select  t.tagValue from `okky`.`articles` as `a`, `okky`.tagOfArticle as `t`" +
                 " where `a`.`index` = `t`.articleIdx and a.`index` = ? and boardId = ?";
-        try{
+        try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,articleIndex);
-            pstmt.setString(2,boardId);
+            pstmt.setInt(1, articleIndex);
+            pstmt.setString(2, boardId);
             rs = pstmt.executeQuery();
-            while(rs.next()){
-                System.out.println("rs.getSting: "+rs.getString(1));
+            while (rs.next()) {
+                System.out.println("rs.getSting: " + rs.getString(1));
                 tags.add(rs.getString(1));
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return tags;
     }
 
-    public void updateArticle(int articleIndex,String userEmail, String title, String content, String[] tags) {
+    public void updateArticle(int articleIndex, String userEmail, String title, String content, String[] tags) {
         String sql = "update `okky`.`articles` set title = ?, content = ? where `index` = ?";
-        try{
+        try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,title);
-            pstmt.setString(2,content);
-            pstmt.setInt(3,articleIndex);
+            pstmt.setString(1, title);
+            pstmt.setString(2, content);
+            pstmt.setInt(3, articleIndex);
             pstmt.executeUpdate();
 
             sql = "delete from `okky`.`tagofarticle` where articleIdx = ?";
@@ -198,16 +201,16 @@ public class ArticleDao {
             pstmt.setInt(1, articleIndex);
             pstmt.executeUpdate();
 
-            for(String tag: tags){
+            for (String tag : tags) {
                 System.out.println("tag = " + tag);
                 sql = "insert into `okky`.`tagofarticle`(articleIdx, tagValue) values (?,?)";
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setInt(1,articleIndex);
-                pstmt.setString(2,tag);
+                pstmt.setInt(1, articleIndex);
+                pstmt.setString(2, tag);
                 pstmt.executeUpdate();
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -216,19 +219,20 @@ public class ArticleDao {
         String sql = "update `okky`.`articles` set status = ? where `index` = ?";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setBoolean(1,false);
-            pstmt.setInt(2,articleIndex);
+            pstmt.setBoolean(1, false);
+            pstmt.setInt(2, articleIndex);
             pstmt.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public List<ArticleDto> selectAllArticle() {
         ArrayList<ArticleDto> dtos = new ArrayList<>();
-        try{
-            for(int i = 1 ; i <= 3; i++){
+        try {
+            for (int i = 1; i <= 3; i++) {
                 String sql = "select * from `okky`.`articles`" +
-                        " where boardId = "+ i + " order by `index` desc limit 5";
+                        " where boardId = " + i + " order by `index` desc limit 5";
                 pstmt = conn.prepareStatement(sql);
                 rs = pstmt.executeQuery();
                 while (rs.next()) {
@@ -245,38 +249,56 @@ public class ArticleDao {
                     dtos.add(dto);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dtos;
     }
 
+    public BoardDto selectBoardById(String boardId) {
+        String sql = "select * from `okky`.boards where id = ?";
+        BoardDto dto = null;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, boardId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                dto = new BoardDto(
+                        rs.getString("id"),
+                        rs.getString("text"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
     public List<BoardDto> selectAllBoard() {
         String sql = "select * from `okky`.boards";
         ArrayList<BoardDto> dtos = new ArrayList<>();
-        try{
+        try {
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 BoardDto dto = new BoardDto(
                         rs.getString(1),
                         rs.getString(2)
                 );
                 dtos.add(dto);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dtos;
     }
 
     public List<TagOfArticleDto> selectAllTag() {
-        String sql = "select * from tagofarticle";
+        String sql = "select * from `okky`.`tagofarticle`";
         ArrayList<TagOfArticleDto> dtos = new ArrayList<>();
-        try{
+        try {
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 TagOfArticleDto dto = new TagOfArticleDto(
                         rs.getInt("index"),
                         rs.getInt("articleIdx"),
@@ -285,7 +307,7 @@ public class ArticleDao {
                 );
                 dtos.add(dto);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dtos;
@@ -294,35 +316,35 @@ public class ArticleDao {
     public int selectArticleTotalCount(String boardId) {
         String sql = "select count(*) from `okky`.articles where boardId = ?";
         int count = 0;
-        try{
+        try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,boardId);
+            pstmt.setString(1, boardId);
             rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 count = rs.getInt(1);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return count;
     }
 
-    public ArrayList<ArticleDto> selectArticleByPageNum(String boardId,int startRow, int pageSize,String keyWord) {
+    public ArrayList<ArticleDto> selectArticleByPageNum(String boardId, int startRow, int pageSize, String keyWord) {
         ArrayList<ArticleDto> dtos = new ArrayList<>();
         String sql = null;
-        if(keyWord == null){
+        if (keyWord == null) {
             sql = "select * from `okky`.articles where boardId = ? order by `index` desc limit ? , ?";
-        }else{
+        } else {
             sql = "select * from `okky`.articles where boardId = ? and " +
-                    "(title like concat('%',"+keyWord+",'%') or content like concat('%',"+keyWord+",'%')) limit ? , ?";
+                    "(title like concat('%'," + keyWord + ",'%') or content like concat('%'," + keyWord + ",'%')) limit ? , ?";
         }
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,boardId);
-            pstmt.setInt(2,startRow-1);
-            pstmt.setInt(3,pageSize);
+            pstmt.setString(1, boardId);
+            pstmt.setInt(2, startRow - 1);
+            pstmt.setInt(3, pageSize);
             rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 ArticleDto dto = new ArticleDto(
                         rs.getInt("index"),
                         rs.getString("boardId"),
@@ -335,11 +357,66 @@ public class ArticleDao {
                 );
                 dtos.add(dto);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dtos;
     }
+
+
+    //    select like
+//    insert like
+//    delete like
+    public int selectLikeByCount(int articleIndex) {
+        int count = 0;
+        String sql = "select count(0) from `okky`.`articleLikes` where `articleIndex` = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, articleIndex);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+
+
+
+
+
+    public void insertLike(String userEmail, int articleIndex) {
+        String sql = "insert into `okky`.`articleLikes` (userEmail, articleIndex) values (?,?)";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userEmail);
+            pstmt.setInt(2, articleIndex);
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void deleteLike(String userEmail, int articleIndex) {
+        String sql = "delete from `okky`.`articleLikes` where `userEmail` = ? and `articleIndex` = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userEmail);
+            pstmt.setInt(2, articleIndex);
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 }

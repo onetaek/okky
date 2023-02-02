@@ -16,7 +16,7 @@
         <section id="section1">
             <div class="title">
                 <span>${boardDto.text}</span>
-                <c:set var="boardId" value="${boardDto.value}"/>
+                <c:set var="boardId" value="${boardDto.id}"/>
                 <c:choose>
                     <c:when test="${boardId == 1}">
                         <span>좋은 질문과 답변으로 동료의 시간을 아껴주세요.</span>
@@ -54,7 +54,7 @@
                 </div>
 
                 <form class="search-c focus" name="searchForm" action="articleListView.do">
-                    <input type="hidden" name="boardId" id="boardId" value="${boardDto.value}"/>
+                    <input type="hidden" name="boardId" id="boardId" value="${boardDto.id}"/>
                     <input type="hidden" name="pageNum" class="p-page-num" value="${p.pageNum}"/>
 <%--                    <input type="hidden" class="p-start-page" value="${p.startPage}"/>--%>
 <%--                    <input type="hidden" class="p-end-page" value="${p.endPage}"/>--%>
@@ -94,7 +94,7 @@
                         </li>
                     </ul>
                     <div class="title-container">
-                        <a href="articleView.do?articleIndex=${article.index}&boardId=${boardDto.value}"><p><c:out value="${article.title}"/></p></a>
+                        <a href="articleView.do?articleIndex=${article.index}&boardId=${boardDto.id}"><p><c:out value="${article.title}"/></p></a>
                     </div>
                     <ul class="tag-container">
                         <c:forEach var="t" items="${tagsList}">

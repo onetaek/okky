@@ -10,6 +10,6 @@ public class UserLogoutCommand implements Command {
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         req.getSession().invalidate();
-        return new View("/main/welcome.jsp");
+        return new View("/main/welcome.do");
     }
 }
