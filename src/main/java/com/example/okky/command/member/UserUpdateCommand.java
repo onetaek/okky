@@ -47,6 +47,7 @@ public class UserUpdateCommand implements Command {
             existingUser.setPassword(hashPw);
         }
 
+
         mdao.updateUser(existingUser);
         session.setAttribute("user", existingUser);
         return new View("/userMyView.do");
