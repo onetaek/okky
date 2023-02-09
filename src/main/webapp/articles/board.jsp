@@ -15,19 +15,30 @@
     <div id="sectionWrap">
         <section id="section1">
             <div class="title">
-                <span>${boardDto.text}</span>
-                <c:set var="boardId" value="${boardDto.id}"/>
-                <c:choose>
-                    <c:when test="${boardId == 1}">
-                        <span>좋은 질문과 답변으로 동료의 시간을 아껴주세요.</span>
-                    </c:when>
-                    <c:when test="${boardId == 2}">
-                        <span>다양한 사람을 만나고 생각의 폭을 넓혀보세요.</span>
-                    </c:when>
-                    <c:when test="${boardId == 3}">
-                        <span>OKKY의 새소식, 이벤트, 행사 정보를 공유하는 공간입니다.</span>
-                    </c:when>
-                </c:choose>
+
+                <c:if test="${boardId != 4}">
+                    <span>${boardDto.text}</span>
+                </c:if>
+                <c:if test="${boardId == 4}">
+                    <span>${tagValue} 관련 게시글</span>
+                </c:if>
+                    <c:set var="boardId" value="${boardDto.id}"/>
+                    <c:choose>
+                        <c:when test="${boardId == 1}">
+                            <span>좋은 질문과 답변으로 동료의 시간을 아껴주세요.</span>
+                        </c:when>
+                        <c:when test="${boardId == 2}">
+                            <span>다양한 사람을 만나고 생각의 폭을 넓혀보세요.</span>
+                        </c:when>
+                        <c:when test="${boardId == 3}">
+                            <span>OKKY의 새소식, 이벤트, 행사 정보를 공유하는 공간입니다.</span>
+                        </c:when>
+                        <c:when test="${boardId == 4}">
+                            <span>많은 사람들의 궁금한 사항을 함께 공유해 봅시다.</span>
+                        </c:when>
+                    </c:choose>
+
+
             </div>
 
 
@@ -66,7 +77,7 @@
                 </form>
 
                 <div class="page-container">
-                    <span>${p.pageNum} / ${p.totalCount}</span>
+                    <span>${p.pageNum} / ${p.endPage}</span>
                     <a href="#" class="left">
                         <i class="icon fa-solid fa-arrow-left"></i>
                     </a>
@@ -110,26 +121,26 @@
             </c:forEach>
         </section>
         <div>
-            <a href="articleListView.do?pageNum=1&boardId=${boardId}" class="most-prev-btn">[쩰앞]</a>
+            <a href="articleListView.do?pageNum=1&boardId=${boardId}&tagValue=${tagValue}" class="most-prev-btn">[쩰앞]</a>
             <c:if test="${p.prev}">
-                <a href="articleListView.do?pageNum=${p.startPage-1}&boardId=${boardId}" class="prev-btn">[이전]</a>
+                <a href="articleListView.do?pageNum=${p.startPage-1}&boardId=${boardId}&tagValue=${tagValue}" class="prev-btn">[이전]</a>
             </c:if>
             <c:forEach var="i" begin="${p.startPage}" end="${p.endPage}">
                 <c:choose>
                     <c:when test="${p.pageNum==i}">
-                        <a href="articleListView.do?pageNum=${i}&boardId=${boardId}" class="page-num-btn" style="color:red;">
+                        <a href="articleListView.do?pageNum=${i}&boardId=${boardId}&tagValue=${tagValue}" class="page-num-btn" style="color:red;">
                             [<span class="page-num-value">${i}</span>]
                         </a>
                     </c:when>
                     <c:otherwise>
-                        <a href="articleListView.do?pageNum=${i}&boardId=${boardId}" class="page-num-btn">[<span class="page-num-value">${i}</span>]</a>
+                        <a href="articleListView.do?pageNum=${i}&boardId=${boardId}&tagValue=${tagValue}" class="page-num-btn">[<span class="page-num-value">${i}</span>]</a>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
             <c:if test="${p.next}">
-                <a href="articleListView.do?pageNum=${p.endPage+1}&boardId=${boardId}" class="next-btn">[다음]</a>
+                <a href="articleListView.do?pageNum=${p.endPage+1}&boardId=${boardId}&tagValue=${tagValue}" class="next-btn">[다음]</a>
             </c:if>
-            <a href="articleListView.do?pageNum=${p.totalCount}&boardId=${boardId}" class="most-next-btn">[쩰뒤]</a>
+            <a href="articleListView.do?pageNum=${p.totalCount}&boardId=${boardId}&tagValue=${tagValue}" class="most-next-btn">[쩰뒤]</a>
         </div>
     </div>
 </main>

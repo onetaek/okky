@@ -5,6 +5,8 @@ import com.example.okky.dtos.bbs.ArticleDto;
 import com.example.okky.dtos.bbs.BoardDto;
 import com.example.okky.dtos.bbs.TagDto;
 import com.example.okky.dtos.bbs.TagOfArticleDto;
+import com.example.okky.utils.Pagination;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 public class ArticleDao {
     private static final ArticleDao INSTANCE = new ArticleDao();
 
@@ -313,12 +315,27 @@ public class ArticleDao {
         return dtos;
     }
 
-    public int selectArticleTotalCount(String boardId) {
-        String sql = "select count(*) from `okky`.articles where boardId = ?";
+    public int selectArticleTotalCount(String boardId, String tagValue) {
+        String sql = null;
+
+        if(tagValue == null || tagValue.equals("")){
+            log.info("select count(*) from `okky`.articles where boardId = ?");
+            sql = "select count(*) from `okky`.articles where boardId = ?";
+
+        } else {
+            sql  = "select count(0)\n" +
+                    "FROM `okky`.`articles`\n" +
+                    "LEFT JOIN `okky`.`tagOfArticle` as `ta` on articles.`index` = ta.articleIdx where `tagValue` = ?";
+        }
         int count = 0;
+
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, boardId);
+            if(tagValue == null || tagValue.equals("")){
+                pstmt.setString(1, boardId);
+            } else {
+                pstmt.setString(1, tagValue);
+            }
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);
@@ -364,9 +381,10 @@ public class ArticleDao {
     }
 
 
-    //    select like
-//    insert like
-//    delete like
+
+
+
+
     public int selectLikeByCount(int articleIndex) {
         int count = 0;
         String sql = "select count(0) from `okky`.`articleLikes` where `articleIndex` = ?";
@@ -382,10 +400,6 @@ public class ArticleDao {
         }
         return count;
     }
-
-
-
-
 
 
     public void insertLike(String userEmail, int articleIndex) {
@@ -416,7 +430,60 @@ public class ArticleDao {
     }
 
 
+    public List<ArticleDto> selectTagOfArticle(String tagValue, int startRow, int pageSize, String keyWord) {
+        List<ArticleDto> dtos = new ArrayList<>();
 
+        String sql = null;
 
+        if (keyWord == null) {
+            sql = "select `articles`.`index`,\n" +
+                    "       `boardId`,\n" +
+                    "       `userEmail`,\n" +
+                    "       `title`,\n" +
+                    "       `content`,\n" +
+                    "       `view`,\n" +
+                    "       `createdAt`,\n" +
+                    "       `status`\n" +
+                    "FROM `okky`.`articles`\n" +
+                    "LEFT JOIN `okky`.`tagOfArticle` as `ta` on articles.`index` = ta.articleIdx where `tagValue` = ? order by `index` desc limit ? , ?";
+        } else {
+            sql = "select `articles`.`index`,\n" +
+                    "       `boardId`,\n" +
+                    "       `userEmail`,\n" +
+                    "       `title`,\n" +
+                    "       `content`,\n" +
+                    "       `view`,\n" +
+                    "       `createdAt`,\n" +
+                    "       `status`\n" +
+                    "FROM `okky`.`articles`\n" +
+                    "LEFT JOIN `okky`.`tagOfArticle` as `ta` on articles.`index` = ta.articleIdx where `tagValue` = ? " +
+                    "and \n" +
+                    "(title like concat('%', " + keyWord + ",'%') or content like concat('%'," + keyWord + ",'%')) limit ? , ?";
+        }
 
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, tagValue);
+            pstmt.setInt(2, startRow - 1);
+            pstmt.setInt(3, pageSize);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                ArticleDto adto = new ArticleDto(
+                        rs.getInt("index"),
+                        rs.getString("boardId"),
+                        rs.getString("userEmail"),
+                        rs.getString("title"),
+                        rs.getString("content"),
+                        rs.getInt("view"),
+                        rs.getDate("createdAt"),
+                        rs.getBoolean("status")
+                );
+                dtos.add(adto);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dtos;
+    }
 }

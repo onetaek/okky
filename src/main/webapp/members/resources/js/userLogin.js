@@ -52,6 +52,10 @@ form.onsubmit = e => {
             console.log(responseJson , typeof responseJson);
 
             switch (responseJson) {
+                case "admin":
+                    alert("관리자 로그인 성공하였습니다.");
+                    window.location.href ="/adminView.do";
+                    break;
                 case "success":
                     alert("로그인에 성공하였습니다.");
                     window.location.href ="/main/welcome.do";

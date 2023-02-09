@@ -1,6 +1,7 @@
 package com.example.okky.frontcontroller;
 
 import com.example.okky.command.*;
+import com.example.okky.command.admin.AdminViewCommand;
 import com.example.okky.command.article.*;
 import com.example.okky.command.member.*;
 
@@ -38,6 +39,7 @@ public class FrontController extends HttpServlet {
         commandMap.put("/userMyPwCheck.do",new UserMyPwCheckCommand());
         commandMap.put("/CommentInsert.do",new CommentInsertCommand());
         commandMap.put("/ArticleLikeView.do",new ArticleLikeViewCommand());
+        commandMap.put("/adminView.do", new AdminViewCommand());
     }
 
     @Override

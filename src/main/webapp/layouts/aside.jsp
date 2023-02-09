@@ -4,7 +4,10 @@
     <h3>인기태그</h3>
     <ul>
         <c:forEach var="t" items="${tagRank}">
-            <li><a href="#">${t.tagValue}</a><span>${t.tagRankCount}</span></li>
+            <li>
+                <a href="articleListView.do?boardId=4&tagValue=${t.tagValue}">${t.tagValue}</a>
+                <span>${t.tagRankCount}</span>
+            </li>
         </c:forEach>
     </ul>
 </aside>

@@ -29,7 +29,7 @@
     </div>
     <div id="login">
 
-        <form id="form">
+        <form id="form" >
             <div>
                 <div class="idbox">
                     <label>아이디</label>

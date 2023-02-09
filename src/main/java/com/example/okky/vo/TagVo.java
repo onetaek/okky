@@ -1,8 +1,11 @@
 package com.example.okky.vo;
 
-public class TagVo {
+import com.example.okky.dtos.bbs.TagOfArticleDto;
+
+public class TagVo extends TagOfArticleDto {
     private String  tagValue;
     private int tagRankCount;
+
 
     public TagVo() {
     }
