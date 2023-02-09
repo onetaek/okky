@@ -62,74 +62,74 @@
     </main>
 </div>
 <jsp:include page="/layouts/footer.jsp"/>
-<script defer src="${pageContext.request.contextPath}/articles/resources/js/article.js"></script>
+<script defer src="${pageContext.request.contextPath}/articles/resources/js/article.js?1"></script>
 
-<script>
-    window.addEventListener("DOMContentLoaded", function (){
-        selectLikeCount();
-        up.addEventListener('click', likeUp);
-        down.addEventListener('click', likeDown);
-    });
-    const up = window.document.querySelector('.up');
-    const down = window.document.querySelector('.down');
+<%--<script>--%>
+<%--    window.addEventListener("DOMContentLoaded", function (){--%>
+<%--        selectLikeCount();--%>
+<%--        up.addEventListener('click', likeUp);--%>
+<%--        down.addEventListener('click', likeDown);--%>
+<%--    });--%>
+<%--    const up = window.document.querySelector('.up');--%>
+<%--    const down = window.document.querySelector('.down');--%>
 
-    const form = window.document.getElementById('form');
-    const articleIndex = form['articleIndex'];
-    const userEmail = form['userEmail'];
-    const likeCount = window.document.querySelector('.like-cnt');
-    console.log(up, down);
-    function likeUp () {
-        const xhr = new XMLHttpRequest();
-        xhr.open('post',"ArticleLikeView.do?action=up&userEmail="+userEmail.value+"&articleIndex="+articleIndex.value)
-        xhr.send();
-        xhr.onreadystatechange = () => {
+<%--    const form = window.document.getElementById('form');--%>
+<%--    const articleIndex = form['articleIndex'];--%>
+<%--    const userEmail = form['userEmail'];--%>
+<%--    const likeCount = window.document.querySelector('.like-cnt');--%>
+<%--    console.log(up, down);--%>
+<%--    function likeUp () {--%>
+<%--        const xhr = new XMLHttpRequest();--%>
+<%--        xhr.open('post',"ArticleLikeView.do?action=up&userEmail="+userEmail.value+"&articleIndex="+articleIndex.value)--%>
+<%--        xhr.send();--%>
+<%--        xhr.onreadystatechange = () => {--%>
 
-            if (xhr.readyState !== XMLHttpRequest.DONE) return;
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseJson = xhr.responseText;
-                console.log(responseJson);
-                likeCount.innerHTML = "";
-                likeCount.innerText = responseJson;
-                selectLikeCount();
-            }
-        }
-    }
+<%--            if (xhr.readyState !== XMLHttpRequest.DONE) return;--%>
+<%--            if (xhr.status >= 200 && xhr.status < 300) {--%>
+<%--                const responseJson = xhr.responseText;--%>
+<%--                console.log(responseJson);--%>
+<%--                likeCount.innerHTML = "";--%>
+<%--                likeCount.innerText = responseJson;--%>
+<%--                selectLikeCount();--%>
+<%--            }--%>
+<%--        }--%>
+<%--    }--%>
 
-    function likeDown() {
-        const xhr = new XMLHttpRequest();
-        xhr.open('post',"ArticleLikeView.do?action=down&userEmail="+userEmail.value+"&articleIndex="+articleIndex.value)
-        xhr.send();
-        xhr.onreadystatechange = () => {
+<%--    function likeDown() {--%>
+<%--        const xhr = new XMLHttpRequest();--%>
+<%--        xhr.open('post',"ArticleLikeView.do?action=down&userEmail="+userEmail.value+"&articleIndex="+articleIndex.value)--%>
+<%--        xhr.send();--%>
+<%--        xhr.onreadystatechange = () => {--%>
 
-            if (xhr.readyState !== XMLHttpRequest.DONE) return;
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseJson = xhr.responseText;
-                console.log(responseJson);
-                likeCount.innerHTML = "";
-                likeCount.innerText = responseJson;
-                selectLikeCount();
-            }
-        }
-    }
-
-
-    function selectLikeCount() {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', "ArticleLikeView.do?articleIndex="+articleIndex.value);
-        xhr.send();
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState !== XMLHttpRequest.DONE) return;
-
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseJson = xhr.responseText;
-                console.log(responseJson);
-                    likeCount.innerHTML = "";
-                    likeCount.innerText = responseJson;
+<%--            if (xhr.readyState !== XMLHttpRequest.DONE) return;--%>
+<%--            if (xhr.status >= 200 && xhr.status < 300) {--%>
+<%--                const responseJson = xhr.responseText;--%>
+<%--                console.log(responseJson);--%>
+<%--                likeCount.innerHTML = "";--%>
+<%--                likeCount.innerText = responseJson;--%>
+<%--                selectLikeCount();--%>
+<%--            }--%>
+<%--        }--%>
+<%--    }--%>
 
 
-            }
-        }
-    }
-</script>
+<%--    function selectLikeCount() {--%>
+<%--        const xhr = new XMLHttpRequest();--%>
+<%--        xhr.open('GET', "ArticleLikeView.do?articleIndex="+articleIndex.value);--%>
+<%--        xhr.send();--%>
+<%--        xhr.onreadystatechange = () => {--%>
+<%--            if (xhr.readyState !== XMLHttpRequest.DONE) return;--%>
+
+<%--            if (xhr.status >= 200 && xhr.status < 300) {--%>
+<%--                const responseJson = xhr.responseText;--%>
+<%--                console.log(responseJson);--%>
+<%--                    likeCount.innerHTML = "";--%>
+<%--                    likeCount.innerText = responseJson;--%>
+
+
+<%--            }--%>
+<%--        }--%>
+<%--    }--%>
+<%--</script>--%>
 </body>
 </html>

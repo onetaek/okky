@@ -1,5 +1,6 @@
-package com.example.okky.command;
+package com.example.okky.command.article;
 
+import com.example.okky.command.Command;
 import com.example.okky.daos.ArticleDao;
 import com.example.okky.frontcontroller.View;
 
