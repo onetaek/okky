@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 public class ArticleLikeViewCommand implements Command {
     ArticleDao adao = ArticleDao.getInstance();
@@ -15,7 +16,7 @@ public class ArticleLikeViewCommand implements Command {
 
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ClassNotFoundException {
         PrintWriter out = resp.getWriter();
         String action = req.getParameter("action");
         String userEmail = req.getParameter("userEmail");

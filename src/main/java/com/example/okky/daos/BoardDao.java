@@ -2,6 +2,7 @@ package com.example.okky.daos;
 
 import com.example.okky.DBConntection.JDBCConnection;
 import com.example.okky.dtos.bbs.BoardDto;
+import lombok.Cleanup;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,14 +12,16 @@ import java.util.ArrayList;
 
 public class BoardDao {
     private static final BoardDao INSTANCE = new BoardDao();
-    public static BoardDao getInstance(){
+
+    public static BoardDao getInstance() {
         return INSTANCE;
     }
 
 
-    private BoardDao(){
+    private BoardDao() {
         connect();
     }
+
     PreparedStatement pstmt = null;
     Connection conn;
     ResultSet rs = null;
@@ -31,21 +34,21 @@ public class BoardDao {
         }
     }
 
-    public BoardDto selectBoardById(String boardId) {
+    public BoardDto selectBoardById(String boardId) throws SQLException, ClassNotFoundException {
         BoardDto dto = null;
-        String sql ="select * from `okky`.`boards` where id = ?";
-        try{
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,boardId);
-            rs = pstmt.executeQuery();
-            if(rs.next()){
-                dto = new BoardDto(
-                        rs.getString(1),
-                        rs.getString(2)
-                );
-            }
-        }catch (SQLException e){
-            throw new RuntimeException(e);
+        String sql = "select * from `okky`.`boards` where id = ?";
+
+        @Cleanup Connection conn = JDBCConnection.getConnection();
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, boardId);
+
+        @Cleanup ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            dto = new BoardDto(
+                    rs.getString(1),
+                    rs.getString(2)
+            );
         }
         return dto;
     }

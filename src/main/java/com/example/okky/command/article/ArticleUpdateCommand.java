@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ArticleUpdateCommand implements Command {
     ArticleDao adao = ArticleDao.getInstance();
 
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
         String boardId = req.getParameter("boardId");
         int articleIndex =Integer.parseInt(req.getParameter("articleIndex"));
         String userEmail = req.getParameter("userEmail");

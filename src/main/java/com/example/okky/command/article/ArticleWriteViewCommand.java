@@ -9,12 +9,13 @@ import com.example.okky.frontcontroller.View;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ArticleWriteViewCommand implements Command {
     ArticleDao adao = ArticleDao.getInstance();
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
         String boardId = req.getParameter("boardId");
         MemberDto user = (MemberDto)req.getSession().getAttribute("user");
         if (user == null) {

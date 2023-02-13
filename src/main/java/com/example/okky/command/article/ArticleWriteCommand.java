@@ -6,11 +6,12 @@ import com.example.okky.frontcontroller.View;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 
 public class ArticleWriteCommand implements Command {
     ArticleDao adao = ArticleDao.getInstance();
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
         String title = req.getParameter("title");
         String boardId = req.getParameter("boardId");
         System.out.println("boardId!boardId :" + boardId);

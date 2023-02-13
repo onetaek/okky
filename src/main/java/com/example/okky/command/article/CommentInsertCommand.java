@@ -7,13 +7,14 @@ import com.example.okky.frontcontroller.View;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class CommentInsertCommand implements Command {
 
     CommentDao dao = CommentDao.getInstance();
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
         String content = req.getParameter("content");
         String boardId = req.getParameter("boardId");
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));

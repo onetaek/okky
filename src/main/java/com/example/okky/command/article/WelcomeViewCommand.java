@@ -11,6 +11,7 @@ import com.example.okky.vo.TagVo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class WelcomeViewCommand implements Command {
     ArticleDao adao = ArticleDao.getInstance();
     TagDao tdao = TagDao.getInstance();
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
         List<ArticleDto> articleDtoArrayList = adao.selectAllArticle();
         List<BoardDto> boardDtoArrayList = adao.selectAllBoard();
         List<TagOfArticleDto> tagOfArticleDtoArraylist = adao.selectAllTag();

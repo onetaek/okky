@@ -3,6 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/com/example/okky/daos/ArticleDao.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/example/okky/daos/BoardDao.java" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/okky/daos/CommentDao.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/example/okky/daos/MemberDao.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/example/okky/daos/TagDao.java" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/main/welcome.jsp" dialect="MariaDB" />
