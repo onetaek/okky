@@ -156,7 +156,7 @@ public class ArticleDao {
         String sql = "select * from `okky`.`articles` where `index` = ?";
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
-
+        pstmt.setInt(1,articleIndex);
         @Cleanup ResultSet rs = pstmt.executeQuery();
         if (rs.next()) {
             dto = new ArticleDto(

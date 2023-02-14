@@ -14,7 +14,7 @@ public class CommentInsertCommand implements Command {
     CommentDao dao = CommentDao.getInstance();
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ClassNotFoundException {
         String content = req.getParameter("content");
         String boardId = req.getParameter("boardId");
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
@@ -26,6 +26,5 @@ public class CommentInsertCommand implements Command {
         dao.commentInsert(boardId,articleIndex,userEmail,userNickName,content);
 
         return new View("redirect:/articleView.do?articleIndex="+articleIndex+"&boardId="+boardId);
-
     }
 }

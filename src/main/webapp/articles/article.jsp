@@ -5,7 +5,7 @@
     <title>게시글</title>
     <jsp:include page="../layouts/head.jsp"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/articles/resources/css/article.css"/>
-
+    <script defer src="${pageContext.request.contextPath}/articles/resources/js/article.js?Time=123123"></script>
 </head>
 <body>
 <jsp:include page="/layouts/header.jsp"/>
@@ -51,18 +51,48 @@
                 </div>
             </c:if>
         </div>
-        <form action="/CommentInsert.do" id="form" method="post">
-            <input type="text" name="content">
-            <input type="hidden" name="boardId" value="${boardId}">
-            <input type="hidden" name="articleIndex" value="${articleDto.index}">
-            <input type="hidden" name="userEmail" value="${user.email}">
-            <input type="hidden" name="userNickName" value="${user.nickName}">
-            <input type="submit" value="전송">
+
+        <form action="/CommentInsert.do" class="articleForm" id="form" method="post">
+            <c:if test="${user != null}">
+                <textarea class="textContent" type="text" cols="90" rows="5" name="content"></textarea>
+                <input class="submitBtn" type="submit" value="전송">
+                <input type="hidden" name="boardId" value="${boardId}">
+                <input type="hidden" name="articleIndex" value="${articleDto.index}">
+                <input type="hidden" name="userEmail" value="${user.email}">
+                <input type="hidden" name="userNickName" value="${user.nickName}">
+            </c:if>
+            <c:if test="${user == null}">
+                <textarea class="textContent" type="text" cols="90" rows="5" name="content" placeholder="로그인을 하여야만 작성하실 수 있습니다." disabled></textarea>
+                <input class="submitBtn" type="submit" value="전송" disabled>
+            </c:if>
         </form>
+
     </main>
 </div>
+
+    <c:forEach var="comment" items="${commentList}" >
+        <div action="" class="replyComment" >
+            <div>${comment.userNickName} - [${comment.createdAt}]</div>
+            <div>${comment.content}</div>
+            <a href="commentDelete.do?index=${comment.index}">삭제</a>
+            <span class="replyBtn">답글</span>
+        </div>
+        <form id="replyInsert" class="replyInsert" action="replyInsert.do"method="post">
+            <input type="hidden" value="${comment.group}">
+            <input type="hidden" value="${comment.sequence}">
+            <input type="hidden" value="${comment.level}" >
+            <input type="hidden" value="${comment.boardId}" >
+            <input type="hidden" value="${comment.articleIndex}">
+            <input type="hidden" value="${comment.userEmail}" >
+            <textarea class="textContent" type="text" cols="90" rows="5" name="content"></textarea>
+            <input class="submitBtn" type="submit" value="전송">
+        </form>
+    </c:forEach>
+
+
+
 <jsp:include page="/layouts/footer.jsp"/>
-<script defer src="${pageContext.request.contextPath}/articles/resources/js/article.js?1"></script>
+
 
 <%--<script>--%>
 <%--    window.addEventListener("DOMContentLoaded", function (){--%>

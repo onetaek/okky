@@ -3,7 +3,10 @@ package com.example.okky.frontcontroller;
 import com.example.okky.command.*;
 import com.example.okky.command.admin.AdminViewCommand;
 import com.example.okky.command.article.*;
+import com.example.okky.command.comment.CommentDeleteCommand;
+import com.example.okky.command.comment.ReplyInsertCommand;
 import com.example.okky.command.member.*;
+import lombok.SneakyThrows;
 
 import javax.servlet.ServletException;
 
@@ -40,10 +43,13 @@ public class FrontController extends HttpServlet {
         commandMap.put("/CommentInsert.do",new CommentInsertCommand());
         commandMap.put("/ArticleLikeView.do",new ArticleLikeViewCommand());
         commandMap.put("/adminView.do", new AdminViewCommand());
+        commandMap.put("/commentDelete.do",new CommentDeleteCommand());
+        commandMap.put("/replyInsert.do",new ReplyInsertCommand());
     }
 
+    @SneakyThrows
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) {
         req.setCharacterEncoding("utf-8");
         String uri = req.getRequestURI(); //localhost:8080/ >>  members/userLogin.jsp
         String path = uri.substring(uri.lastIndexOf("/")); //  /*.do
@@ -57,7 +63,7 @@ public class FrontController extends HttpServlet {
         }
 
         View view = command.execute(req, resp);
-        System.out.println("접선 실패 ㅠㅜ");
+//        System.out.println("접선 실패 ㅠㅜ");
         if(view != null) view.render(req, resp);
     }
 }

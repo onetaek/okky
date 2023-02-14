@@ -182,3 +182,27 @@
 .btn-toggle > a > i{
     margin-right:5px;
 }
+.articleForm {
+    margin-top: 2rem;
+    display: flex;
+    /*border: 2px solid #F00;*/
+    justify-content: space-around;
+    align-content: center;
+}
+.submitBtn {
+}
+.textContent {
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+}
+.replyComment {
+    border-top: 1px solid #F00;
+    width: 100%;
+    height: 100px;
+}
+.replyInsert.visible {
+    display: block;
+}
+.replyInsert {
+    display: none;
+}

@@ -8,6 +8,8 @@ const articleIndex = form['articleIndex'];
 const userEmail = form['userEmail'];
 const likeCount = window.document.querySelector('.like-cnt');
 console.log(up, down);
+const replyBtn = window.document.querySelector(".replyBtn");
+const replyForm = window.document.getElementById("replyInsert");
 
 
 
@@ -80,6 +82,18 @@ function selectLikeCount() {
 btn_ellipsis.addEventListener("click",()=>{
     btn_toggle.classList.toggle("off");
 });
+
+replyBtn.addEventListener("click",()=>{
+    replyForm.classList.toggle("visible");
+});
+
+
+
+
+
+
+
+
 
 // console.log("test code")
 
