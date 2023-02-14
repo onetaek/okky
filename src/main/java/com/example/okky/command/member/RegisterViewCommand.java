@@ -9,12 +9,13 @@ import com.example.okky.frontcontroller.View;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.util.List;
 
 public class RegisterViewCommand implements Command {
     MemberDao mdao = MemberDao.getInstance();
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
 
 //        List<ContactCountryDto> contactCountryDtoList = memberDao.selectContactCountry();
         List<TelecomDto> telecomDtoList = mdao.selectTelecom();

@@ -8,11 +8,12 @@ import com.example.okky.utils.CryptoUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 
 public class RegisterCommand implements Command {
     MemberDao mdao = MemberDao.getInstance();
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
         System.out.println("RegisterCommand Method : execute Start!!!!!!!!!!!!!!!!");
         String email = req.getParameter("email");
         String password = req.getParameter("password");

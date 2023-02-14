@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 public class UserMyPwCheckCommand implements Command {
     MemberDao mdao = MemberDao.getInstance();
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ClassNotFoundException {
         System.out.println("Ajax 실행 메서드 작동 완료1111");
         String email = req.getParameter("email");
         System.out.println("email : "+email);
