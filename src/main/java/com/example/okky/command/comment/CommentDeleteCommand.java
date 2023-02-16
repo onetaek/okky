@@ -7,6 +7,7 @@ import com.example.okky.frontcontroller.View;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 public class CommentDeleteCommand implements Command {
@@ -18,9 +19,11 @@ public class CommentDeleteCommand implements Command {
 
         int index = Integer.parseInt(req.getParameter("index"));
         System.out.println("index = " + index);
-//        cdao.commentDeleteByIndex(index);
-
-
+        cdao.commentDeleteByIndex(index);
+        PrintWriter out = resp.getWriter();
+        out.print("success");
+        out.flush();
+        out.close();
         return null;
     }
 }

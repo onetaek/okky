@@ -4,8 +4,12 @@ const up = window.document.querySelector('.up');
 const down = window.document.querySelector('.down');
 
 const form = window.document.getElementById('form');
+const insertBtn = form['insertBtn'];
+const content = form['content'];
+const boardId = form['boardId'];
 const articleIndex = form['articleIndex'];
 const userEmail = form['userEmail'];
+const userNickName = form['userNickName'];
 const likeCount = window.document.querySelector('.like-cnt');
 console.log(up, down);
 // const replyBtn = window.document.querySelector(".replyBtn");
@@ -17,18 +21,63 @@ let comments = [];
 console.log(comments);
 
 selectLikeCount();
-selectCommentList();
 
 up.addEventListener('click', likeUp);
 down.addEventListener('click', likeDown);
+insertBtn.addEventListener('click', () => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', 'commentInsert.do?boardId=' + boardId.value +
+        "&articleIndex=" + articleIndex.value +
+        "&content=" + content.value +
+        "&userEmail=" + userEmail.value +
+        "&userNickName=" + userNickName.value);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const responseJson = xhr.responseText;
+            if (responseJson === 'success') {
+                const newDiv = document.createElement("div");
+                let commentContainerWrap = document.querySelector('.commentContainerWrap');
+                commentContainerWrap.append(newDiv);
+                newDiv.innerHTML = "<div class=\"commentContainer\">\n" +
+                    "            <div class=\"replyComment\" >\n" +
+                    "                <div class=\"comment_nickNameAndTime\"></div>\n" +
+                    "                <div class=\"comment_content\"></div>\n" +
+                    "                <span class=\"comment_delete_btn\">삭제</span>\n" +
+                    "                <span class=\"replyBtn\">답글</span>\n" +
+                    "            </div>\n" +
+                    "            <form class=\"replyInsert\">\n" +
+                    "                <input class=\"comment_group\" type=\"hidden\" value=\"\">\n" +
+                    "                <input class=\"comment_sequence\" type=\"hidden\" value=\"\">\n" +
+                    "                <input class=\"comment_level\" type=\"hidden\" value=\"\" >\n" +
+                    "                <input class=\"comment_boardId\" type=\"hidden\" value=\"\" >\n" +
+                    "                <input class=\"comment_articleIndex\" type=\"hidden\" value=\"\">\n" +
+                    "                <input class=\"comment_userEmail\" type=\"hidden\" value=\"\" >\n" +
+                    "\n" +
+                    "                <textarea class=\"textContent\" type=\"text\" cols=\"90\" rows=\"5\" name=\"content\"></textarea>\n" +
+                    "                <input class=\"submitBtn\" type=\"submit\" value=\"전송\">\n" +
+                    "            </form>\n" +
+                    "        </div>"
+                selectCommentList();
+
+            } else if (responseJson === 'failure') {
+                alert('댓글이 정상적으로 입력되지 않았습니다. 잠시후 다시 시도해 주세요.')
+            } else {
+                alert('통신오류');
+            }
+        }
+    }
+
+})
 
 // window.addEventListener("DOMContentLoaded", function (){
 //
 // });
 
-function likeUp () {
+function likeUp() {
     const xhr = new XMLHttpRequest();
-    xhr.open('post',"ArticleLikeView.do?action=up&userEmail="+userEmail.value+"&articleIndex="+articleIndex.value)
+    xhr.open('post', "ArticleLikeView.do?action=up&userEmail=" + userEmail.value + "&articleIndex=" + articleIndex.value)
     xhr.send();
     xhr.onreadystatechange = () => {
 
@@ -45,7 +94,7 @@ function likeUp () {
 
 function likeDown() {
     const xhr = new XMLHttpRequest();
-    xhr.open('post',"ArticleLikeView.do?action=down&userEmail="+userEmail.value+"&articleIndex="+articleIndex.value)
+    xhr.open('post', "ArticleLikeView.do?action=down&userEmail=" + userEmail.value + "&articleIndex=" + articleIndex.value)
     xhr.send();
     xhr.onreadystatechange = () => {
 
@@ -63,7 +112,7 @@ function likeDown() {
 
 function selectLikeCount() {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', "ArticleLikeView.do?articleIndex="+articleIndex.value);
+    xhr.open('GET', "ArticleLikeView.do?articleIndex=" + articleIndex.value);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) return;
@@ -79,25 +128,19 @@ function selectLikeCount() {
     }
 }
 
-
-
-
-
-btn_ellipsis.addEventListener("click",()=>{
+btn_ellipsis.addEventListener("click", () => {
     btn_toggle.classList.toggle("off");
 });
 
-
-
-function selectCommentList () {
+function selectCommentList() {
     const xhr = new XMLHttpRequest();
-    xhr.open('get', 'commentListView.do?articleIndex='+articleIndex.value);
+    xhr.open('get', 'commentListView.do?articleIndex=' + articleIndex.value);
     xhr.send();
 
     xhr.onreadystatechange = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) return;
 
-        if (xhr.status >= 200 && xhr.status <300) {
+        if (xhr.status >= 200 && xhr.status < 300) {
             const responseJson = JSON.parse(xhr.responseText);
 
             if (responseJson['result'] !== null) {
@@ -105,11 +148,11 @@ function selectCommentList () {
                 console.log(comments);
 
                 let commentContainer = document.querySelectorAll('.commentContainer');
-                console.log("commentContainer",commentContainer)
+                console.log("commentContainer", commentContainer)
 
 
-                for( let i = 0 ; i < commentContainer.length; i ++){
-                    commentContainer[i].querySelector('.replyBtn').addEventListener("click",()=>{
+                for (let i = 0; i < commentContainer.length; i++) {
+                    commentContainer[i].querySelector('.replyBtn').addEventListener("click", () => {
                         commentContainer[i].querySelector('.replyInsert').classList.toggle("visible");
                         console.log(commentContainer[i].querySelector('.replyBtn'),
                             commentContainer[i].querySelector('.replyInsert'))
@@ -118,9 +161,9 @@ function selectCommentList () {
                     nickNameAndTime.innerText = comments[i]['userNickName'] + " - " + comments[i]['createdAt'];
                     const comment_content = commentContainer[i].querySelector('.comment_content');
                     comment_content.innerText = comments[i]['content'];
-                    const comment_link = commentContainer[i].querySelector('.comment_link');
-                    comment_link.setAttribute('href', "commentDelete.do?index="+comments[i]['index']);
+                    const comment_delete_btn = commentContainer[i].querySelector('.comment_delete_btn');
 
+                    const comment = comments[i];
 
                     const comment_group = commentContainer[i].querySelector('.comment_group');
                     comment_group.value = comments[i]['group'];
@@ -135,9 +178,12 @@ function selectCommentList () {
                     const comment_userEmail = commentContainer[i].querySelector('.comment_userEmail');
                     comment_userEmail.value = comments[i]['userEmail'];
 
+                    comment_delete_btn.addEventListener("click", () => {
+                        deleteComment(comment, i);
+                    });
+
                     console.log(nickNameAndTime,
                         comment_content,
-                        comment_link,
                         comment_group,
                         comment_sequence,
                         comment_level,
@@ -155,12 +201,34 @@ function selectCommentList () {
     }
 }
 
+function deleteComment(comment, i) {
+    const comment_index = comment['index'];
+    const comment_boardId = comment['boardId'];
+    const comment_articleIndex = comment['articleIndex'];
+    console.log(comment_index, comment_boardId, comment_articleIndex);
 
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', 'commentDelete.do?index=' + comment_index);
+    xhr.send();
+
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const responseJson = xhr.responseText;
+            if (responseJson === 'success') {
+                let commentContainer = document.querySelectorAll('.commentContainer');
+                commentContainer[i].innerHTML = "";
+                selectCommentList();
+                // window.location.href='articleView.do?boardId='+comment_boardId+"&articleIndex="+comment_articleIndex;
+            }
+        }
+    }
+
+}
+selectCommentList();
 
 
 // console.log("test code")
-
-
 
 
 // const up = window.document.querySelector(".up");

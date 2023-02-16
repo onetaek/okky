@@ -52,10 +52,10 @@
             </c:if>
         </div>
 
-        <form action="/CommentInsert.do" class="articleForm" id="form" method="post">
+        <form class="articleForm" id="form" method="post">
             <c:if test="${user != null}">
                 <textarea class="textContent" type="text" cols="90" rows="5" name="content"></textarea>
-                <input class="submitBtn" type="submit" value="전송">
+                <input class="submitBtn" name="insertBtn" type="button" value="전송">
                 <input type="hidden" name="boardId" value="${boardId}">
                 <input class="articleIndex" type="hidden" name="articleIndex" value="${articleDto.index}">
                 <input type="hidden" name="userEmail" value="${user.email}">
@@ -69,13 +69,13 @@
 
     </main>
 </div>
-
+<div class="commentContainerWrap">
     <c:forEach var="comment" items="${commentList}" >
         <div class="commentContainer">
             <div class="replyComment" >
                 <div class="comment_nickNameAndTime"></div>
                 <div class="comment_content"></div>
-                <a class="comment_link">삭제</a>
+                <span class="comment_delete_btn">삭제</span>
                 <span class="replyBtn">답글</span>
             </div>
             <form class="replyInsert">
@@ -90,8 +90,9 @@
                 <input class="submitBtn" type="submit" value="전송">
             </form>
         </div>
-    </c:forEach>
 
+    </c:forEach>
+</div>
 
 
 <jsp:include page="/layouts/footer.jsp"/>

@@ -64,7 +64,7 @@ public class CommentDao {
         return dto;
     }
 
-    public void commentInsert(
+    public int commentInsert(
             String boardId,
             int articleIndex,
             String userEmail,
@@ -95,7 +95,8 @@ public class CommentDao {
         pstmt.setString(4, userEmail);
         pstmt.setString(5, userNickName);
         pstmt.setString(6, content);
-        pstmt.executeUpdate();
+        int count = pstmt.executeUpdate();
+        return count;
     }
 
     public List<CommentDto> selectCommentByArticleIndex(int articleIndex) throws SQLException, ClassNotFoundException {
@@ -125,7 +126,13 @@ public class CommentDao {
         return list;
     }
 
-//    public void commentDeleteByIndex(int index) {
-//        String
-//    }
+    public boolean commentDeleteByIndex(int index) throws SQLException, ClassNotFoundException {
+        String sql = "delete from `okky`.comment where `index` = ?";
+        @Cleanup Connection conn = JDBCConnection.getConnection();
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1,index);
+        int count = pstmt.executeUpdate();
+        return count == 1;
+    }
+
 }
