@@ -6,6 +6,15 @@
   width: 840px;
   margin: 0 auto;
 }
+
+.replyInsert.visible {
+    display: block;
+}
+
+.replyInsert {
+    display: none;
+}
+
 .article-container{
     position: relative;
 }
@@ -199,10 +208,4 @@
     border-top: 1px solid #F00;
     width: 100%;
     height: 100px;
-}
-.replyInsert.visible {
-    display: block;
-}
-.replyInsert {
-    display: none;
 }

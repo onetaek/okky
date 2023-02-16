@@ -5,7 +5,7 @@
     <title>게시글</title>
     <jsp:include page="../layouts/head.jsp"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/articles/resources/css/article.css"/>
-    <script defer src="${pageContext.request.contextPath}/articles/resources/js/article.js?Time=123123"></script>
+    <script defer src="${pageContext.request.contextPath}/articles/resources/js/article.js"></script>
 </head>
 <body>
 <jsp:include page="/layouts/header.jsp"/>
@@ -57,7 +57,7 @@
                 <textarea class="textContent" type="text" cols="90" rows="5" name="content"></textarea>
                 <input class="submitBtn" type="submit" value="전송">
                 <input type="hidden" name="boardId" value="${boardId}">
-                <input type="hidden" name="articleIndex" value="${articleDto.index}">
+                <input class="articleIndex" type="hidden" name="articleIndex" value="${articleDto.index}">
                 <input type="hidden" name="userEmail" value="${user.email}">
                 <input type="hidden" name="userNickName" value="${user.nickName}">
             </c:if>
@@ -71,22 +71,25 @@
 </div>
 
     <c:forEach var="comment" items="${commentList}" >
-        <div action="" class="replyComment" >
-            <div>${comment.userNickName} - [${comment.createdAt}]</div>
-            <div>${comment.content}</div>
-            <a href="commentDelete.do?index=${comment.index}">삭제</a>
-            <span class="replyBtn">답글</span>
+        <div class="commentContainer">
+            <div class="replyComment" >
+                <div class="comment_nickNameAndTime"></div>
+                <div class="comment_content"></div>
+                <a class="comment_link">삭제</a>
+                <span class="replyBtn">답글</span>
+            </div>
+            <form class="replyInsert">
+                <input class="comment_group" type="hidden" value="">
+                <input class="comment_sequence" type="hidden" value="">
+                <input class="comment_level" type="hidden" value="" >
+                <input class="comment_boardId" type="hidden" value="" >
+                <input class="comment_articleIndex" type="hidden" value="">
+                <input class="comment_userEmail" type="hidden" value="" >
+
+                <textarea class="textContent" type="text" cols="90" rows="5" name="content"></textarea>
+                <input class="submitBtn" type="submit" value="전송">
+            </form>
         </div>
-        <form id="replyInsert" class="replyInsert" action="replyInsert.do"method="post">
-            <input type="hidden" value="${comment.group}">
-            <input type="hidden" value="${comment.sequence}">
-            <input type="hidden" value="${comment.level}" >
-            <input type="hidden" value="${comment.boardId}" >
-            <input type="hidden" value="${comment.articleIndex}">
-            <input type="hidden" value="${comment.userEmail}" >
-            <textarea class="textContent" type="text" cols="90" rows="5" name="content"></textarea>
-            <input class="submitBtn" type="submit" value="전송">
-        </form>
     </c:forEach>
 
 

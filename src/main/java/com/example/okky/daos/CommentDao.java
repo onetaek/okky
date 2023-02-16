@@ -122,8 +122,10 @@ public class CommentDao {
                     .build();
             list.add(cdto);
         }
-
         return list;
     }
 
+//    public void commentDeleteByIndex(int index) {
+//        String
+//    }
 }

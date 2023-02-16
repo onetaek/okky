@@ -28,11 +28,8 @@ public class ArticleLikeViewCommand implements Command {
 
         int likeCount = 0;
 
-
-
-
+        likeCount = adao.selectLikeByCount(articleIndex);
         if (action == null) {
-            likeCount =adao.selectLikeByCount(articleIndex);
             System.out.println("likeCount = " + likeCount);
         } else {
             if(action.equals("up")){

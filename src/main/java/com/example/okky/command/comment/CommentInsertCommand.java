@@ -1,4 +1,4 @@
-package com.example.okky.command.article;
+package com.example.okky.command.comment;
 
 import com.example.okky.command.Command;
 import com.example.okky.daos.CommentDao;
