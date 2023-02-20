@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class ArticleDto {
     private int index;
-    private String boardId;
+    private int boardId;
     private String userEmail;
     private String title;
     private String content;
@@ -25,7 +25,8 @@ public class ArticleDto {
     public ArticleDto() {
     }
 
-    public ArticleDto(int index, String boardId, String userEmail, String title, String content, long view, Date createdAt, boolean status) {
+    public ArticleDto(int index, int boardId, String userEmail, String title, String content,
+                      long view, Date createdAt, boolean status) {
         this.index = index;
         this.boardId = boardId;
         this.userEmail = userEmail;
@@ -57,11 +58,11 @@ public class ArticleDto {
         this.index = index;
     }
 
-    public String getBoardId() {
+    public int getBoardId() {
         return boardId;
     }
 
-    public void setBoardId(String boardId) {
+    public void setBoardId(int boardId) {
         this.boardId = boardId;
     }
 

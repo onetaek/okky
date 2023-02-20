@@ -13,7 +13,7 @@ public class ArticleWriteCommand implements Command {
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
         String title = req.getParameter("title");
-        String boardId = req.getParameter("boardId");
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
         System.out.println("boardId!boardId :" + boardId);
         String userEmail = req.getParameter("email");
         String[] tags = req.getParameterValues("tags");

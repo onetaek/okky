@@ -40,7 +40,7 @@ public class ArticleDao {
         }
     }
 
-    public ArrayList<ArticleDto> selectArticleByBoardId(String boardId) throws SQLException, ClassNotFoundException {
+    public ArrayList<ArticleDto> selectArticleByBoardId(int boardId) throws SQLException, ClassNotFoundException {
         ArrayList<ArticleDto> dtos = new ArrayList<>();
 
         String sql = "select * from `okky`.`articles` where boardId = ? order by `index` desc";
@@ -49,13 +49,13 @@ public class ArticleDao {
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
 
-        pstmt.setString(1, boardId);
+        pstmt.setInt(1, boardId);
         @Cleanup ResultSet rs = pstmt.executeQuery();
 
         while (rs.next()) {
             ArticleDto dto = new ArticleDto(
                     rs.getInt(1),
-                    rs.getString(2),
+                    rs.getInt(2),
                     rs.getString(3),
                     rs.getString(4),
                     rs.getString(5),
@@ -90,7 +90,7 @@ public class ArticleDao {
         return dtos;
     }
 
-    public void insertArticle(String boardId, String title, String content,
+    public void insertArticle(int boardId, String title, String content,
                               String userEmail, String[] tags) throws SQLException, ClassNotFoundException {
         System.out.println("insertArticles의 boardId: " + boardId);
         String sql = "insert into `okky`.`articles` (boardId,userEmail," +
@@ -101,7 +101,7 @@ public class ArticleDao {
         @Cleanup ResultSet rs = null;
 
 
-        pstmt.setString(1, boardId);
+        pstmt.setInt(1, boardId);
         pstmt.setString(2, userEmail);
         pstmt.setString(3, title);
         pstmt.setString(4, content);
@@ -129,7 +129,7 @@ public class ArticleDao {
     }
 
 
-    public ArrayList<TagOfArticleDto> selectTagsByBoardId(String boardId) throws SQLException, ClassNotFoundException {
+    public ArrayList<TagOfArticleDto> selectTagsByBoardId(int boardId) throws SQLException, ClassNotFoundException {
         ArrayList<TagOfArticleDto> dtos = new ArrayList<>();
         String sql = "select `A`.index, `T`.tagValue\n" +
                 "from `okky`.`articles` as `A`\n" +
@@ -161,7 +161,7 @@ public class ArticleDao {
         if (rs.next()) {
             dto = new ArticleDto(
                     rs.getInt(1),
-                    rs.getString(2),
+                    rs.getInt(2),
                     rs.getString(3),
                     rs.getString(4),
                     rs.getString(5),
@@ -174,14 +174,14 @@ public class ArticleDao {
     }
 
 
-    public ArrayList<String> selectTagsByArticleIdxAndBoardId(int articleIndex, String boardId) throws SQLException, ClassNotFoundException {
+    public ArrayList<String> selectTagsByArticleIdxAndBoardId(int articleIndex, int boardId) throws SQLException, ClassNotFoundException {
         ArrayList<String> tags = new ArrayList<>();
         String sql = "select  t.tagValue from `okky`.`articles` as `a`, `okky`.tagOfArticle as `t`" +
                 " where `a`.`index` = `t`.articleIdx and a.`index` = ? and boardId = ?";
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, articleIndex);
-        pstmt.setString(2, boardId);
+        pstmt.setInt(2, boardId);
 
         @Cleanup ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
@@ -243,7 +243,7 @@ public class ArticleDao {
             while (rs.next()) {
                 ArticleDto dto = new ArticleDto(
                         rs.getInt("index"),
-                        rs.getString("boardId"),
+                        rs.getInt("boardId"),
                         rs.getString("userEmail"),
                         rs.getString("title"),
                         rs.getString("content"),
@@ -258,18 +258,18 @@ public class ArticleDao {
         return dtos;
     }
 
-    public BoardDto selectBoardById(String boardId) throws SQLException, ClassNotFoundException {
+    public BoardDto selectBoardById(int boardId) throws SQLException, ClassNotFoundException {
         String sql = "select * from `okky`.boards where id = ?";
         BoardDto dto = null;
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, boardId);
+        pstmt.setInt(1, boardId);
 
         @Cleanup ResultSet rs = pstmt.executeQuery();
 
         if (rs.next()) {
             dto = new BoardDto(
-                    rs.getString("id"),
+                    rs.getInt("id"),
                     rs.getString("text"));
         }
         return dto;
@@ -284,7 +284,7 @@ public class ArticleDao {
         @Cleanup ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
             BoardDto dto = new BoardDto(
-                    rs.getString(1),
+                    rs.getInt(1),
                     rs.getString(2)
             );
             dtos.add(dto);
@@ -313,7 +313,7 @@ public class ArticleDao {
         return dtos;
     }
 
-    public int selectArticleTotalCount(String boardId, String tagValue) throws SQLException, ClassNotFoundException {
+    public int selectArticleTotalCount(int boardId, String tagValue) throws SQLException, ClassNotFoundException {
         String sql = null;
 
         if (tagValue == null || tagValue.equals("")) {
@@ -331,7 +331,7 @@ public class ArticleDao {
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
 
         if (tagValue == null || tagValue.equals("")) {
-            pstmt.setString(1, boardId);
+            pstmt.setInt(1, boardId);
         } else {
             pstmt.setString(1, tagValue);
         }
@@ -343,7 +343,7 @@ public class ArticleDao {
         return count;
     }
 
-    public ArrayList<ArticleDto> selectArticleByPageNum(String boardId, int startRow, int pageSize, String keyWord) throws SQLException, ClassNotFoundException {
+    public ArrayList<ArticleDto> selectArticleByPageNum(int boardId, int startRow, int pageSize, String keyWord) throws SQLException, ClassNotFoundException {
         ArrayList<ArticleDto> dtos = new ArrayList<>();
         String sql = null;
         if (keyWord == null) {
@@ -354,7 +354,7 @@ public class ArticleDao {
         }
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, boardId);
+        pstmt.setInt(1, boardId);
         pstmt.setInt(2, startRow - 1);
         pstmt.setInt(3, pageSize);
 
@@ -362,7 +362,7 @@ public class ArticleDao {
         while (rs.next()) {
             ArticleDto dto = new ArticleDto(
                     rs.getInt("index"),
-                    rs.getString("boardId"),
+                    rs.getInt("boardId"),
                     rs.getString("userEmail"),
                     rs.getString("title"),
                     rs.getString("content"),
@@ -457,7 +457,7 @@ public class ArticleDao {
         while (rs.next()) {
             ArticleDto adto = new ArticleDto(
                     rs.getInt("index"),
-                    rs.getString("boardId"),
+                    rs.getInt("boardId"),
                     rs.getString("userEmail"),
                     rs.getString("title"),
                     rs.getString("content"),

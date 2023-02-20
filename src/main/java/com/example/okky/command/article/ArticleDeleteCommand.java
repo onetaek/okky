@@ -14,7 +14,7 @@ public class ArticleDeleteCommand implements Command {
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
-        String boardId = req.getParameter("boardId");
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
         adao.deleteArticle(articleIndex);
         req.setAttribute("boardId",boardId);
         return new View("/articleListView.do");

@@ -34,19 +34,19 @@ public class BoardDao {
         }
     }
 
-    public BoardDto selectBoardById(String boardId) throws SQLException, ClassNotFoundException {
+    public BoardDto selectBoardById(int boardId) throws SQLException, ClassNotFoundException {
         BoardDto dto = null;
         String sql = "select * from `okky`.`boards` where id = ?";
 
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, boardId);
+        pstmt.setInt(1, boardId);
 
         @Cleanup ResultSet rs = pstmt.executeQuery();
 
         if (rs.next()) {
             dto = new BoardDto(
-                    rs.getString(1),
+                    rs.getInt(1),
                     rs.getString(2)
             );
         }

@@ -19,7 +19,7 @@ public class CommentInsertCommand implements Command {
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ClassNotFoundException {
         String content = req.getParameter("content");
-        String boardId = req.getParameter("boardId");
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
         String userEmail = req.getParameter("userEmail");
         String userNickName = req.getParameter("userNickName");

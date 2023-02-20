@@ -16,7 +16,7 @@ public class ArticleWriteViewCommand implements Command {
     ArticleDao adao = ArticleDao.getInstance();
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
-        String boardId = req.getParameter("boardId");
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
         MemberDto user = (MemberDto)req.getSession().getAttribute("user");
         if (user == null) {
             System.out.println("Session이 없습니다!");

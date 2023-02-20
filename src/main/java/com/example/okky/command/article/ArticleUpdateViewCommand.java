@@ -19,7 +19,7 @@ public class ArticleUpdateViewCommand implements Command {
         //request값 받기
         System.out.println("articleIndex???????: "+req.getParameter("articleIndex"));
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
-        String boardId = req.getParameter("boardId");
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
 
 
 

@@ -3,13 +3,13 @@ package com.example.okky.dtos.bbs;
 import java.util.Objects;
 
 public class BoardDto {
-    private String id;
+    private int id;
     private String text;
 
     public BoardDto() {
     }
 
-    public BoardDto(String id, String text) {
+    public BoardDto(int id, String text) {
         this.id = id;
         this.text = text;
     }
@@ -27,11 +27,11 @@ public class BoardDto {
         return Objects.hash(id);
     }
     
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -31,8 +31,7 @@ public class ArticleListViewCommand implements Command {
         List<ArticleDto> articleDtoList = null;
 
 
-        String boardId = req.getParameter("boardId");
-//        System.out.println("jaklsdjfiiioio"+boardId);
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
         String pageNum = req.getParameter("pageNum");
         String keyWord = req.getParameter("keyWord");
         String tagValue = req.getParameter("tagValue");
@@ -49,7 +48,7 @@ public class ArticleListViewCommand implements Command {
         }
 
         log.info("Pagination = {} ",p);
-//        ArrayList<TagOfArticleDto> tag = adao.selectTagsByBoardId(boardId);
+
         List<TagOfArticleDto> tagOfArticleDtoArraylist = adao.selectAllTag();
         List<TagVo> tagRank = tdao.selectTagTop5();
 

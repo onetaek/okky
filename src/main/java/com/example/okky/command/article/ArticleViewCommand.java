@@ -27,7 +27,7 @@ public class ArticleViewCommand implements Command {
 
 
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
-        String boardId = req.getParameter("boardId");
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
         System.out.println("ArticleView Command boardId = " + boardId);
         ArticleDto articleDto = adao.selectArticleByIndex(articleIndex);
         BoardDto board = adao.selectBoardById(boardId);

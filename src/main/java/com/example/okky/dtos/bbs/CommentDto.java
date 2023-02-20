@@ -13,7 +13,7 @@ public class CommentDto {
    private int group;
    private int sequence;
    private int level;
-   private String boardId;
+   private int boardId;
    private int articleIndex;
    private String userEmail;
    private String userNickName;

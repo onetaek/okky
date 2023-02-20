@@ -17,7 +17,7 @@ public class ArticleUpdateCommand implements Command {
 
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
-        String boardId = req.getParameter("boardId");
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
         int articleIndex =Integer.parseInt(req.getParameter("articleIndex"));
         String userEmail = req.getParameter("userEmail");
         String title = req.getParameter("title");

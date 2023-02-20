@@ -53,7 +53,7 @@ public class CommentDao {
                     rs.getInt(2),
                     rs.getInt(3),
                     rs.getInt(4),
-                    rs.getString(5),
+                    rs.getInt(5),
                     rs.getInt(6),
                     rs.getString(7),
                     rs.getString(8),
@@ -65,7 +65,7 @@ public class CommentDao {
     }
 
     public int commentInsert(
-            String boardId,
+            int boardId,
             int articleIndex,
             String userEmail,
             String userNickName,
@@ -77,7 +77,7 @@ public class CommentDao {
         String sql1 = "select  max(`group`) from `okky`.comment where boardId = ?";
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql1);
-        pstmt.setString(1, boardId);
+        pstmt.setInt(1, boardId);
 
         @Cleanup ResultSet rs = pstmt.executeQuery();
         if (rs.next()) {
@@ -90,7 +90,7 @@ public class CommentDao {
                 "`content`, `createdAt`) values(null, ? ,default,default,?,?,?,?,?,default) ";
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, maxGroup + 1);
-        pstmt.setString(2, boardId);
+        pstmt.setInt(2, boardId);
         pstmt.setInt(3, articleIndex);
         pstmt.setString(4, userEmail);
         pstmt.setString(5, userNickName);
@@ -114,7 +114,7 @@ public class CommentDao {
                     .group(rs.getInt("group"))
                     .sequence(rs.getInt("sequence"))
                     .level(rs.getInt("level"))
-                    .boardId(rs.getString("boardId"))
+                    .boardId(rs.getInt("boardId"))
                     .articleIndex(rs.getInt("articleIndex"))
                     .userEmail(rs.getString("userEmail"))
                     .userNickName(rs.getString("userNickName"))
