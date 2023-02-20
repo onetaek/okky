@@ -19,14 +19,14 @@ public class ArticleUpdateCommand implements Command {
     public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
         int boardId = Integer.parseInt(req.getParameter("boardId"));
         int articleIndex =Integer.parseInt(req.getParameter("articleIndex"));
-        String userEmail = req.getParameter("userEmail");
+        String memberEmail = req.getParameter("memberEmail");
         String title = req.getParameter("title");
         String[] tags = req.getParameterValues("tags");
         String content = req.getParameter("content");
 
 
 
-        adao.updateArticle(articleIndex,userEmail, title, content, tags);
+        adao.updateArticle(articleIndex,memberEmail, title, content, tags);
 
         req.setAttribute("boardId",boardId);
         req.setAttribute("articleIndex",articleIndex);

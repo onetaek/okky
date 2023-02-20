@@ -49,8 +49,8 @@ public class RegisterCommand implements Command {
 
 
 
-        mdao.insertUser(mdto);
+        mdao.insertmember(mdto);
         System.out.println("RegisterCommand Method : execute End!!!!!!!!!!!!!!!!");
-        return new View("/members/userLogin.jsp");
+        return new View("/members/memberLogin.jsp");
     }
 }

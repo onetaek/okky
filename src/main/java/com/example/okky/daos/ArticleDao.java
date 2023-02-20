@@ -91,9 +91,9 @@ public class ArticleDao {
     }
 
     public void insertArticle(int boardId, String title, String content,
-                              String userEmail, String[] tags) throws SQLException, ClassNotFoundException {
+                              String memberEmail, String[] tags) throws SQLException, ClassNotFoundException {
         System.out.println("insertArticles의 boardId: " + boardId);
-        String sql = "insert into `okky`.`articles` (boardId,userEmail," +
+        String sql = "insert into `okky`.`articles` (boardId,memberEmail," +
                 "title,content ) values(?,?,?,?)";
 
         @Cleanup Connection conn = JDBCConnection.getConnection();
@@ -102,7 +102,7 @@ public class ArticleDao {
 
 
         pstmt.setInt(1, boardId);
-        pstmt.setString(2, userEmail);
+        pstmt.setString(2, memberEmail);
         pstmt.setString(3, title);
         pstmt.setString(4, content);
 
@@ -110,9 +110,9 @@ public class ArticleDao {
 
 
         int articleIndex = 0;
-        sql = "select max(`index`) from `okky`.`articles` where userEmail = ?";
+        sql = "select max(`index`) from `okky`.`articles` where memberEmail = ?";
         pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, userEmail);
+        pstmt.setString(1, memberEmail);
         rs = pstmt.executeQuery();
         if (rs.next()) {
             articleIndex = rs.getInt(1);
@@ -193,7 +193,7 @@ public class ArticleDao {
     }
 
 
-    public void updateArticle(int articleIndex, String userEmail, String title, String content, String[] tags) throws SQLException, ClassNotFoundException {
+    public void updateArticle(int articleIndex, String memberEmail, String title, String content, String[] tags) throws SQLException, ClassNotFoundException {
         String sql = "update `okky`.`articles` set title = ?, content = ? where `index` = ?";
 
         @Cleanup Connection conn = JDBCConnection.getConnection();
@@ -244,7 +244,7 @@ public class ArticleDao {
                 ArticleDto dto = new ArticleDto(
                         rs.getInt("index"),
                         rs.getInt("boardId"),
-                        rs.getString("userEmail"),
+                        rs.getString("memberEmail"),
                         rs.getString("title"),
                         rs.getString("content"),
                         rs.getInt("view"),
@@ -363,7 +363,7 @@ public class ArticleDao {
             ArticleDto dto = new ArticleDto(
                     rs.getInt("index"),
                     rs.getInt("boardId"),
-                    rs.getString("userEmail"),
+                    rs.getString("memberEmail"),
                     rs.getString("title"),
                     rs.getString("content"),
                     rs.getInt("view"),
@@ -391,11 +391,11 @@ public class ArticleDao {
     }
 
 
-    public void insertLike(String userEmail, int articleIndex) throws SQLException, ClassNotFoundException {
-        String sql = "insert into `okky`.`articleLikes` (userEmail, articleIndex) values (?,?)";
+    public void insertLike(String memberEmail, int articleIndex) throws SQLException, ClassNotFoundException {
+        String sql = "insert into `okky`.`articleLikes` (memberEmail, articleIndex) values (?,?)";
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, userEmail);
+        pstmt.setString(1, memberEmail);
         pstmt.setInt(2, articleIndex);
 
         @Cleanup ResultSet rs = pstmt.executeQuery();
@@ -403,11 +403,11 @@ public class ArticleDao {
     }
 
 
-    public void deleteLike(String userEmail, int articleIndex) throws SQLException, ClassNotFoundException {
-        String sql = "delete from `okky`.`articleLikes` where `userEmail` = ? and `articleIndex` = ?";
+    public void deleteLike(String memberEmail, int articleIndex) throws SQLException, ClassNotFoundException {
+        String sql = "delete from `okky`.`articleLikes` where `memberEmail` = ? and `articleIndex` = ?";
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, userEmail);
+        pstmt.setString(1, memberEmail);
         pstmt.setInt(2, articleIndex);
 
         @Cleanup ResultSet rs = pstmt.executeQuery();
@@ -423,7 +423,7 @@ public class ArticleDao {
         if (keyWord == null) {
             sql = "select `articles`.`index`,\n" +
                     "       `boardId`,\n" +
-                    "       `userEmail`,\n" +
+                    "       `memberEmail`,\n" +
                     "       `title`,\n" +
                     "       `content`,\n" +
                     "       `view`,\n" +
@@ -434,7 +434,7 @@ public class ArticleDao {
         } else {
             sql = "select `articles`.`index`,\n" +
                     "       `boardId`,\n" +
-                    "       `userEmail`,\n" +
+                    "       `memberEmail`,\n" +
                     "       `title`,\n" +
                     "       `content`,\n" +
                     "       `view`,\n" +
@@ -458,7 +458,7 @@ public class ArticleDao {
             ArticleDto adto = new ArticleDto(
                     rs.getInt("index"),
                     rs.getInt("boardId"),
-                    rs.getString("userEmail"),
+                    rs.getString("memberEmail"),
                     rs.getString("title"),
                     rs.getString("content"),
                     rs.getInt("view"),

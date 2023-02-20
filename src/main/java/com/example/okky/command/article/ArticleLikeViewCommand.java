@@ -19,11 +19,11 @@ public class ArticleLikeViewCommand implements Command {
     public View execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ClassNotFoundException {
         PrintWriter out = resp.getWriter();
         String action = req.getParameter("action");
-        String userEmail = req.getParameter("userEmail");
+        String memberEmail = req.getParameter("memberEmail");
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
 
         System.out.println("action = " + action);
-        System.out.println("userEmail = " + userEmail);
+        System.out.println("memberEmail = " + memberEmail);
         System.out.println("articleIndex = " +articleIndex);
 
         int likeCount = 0;
@@ -34,7 +34,7 @@ public class ArticleLikeViewCommand implements Command {
         } else {
             if(action.equals("up")){
                 System.out.println("upupupupupupupupupp");
-                adao.insertLike(userEmail,articleIndex);
+                adao.insertLike(memberEmail,articleIndex);
                 likeCount++;
                 out.print(likeCount+"");
                 out.flush();
@@ -42,7 +42,7 @@ public class ArticleLikeViewCommand implements Command {
                 return null;
             } else if(action.equals("down")){
                 System.out.println("downdowndowndown");
-                adao.deleteLike(userEmail,articleIndex);
+                adao.deleteLike(memberEmail,articleIndex);
                 likeCount--;
                 out.print(likeCount+"");
                 out.flush();

@@ -34,10 +34,10 @@ public class MemberDao {
     }
 
 
-    public void insertUser(MemberDto mdto) throws SQLException, ClassNotFoundException {
-        System.out.println("insertUser method start");
+    public void insertmember(MemberDto mdto) throws SQLException, ClassNotFoundException {
+        System.out.println("insertmember method start");
 
-        String sql = "insert into `okky`.`users` (`email`, `password`, `name`, `nickName`, `telecom`, `contact`, `contactCountryValue`, `policyEmailSend`) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into `okky`.`members` (`email`, `password`, `name`, `nickName`, `telecom`, `contact`, `contactCountryValue`, `policyEmailSend`) values (?,?,?,?,?,?,?,?)";
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, mdto.getEmail());
@@ -89,9 +89,9 @@ public class MemberDao {
         return telecomDtoList;
     }
 
-    public MemberDto selectUserById(String id, String password) throws SQLException, ClassNotFoundException {
+    public MemberDto selectmemberById(String id, String password) throws SQLException, ClassNotFoundException {
         MemberDto dto = null;
-        String sql = "select * from `okky`.`users` where `email` = ? and `password` = ?";
+        String sql = "select * from `okky`.`members` where `email` = ? and `password` = ?";
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, id);
@@ -121,9 +121,9 @@ public class MemberDao {
     }
 
 
-    public MemberDto selectUser(String email) throws SQLException, ClassNotFoundException {
+    public MemberDto selectmember(String email) throws SQLException, ClassNotFoundException {
         MemberDto dto = null;
-        String sql = "select * from `okky`.`users` where email = ?";
+        String sql = "select * from `okky`.`members` where email = ?";
 
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -149,8 +149,8 @@ public class MemberDao {
         return dto;
     }
 
-    public void updateUser(MemberDto existingUser) throws SQLException, ClassNotFoundException {
-        String sql = "update `okky`.`users` " +
+    public void updatemember(MemberDto existingmember) throws SQLException, ClassNotFoundException {
+        String sql = "update `okky`.`members` " +
                 "set `name` = ?, " +
                 "nickName = ?, " +
                 "contact = ?," +
@@ -159,11 +159,11 @@ public class MemberDao {
         @Cleanup Connection conn = JDBCConnection.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, existingUser.getName());
-            pstmt.setString(2, existingUser.getNickName());
-            pstmt.setString(3, existingUser.getContact());
-            pstmt.setString(4, existingUser.getPassword());
-            pstmt.setString(5, existingUser.getEmail());
+            pstmt.setString(1, existingmember.getName());
+            pstmt.setString(2, existingmember.getNickName());
+            pstmt.setString(3, existingmember.getContact());
+            pstmt.setString(4, existingmember.getPassword());
+            pstmt.setString(5, existingmember.getEmail());
             pstmt.executeUpdate();
 
 

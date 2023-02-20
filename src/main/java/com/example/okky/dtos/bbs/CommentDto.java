@@ -15,8 +15,8 @@ public class CommentDto {
    private int level;
    private int boardId;
    private int articleIndex;
-   private String userEmail;
-   private String userNickName;
+   private String memberEmail;
+   private String memberNickName;
    private String content;
    private Date createdAt;
 

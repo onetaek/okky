@@ -6,7 +6,7 @@ import java.util.Objects;
 public class ArticleDto {
     private int index;
     private int boardId;
-    private String userEmail;
+    private String memberEmail;
     private String title;
     private String content;
     private long view;
@@ -25,11 +25,11 @@ public class ArticleDto {
     public ArticleDto() {
     }
 
-    public ArticleDto(int index, int boardId, String userEmail, String title, String content,
+    public ArticleDto(int index, int boardId, String memberEmail, String title, String content,
                       long view, Date createdAt, boolean status) {
         this.index = index;
         this.boardId = boardId;
-        this.userEmail = userEmail;
+        this.memberEmail = memberEmail;
         this.title = title;
         this.content = content;
         this.view = view;
@@ -67,12 +67,12 @@ public class ArticleDto {
     }
 
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getmemberEmail() {
+        return memberEmail;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setmemberEmail(String memberEmail) {
+        this.memberEmail = memberEmail;
     }
 
     public String getTitle() {
@@ -112,7 +112,7 @@ public class ArticleDto {
         return "ArticleDto{" +
                 "index=" + index +
                 ", boardId='" + boardId + '\'' +
-                ", userEmail='" + userEmail + '\'' +
+                ", memberEmail='" + memberEmail + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", view=" + view +

@@ -15,10 +15,10 @@ public class ArticleWriteCommand implements Command {
         String title = req.getParameter("title");
         int boardId = Integer.parseInt(req.getParameter("boardId"));
         System.out.println("boardId!boardId :" + boardId);
-        String userEmail = req.getParameter("email");
+        String memberEmail = req.getParameter("email");
         String[] tags = req.getParameterValues("tags");
         String content = req.getParameter("content");
-        adao.insertArticle(boardId,title,content,userEmail,tags);
+        adao.insertArticle(boardId,title,content,memberEmail,tags);
 
         return new View("redirect:/articleListView.do?boardId="+boardId);
 

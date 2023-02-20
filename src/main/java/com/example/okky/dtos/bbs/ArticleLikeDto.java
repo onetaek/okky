@@ -4,15 +4,15 @@ import java.util.Date;
 import java.util.Objects;
 
 public class ArticleLikeDto {
-    private String userEmail;
+    private String memberEmail;
     private String articleIndex;
     private Date createdAt;
 
     public ArticleLikeDto() {
     }
 
-    public ArticleLikeDto(String userEmail, String articleIndex, Date createdAt) {
-        this.userEmail = userEmail;
+    public ArticleLikeDto(String memberEmail, String articleIndex, Date createdAt) {
+        this.memberEmail = memberEmail;
         this.articleIndex = articleIndex;
         this.createdAt = createdAt;
     }
@@ -22,20 +22,20 @@ public class ArticleLikeDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ArticleLikeDto that = (ArticleLikeDto) o;
-        return Objects.equals(userEmail, that.userEmail) && Objects.equals(articleIndex, that.articleIndex);
+        return Objects.equals(memberEmail, that.memberEmail) && Objects.equals(articleIndex, that.articleIndex);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userEmail, articleIndex);
+        return Objects.hash(memberEmail, articleIndex);
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getmemberEmail() {
+        return memberEmail;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setmemberEmail(String memberEmail) {
+        this.memberEmail = memberEmail;
     }
 
     public String getArticleIndex() {

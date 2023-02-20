@@ -17,10 +17,10 @@ public class ArticleWriteViewCommand implements Command {
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ClassNotFoundException {
         int boardId = Integer.parseInt(req.getParameter("boardId"));
-        MemberDto user = (MemberDto)req.getSession().getAttribute("user");
-        if (user == null) {
+        MemberDto member = (MemberDto)req.getSession().getAttribute("member");
+        if (member == null) {
             System.out.println("Session이 없습니다!");
-            return new View("/userLoginView.do");
+            return new View("/memberLoginView.do");
         }
 
         List<TagDto> tagDtoList = adao.selectTags();

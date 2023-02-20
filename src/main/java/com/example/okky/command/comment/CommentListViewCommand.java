@@ -34,8 +34,8 @@ public class CommentListViewCommand implements com.example.okky.command.Command 
             innerJson.put("level", comment.getLevel());
             innerJson.put("boardId", comment.getBoardId());
             innerJson.put("articleIndex", comment.getArticleIndex());
-            innerJson.put("userEmail", comment.getUserEmail());
-            innerJson.put("userNickName", comment.getUserNickName());
+            innerJson.put("memberEmail", comment.getMemberEmail());
+            innerJson.put("memberNickName", comment.getMemberNickName());
             innerJson.put("content", comment.getContent());
             innerJson.put("createdAt", comment.getCreatedAt());
 

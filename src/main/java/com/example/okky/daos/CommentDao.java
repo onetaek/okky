@@ -67,8 +67,8 @@ public class CommentDao {
     public int commentInsert(
             int boardId,
             int articleIndex,
-            String userEmail,
-            String userNickName,
+            String memberEmail,
+            String memberNickName,
             String content
     ) throws SQLException, ClassNotFoundException {
         CommentDto dto = null;
@@ -86,14 +86,14 @@ public class CommentDao {
 
 
         String sql = "insert into `okky`.comment (`index`,`group`, `sequence`, " +
-                "`level`, `boardId`, `articleIndex`, `userEmail`, `userNickName`, " +
+                "`level`, `boardId`, `articleIndex`, `memberEmail`, `memberNickName`, " +
                 "`content`, `createdAt`) values(null, ? ,default,default,?,?,?,?,?,default) ";
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, maxGroup + 1);
         pstmt.setInt(2, boardId);
         pstmt.setInt(3, articleIndex);
-        pstmt.setString(4, userEmail);
-        pstmt.setString(5, userNickName);
+        pstmt.setString(4, memberEmail);
+        pstmt.setString(5, memberNickName);
         pstmt.setString(6, content);
         int count = pstmt.executeUpdate();
         return count;
@@ -116,8 +116,8 @@ public class CommentDao {
                     .level(rs.getInt("level"))
                     .boardId(rs.getInt("boardId"))
                     .articleIndex(rs.getInt("articleIndex"))
-                    .userEmail(rs.getString("userEmail"))
-                    .userNickName(rs.getString("userNickName"))
+                    .memberEmail(rs.getString("memberEmail"))
+                    .memberNickName(rs.getString("memberNickName"))
                     .content(rs.getString("content"))
                     .createdAt(rs.getDate("createdAt"))
                     .build();

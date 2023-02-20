@@ -24,11 +24,11 @@ public class FrontController extends HttpServlet {
 
     public FrontController() {
         commandMap.put("/welcome.do", new WelcomeViewCommand());
-        commandMap.put("/userLoginView.do", new UserLoginViewCommand());
-        commandMap.put("/login.do",new UserLoginCommand());
-        commandMap.put("/userRegisterView.do",new RegisterViewCommand());
-        commandMap.put("/userRegister.do",new RegisterCommand());
-        commandMap.put("/logout.do",new UserLogoutCommand());
+        commandMap.put("/memberLoginView.do", new MemberLogoutCommand());
+        commandMap.put("/login.do",new MemberLogoutCommand());
+        commandMap.put("/memberRegisterView.do",new RegisterViewCommand());
+        commandMap.put("/memberRegister.do",new RegisterCommand());
+        commandMap.put("/logout.do",new MemberLogoutCommand());
         commandMap.put("/articleListView.do",new ArticleListViewCommand());
         commandMap.put("/writeView.do",new ArticleWriteViewCommand());
         commandMap.put("/write.do",new ArticleWriteCommand());
@@ -36,9 +36,9 @@ public class FrontController extends HttpServlet {
         commandMap.put("/articleUpdateView.do",new ArticleUpdateViewCommand());
         commandMap.put("/articleUpdate.do",new ArticleUpdateCommand());
         commandMap.put("/articleDelete.do",new ArticleDeleteCommand());
-        commandMap.put("/userMyView.do",new UserMyViewCommand());
-        commandMap.put("/userUpdate.do",new UserUpdateCommand());
-        commandMap.put("/userMyPwCheck.do",new UserMyPwCheckCommand());
+        commandMap.put("/memberMyView.do",new MemberLogoutCommand());
+        commandMap.put("/memberUpdate.do",new MemberLogoutCommand());
+        commandMap.put("/memberMyPwCheck.do",new MemberLogoutCommand());
         commandMap.put("/commentInsert.do",new CommentInsertCommand());
         commandMap.put("/ArticleLikeView.do",new ArticleLikeViewCommand());
         commandMap.put("/adminView.do", new AdminViewCommand());
@@ -51,7 +51,7 @@ public class FrontController extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) {
         req.setCharacterEncoding("utf-8");
-        String uri = req.getRequestURI(); //localhost:8080/ >>  members/userLogin.jsp
+        String uri = req.getRequestURI(); //localhost:8080/ >>  members/memberLogin.jsp
         String path = uri.substring(uri.lastIndexOf("/")); //  /*.do
         System.out.println("uri: "+uri);
         System.out.println("com: "+path);

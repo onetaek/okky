@@ -21,10 +21,10 @@ public class CommentInsertCommand implements Command {
         String content = req.getParameter("content");
         int boardId = Integer.parseInt(req.getParameter("boardId"));
         int articleIndex = Integer.parseInt(req.getParameter("articleIndex"));
-        String userEmail = req.getParameter("userEmail");
-        String userNickName = req.getParameter("userNickName");
+        String memberEmail = req.getParameter("memberEmail");
+        String memberNickName = req.getParameter("memberNickName");
 
-        int count = cdao.commentInsert(boardId, articleIndex, userEmail, userNickName, content);
+        int count = cdao.commentInsert(boardId, articleIndex, memberEmail, memberNickName, content);
 
 //        List<CommentDto> commentList = cdao.selectCommentByArticleIndex(articleIndex);
 //        req.setAttribute("commentList", commentList);
@@ -38,9 +38,9 @@ public class CommentInsertCommand implements Command {
         writer.flush();
         writer.close();
         return null;
-//        System.out.println(boardId+articleIndex+userEmail+userNickName+content);
+//        System.out.println(boardId+articleIndex+memberEmail+memberNickName+content);
 //
-//        dao.commentInsert(boardId,articleIndex,userEmail,userNickName,content);
+//        dao.commentInsert(boardId,articleIndex,memberEmail,memberNickName,content);
 //
 //        return new View("redirect:/articleView.do?articleIndex="+articleIndex+"&boardId="+boardId);
     }
