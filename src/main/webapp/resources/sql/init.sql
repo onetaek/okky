@@ -3,7 +3,7 @@ create schema okky;
 
 CREATE TABLE `okky`.`boards`
 (
-    `id`   VARCHAR(10) NOT NULL,
+    `id`   int(10) NOT NULL,
     `text` VARCHAR(20) NOT NULL,
     CONSTRAINT PRIMARY KEY (`id`)
 ) engine = InnoDB
@@ -29,7 +29,7 @@ CREATE TABLE `okky`.`telecoms`
 (
     `value` VARCHAR(10) NOT NULL,
     #SKT,KT,LGU,알뜰폰
-            `text` VARCHAR(20) NOT NULL,
+    `text` VARCHAR(20) NOT NULL,
     CONSTRAINT PRIMARY KEY (`value`)
 ) engine = InnoDB
   default charset = utf8;
@@ -38,7 +38,7 @@ CREATE TABLE `okky`.`statuses`
 (
     `value` VARCHAR(3) NOT NULL,
     #       OKY,SUS,RES
-            `text` VARCHAR(20) NOT NULL,
+    `text` VARCHAR(20) NOT NULL,
     CONSTRAINT PRIMARY KEY (`value`)
 ) engine = InnoDB
   default charset = utf8;
@@ -69,7 +69,7 @@ CREATE TABLE `okky`.`emailAuth`
   default charset = utf8;
 
 
-CREATE TABLE `okky`.`users`
+CREATE TABLE `okky`.`members`
 (
     `email`           VARCHAR(100) NOT NULL,
     `password`        VARCHAR(128) NOT NULL,
@@ -77,9 +77,9 @@ CREATE TABLE `okky`.`users`
     `nickName`        VARCHAR(20)  NOT NULL UNIQUE,
     `telecom`         VARCHAR(10)  NOT NULL,
     #                 0FK
-        `contactCountryValue` VARCHAR (3) NOT NULL,
+    `contactCountryValue` VARCHAR (3) NOT NULL,
     # 082,0FK
-                      `contact` VARCHAR(20) NOT NULL,
+    `contact` VARCHAR(20) NOT NULL,
     `policyEmailSend` boolean      NOT NULL DEFAULT FALSE,
     `createdAt`       DATETIME     NOT NULL DEFAULT NOW(),
     `statusValue`     VARCHAR(3)   NOT NULL DEFAULT 'OKY',
@@ -102,9 +102,9 @@ CREATE TABLE `okky`.`users`
 CREATE TABLE `okky`.`articles`
 (
     `index`     INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `boardId`   VARCHAR(10)   NOT NULL,
+    `boardId`   int(10)   NOT NULL,
     #
-                `userEmail` VARCHAR(100) NOT NULL,
+    `memberEmail` VARCHAR(100) NOT NULL,
     `title`     VARCHAR(100)  NOT NULL,
     `content`   VARCHAR(5000) NOT NULL,
     `view`      BIGINT UNSIGNED NOT NULL DEFAULT 0,
@@ -114,7 +114,7 @@ CREATE TABLE `okky`.`articles`
     CONSTRAINT FOREIGN KEY (`boardId`) REFERENCES `okky`.`boards` (`id`)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT FOREIGN KEY (`userEmail`) REFERENCES `okky`.`users` (`email`)
+    CONSTRAINT FOREIGN KEY (`memberEmail`) REFERENCES `okky`.`members` (`email`)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 ) engine = InnoDB
@@ -122,11 +122,11 @@ CREATE TABLE `okky`.`articles`
 
 CREATE TABLE `okky`.`articleLikes`
 (
-    `userEmail`    VARCHAR(100) NOT NULL,
+    `memberEmail`    VARCHAR(100) NOT NULL,
     `articleIndex` INT UNSIGNED NOT NULL,
     `createdAt`    DATETIME     NOT NULL DEFAULT NOW(),
-    CONSTRAINT PRIMARY KEY (`userEmail`, `articleIndex`),
-    CONSTRAINT FOREIGN KEY (`userEmail`) REFERENCES `okky`.`users` (`email`)
+    CONSTRAINT PRIMARY KEY (`memberEmail`, `articleIndex`),
+    CONSTRAINT FOREIGN KEY (`memberEmail`) REFERENCES `okky`.`members` (`email`)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT FOREIGN KEY (`articleIndex`) REFERENCES `okky`.`articles` (`index`)
@@ -135,26 +135,27 @@ CREATE TABLE `okky`.`articleLikes`
 ) engine = InnoDB
   default charset = utf8;
 
-CREATE TABLE `okky`.`comments`
-(
-    `index`        INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `commentIndex` INT UNSIGNED NULL DEFAULT NULL,
-    `articleIndex` INT UNSIGNED NOT NULL,
-    `userEmail`    VARCHAR(100) NOT NULL,
-    `content`      VARCHAR(200) NOT NULL,
-    `createdAt`    DATETIME     NOT NULL DEFAULT NOW(),
-    CONSTRAINT PRIMARY KEY (`index`),
-    CONSTRAINT FOREIGN KEY (`commentIndex`) REFERENCES `okky`.`comments` (`index`)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT FOREIGN KEY (`articleIndex`) REFERENCES `okky`.`articles` (`index`)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT FOREIGN KEY (`userEmail`) REFERENCES `okky`.`users` (`email`)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-) engine = InnoDB
-  default charset = utf8;
+# drop table `okky`.`comments`;
+# CREATE TABLE `okky`.`comments`
+# (
+#     `index`        INT UNSIGNED NOT NULL AUTO_INCREMENT,
+#     `commentIndex` INT UNSIGNED NULL DEFAULT NULL,
+#     `articleIndex` INT UNSIGNED NOT NULL,
+#     `memberEmail`    VARCHAR(100) NOT NULL,
+#     `content`      VARCHAR(200) NOT NULL,
+#     `createdAt`    DATETIME     NOT NULL DEFAULT NOW(),
+#     CONSTRAINT PRIMARY KEY (`index`),
+#     CONSTRAINT FOREIGN KEY (`commentIndex`) REFERENCES `okky`.`comments` (`index`)
+#         ON UPDATE CASCADE
+#         ON DELETE CASCADE,
+#     CONSTRAINT FOREIGN KEY (`articleIndex`) REFERENCES `okky`.`articles` (`index`)
+#         ON UPDATE CASCADE
+#         ON DELETE CASCADE,
+#     CONSTRAINT FOREIGN KEY (`memberEmail`) REFERENCES `okky`.`members` (`email`)
+#         ON UPDATE CASCADE
+#         ON DELETE CASCADE
+# ) engine = InnoDB
+#   default charset = utf8;
 
 create table `okky`.`tagOfArticle`
 (
@@ -178,23 +179,23 @@ CREATE TABLE `okky`.`comment`
     `group`        int unsigned not null ,
     `sequence`     int unsigned not null default 0,
     `level`        int unsigned not null default 0,
-    `boardId`      VARCHAR(10)  NOT NULL,
+    `boardId`      int(10)  NOT NULL,
     `articleIndex` INT UNSIGNED NOT NULL,
-    `userEmail`    VARCHAR(100) NOT NULL,
-    `userNickName` VARCHAR(20)  NOT NULL,
+    `memberEmail`    VARCHAR(100) NOT NULL,
+    `memberNickName` VARCHAR(20)  NOT NULL,
     `content`      VARCHAR(200) NOT NULL,
     `createdAt`    DATETIME     NOT NULL DEFAULT NOW(),
     CONSTRAINT PRIMARY KEY (`index`),
     constraint foreign key (`boardId`) references `okky`.`boards` (`id`)
         on update cascade
         on delete cascade,
-    constraint foreign key (`userNickName`) references `okky`.`users` (`nickName`)
+    constraint foreign key (`memberNickName`) references `okky`.`members` (`nickName`)
         on update cascade
         on delete cascade,
     CONSTRAINT FOREIGN KEY (`articleIndex`) REFERENCES `okky`.`articles` (`index`)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT FOREIGN KEY (`userEmail`) REFERENCES `okky`.`users` (`email`)
+    CONSTRAINT FOREIGN KEY (`memberEmail`) REFERENCES `okky`.`members` (`email`)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 ) engine = InnoDB
