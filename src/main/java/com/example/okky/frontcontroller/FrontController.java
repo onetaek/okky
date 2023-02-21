@@ -20,40 +20,6 @@ import java.util.Map;
 @Slf4j
 @WebServlet(urlPatterns = {"/main/*","/member/*","/article/*","/admin/*","/board/*"})
 public class FrontController extends HttpServlet {
-
-    private Map<String,Command> commandMap = new HashMap<>();
-    private Map<String,Command> getMapping = new HashMap<>();
-    private Map<String,Command> postMapping = new HashMap<>();
-    public FrontController() {
-//        commandMap.put("/welcome.do", new WelcomeViewCommand());
-//        commandMap.put("/memberLoginView.do", new MemberLoginViewCommand());
-//        commandMap.put("/login.do",new MemberLoginCommand());
-//        commandMap.put("/memberRegisterView.do",new RegisterViewCommand());
-//        commandMap.put("/memberRegister.do",new RegisterCommand());
-//        commandMap.put("/logout.do",new MemberLogoutCommand());
-//        commandMap.put("/articleListView.do",new ArticleListViewCommand());
-//        commandMap.put("/writeView.do",new ArticleWriteViewCommand());
-//        commandMap.put("/write.do",new ArticleWriteCommand());
-//        commandMap.put("/article",new ArticleViewCommand());
-//        commandMap.put("/articleUpdateView.do",new ArticleUpdateViewCommand());
-//        commandMap.put("/articleUpdate.do",new ArticleUpdateCommand());
-//        commandMap.put("/articleDelete.do",new ArticleDeleteCommand());
-//        commandMap.put("/memberMyView.do",new MemberMyViewCommand());
-//        commandMap.put("/memberUpdate.do",new MemberUpdateCommand());
-//        commandMap.put("/memberMyPwCheck.do",new MemberMyPwCheckCommand());
-//        commandMap.put("/commentInsert.do",new CommentInsertCommand());
-//        commandMap.put("/ArticleLikeView.do",new ArticleLikeViewCommand());
-//        commandMap.put("/adminView.do", new AdminViewCommand());
-//        commandMap.put("/commentDelete.do",new CommentDeleteCommand());
-//        commandMap.put("/replyInsert.do",new ReplyInsertCommand());
-//        commandMap.put("/commentListView.do",new CommentListViewCommand());
-
-        //GET
-
-
-        //POST
-    }
-
     @SneakyThrows
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) {
