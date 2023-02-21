@@ -6,7 +6,7 @@
 <body>
 <%
 //    response.sendRedirect("./main/welcome.jsp");
-    response.sendRedirect("welcome.do");
+    response.sendRedirect("/main/welcome");
 %>
 </body>
 </html>

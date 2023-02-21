@@ -33,7 +33,7 @@ public class View {
     }
     private String viewResolver(String viewName){
         if(viewName.contains("redirect:")){
-            return "/"+ viewName.substring(viewName.indexOf("/"));
+            return viewName.substring(viewName.indexOf("/"));
         }else{
             return PREFIX + viewName + SUFFIX;
         }

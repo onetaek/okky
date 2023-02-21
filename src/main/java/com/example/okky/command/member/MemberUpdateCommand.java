@@ -27,30 +27,24 @@ public class MemberUpdateCommand implements Command {
         String pwCheck = req.getParameter("pwCheck");
         System.out.println("pwCheck = " + pwCheck);
 
-//        boolean pwCheckToBool = (pwCheck != null);
-
-//        boolean checkBool = pwCheck.equals("on");
-
-
-//        if(!pwCheckToBool){
-        MemberDto existingmember = mdao.selectmember(email);
-        if (existingmember == null || session.getAttribute("member") == null) {
+        MemberDto existingMember = mdao.selectmember(email);
+        if (existingMember == null || session.getAttribute("member") == null) {
             resp.sendRedirect("login.do");
         }
 
-        existingmember.setName(name);
-        existingmember.setNickName(nickName);
-        existingmember.setContact(contact);
+        existingMember.setName(name);
+        existingMember.setNickName(nickName);
+        existingMember.setContact(contact);
 
         if (pwCheck != null) {
             String pw = req.getParameter("NewPw");
             String hashPw = CryptoUtils.hashSha512(pw);
-            existingmember.setPassword(hashPw);
+            existingMember.setPassword(hashPw);
         }
 
 
-        mdao.updatemember(existingmember);
-        session.setAttribute("member", existingmember);
+        mdao.updatemember(existingMember);
+        session.setAttribute("member", existingMember);
         return new View("/memberMyView.do");
     }
 }

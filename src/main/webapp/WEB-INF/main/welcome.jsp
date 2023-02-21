@@ -5,8 +5,8 @@
 <head>
     <title>JSP - Hello World</title>
     <jsp:include page="../layouts/head.jsp"/>
-    <link rel="stylesheet" href="../../resources/css/layouts/aside.css" />
-    <link rel="stylesheet" href="../../resources/css/main/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layouts/aside.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/main.css">
 </head>
 <body>
 <jsp:include page="../layouts/header.jsp"/>

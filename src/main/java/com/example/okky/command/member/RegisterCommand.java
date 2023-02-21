@@ -27,7 +27,6 @@ public class RegisterCommand implements Command {
         String policyEmailSend = req.getParameter("policyEmailSend");
 
         System.out.println("policyEmailSend : " + policyEmailSend);
-//        boolean policy = policyEmailSend.equals("on");
 
         MemberDto mdto = new MemberDto();
 
@@ -40,17 +39,11 @@ public class RegisterCommand implements Command {
         mdto.setContact(contact);
         mdto.setcontactCountryValue(contactCountryValue);
         if (policyEmailSend == null) {
-            //        System.out.println(Boolean.valueOf(policyEmailSend));
             mdto.setPolicyEmailSend(false);
         } else {
-            //        System.out.println(Boolean.valueOf(policyEmailSend));
             mdto.setPolicyEmailSend(true);
         }
-
-
-
         mdao.insertmember(mdto);
-        System.out.println("RegisterCommand Method : execute End!!!!!!!!!!!!!!!!");
         return new View("/members/memberLogin.jsp");
     }
 }

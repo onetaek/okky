@@ -9,6 +9,7 @@ import com.example.okky.command.comment.CommentListViewCommand;
 import com.example.okky.command.comment.ReplyInsertCommand;
 import com.example.okky.command.member.*;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,14 +17,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
-
-@WebServlet("*.do")
+@Slf4j
+@WebServlet("/")
 public class FrontController extends HttpServlet {
 
     private Map<String,Command> commandMap = new HashMap<>();
 
+    private Map<String,Command> getMapping = new HashMap<>();
+    private Map<String,Command> postMapping = new HashMap<>();
     public FrontController() {
-        commandMap.put("/welcome.do", new WelcomeViewCommand());
+//        commandMap.put("/welcome.do", new WelcomeViewCommand());
         commandMap.put("/memberLoginView.do", new MemberLogoutCommand());
         commandMap.put("/login.do",new MemberLogoutCommand());
         commandMap.put("/memberRegisterView.do",new RegisterViewCommand());
@@ -36,34 +39,40 @@ public class FrontController extends HttpServlet {
         commandMap.put("/articleUpdateView.do",new ArticleUpdateViewCommand());
         commandMap.put("/articleUpdate.do",new ArticleUpdateCommand());
         commandMap.put("/articleDelete.do",new ArticleDeleteCommand());
-        commandMap.put("/memberMyView.do",new MemberLogoutCommand());
-        commandMap.put("/memberUpdate.do",new MemberLogoutCommand());
-        commandMap.put("/memberMyPwCheck.do",new MemberLogoutCommand());
+        commandMap.put("/memberMyView.do",new MemberMyViewCommand());
+        commandMap.put("/memberUpdate.do",new MemberUpdateCommand());
+        commandMap.put("/memberMyPwCheck.do",new MemberMyPwCheckCommand());
         commandMap.put("/commentInsert.do",new CommentInsertCommand());
         commandMap.put("/ArticleLikeView.do",new ArticleLikeViewCommand());
         commandMap.put("/adminView.do", new AdminViewCommand());
         commandMap.put("/commentDelete.do",new CommentDeleteCommand());
         commandMap.put("/replyInsert.do",new ReplyInsertCommand());
         commandMap.put("/commentListView.do",new CommentListViewCommand());
+
+        //GET
+        getMapping.put("/main/welcome",new WelcomeViewCommand());
+
+        //POST
     }
 
     @SneakyThrows
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) {
         req.setCharacterEncoding("utf-8");
-        String uri = req.getRequestURI(); //localhost:8080/ >>  members/memberLogin.jsp
-        String path = uri.substring(uri.lastIndexOf("/")); //  /*.do
-        System.out.println("uri: "+uri);
-        System.out.println("com: "+path);
-
-        Command command = commandMap.get(path);
+        String requestURI = req.getRequestURI();
+        String method = req.getMethod();
+        log.info("method = {}, requestURI = {}",req.getMethod(),requestURI);
+        Command command = null;
+        if(method.equals("GET")){
+            command = getMapping.get(requestURI);
+        }else if(method.equals("POST")){
+            command = postMapping.get(requestURI);
+        }
         if(command == null){
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-
         View view = command.execute(req, resp);
-//        System.out.println("접선 실패 ㅠㅜ");
         if(view != null) view.render(req, resp);
     }
 }

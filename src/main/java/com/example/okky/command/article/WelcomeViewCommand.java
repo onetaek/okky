@@ -31,6 +31,6 @@ public class WelcomeViewCommand implements Command {
         req.setAttribute("tagList",tagOfArticleDtoArraylist);
         req.setAttribute("tagRank",tagRank);
 
-        return new View("/main/welcome.jsp");
+        return new View("/main/welcome");
     }
 }

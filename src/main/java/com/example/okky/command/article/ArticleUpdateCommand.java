@@ -25,7 +25,6 @@ public class ArticleUpdateCommand implements Command {
         String content = req.getParameter("content");
 
 
-
         adao.updateArticle(articleIndex,memberEmail, title, content, tags);
 
         req.setAttribute("boardId",boardId);
