@@ -24,11 +24,8 @@ public class ArticleUpdateCommand implements Command {
         String[] tags = req.getParameterValues("tags");
         String content = req.getParameter("content");
 
-
         adao.updateArticle(articleIndex,memberEmail, title, content, tags);
 
-        req.setAttribute("boardId",boardId);
-        req.setAttribute("articleIndex",articleIndex);
-        return new View("/articleView.do");
+        return new View("redirect:/article?boardId="+boardId+"&articleIndex="+articleIndex);
     }
 }

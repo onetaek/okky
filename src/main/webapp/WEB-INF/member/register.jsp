@@ -17,7 +17,7 @@
 <body>
 <!-- ----------------------------------------로고-------------------------------------------- -->
 <div id="headerWrap">
-    <a href="../main/welcome.do"><img class="logo" src="../../resources/img/okky.svg" alt="OKKY Logo"></a>
+    <a href="/main/welcome"><img class="logo" src="../../resources/img/okky.svg" alt="OKKY Logo"></a>
     <h2>OKKY에 오신것을 환영합니다.</h2>
     <p class="Explanation">OKKY는 소프트웨어 개발자를 위한 지식공유 플랫폼입니다.</p>
     <!-- --------------------------------------SNS로그인----------------------------------------------- -->
@@ -37,7 +37,7 @@
         <span>회원가입에 필요한 기본정보를 입력해주세요.</span>
     </div>
     <div id="lnformation">
-        <form action="userRegister.do" id="form" method="post">
+        <form action="/member/register" id="form" method="post">
             <div>
                 <div class="emaillabel">
                     <label for="email">이메일</label>
@@ -120,7 +120,7 @@
             </div>
             <p class="loginbox">
                 <span>이미 회원이신가요?</span>
-                <a href="./userLoginView.do">로그인</a>
+                <a href="/member/login">로그인</a>
             </p>
         </form>
     </div>

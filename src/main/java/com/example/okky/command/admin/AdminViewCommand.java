@@ -13,6 +13,7 @@ public class AdminViewCommand implements Command {
 
 
 
-        return new View("/admin/admin.jsp");
+
+        return new View("/admin/admin");
     }
 }

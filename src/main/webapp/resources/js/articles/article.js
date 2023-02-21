@@ -26,7 +26,7 @@ up.addEventListener('click', likeUp);
 down.addEventListener('click', likeDown);
 insertBtn.addEventListener('click', () => {
     const xhr = new XMLHttpRequest();
-    xhr.open('post', 'commentInsert.do?boardId=' + boardId.value +
+    xhr.open('post', '/comment/insert?boardId=' + boardId.value +
         "&articleIndex=" + articleIndex.value +
         "&content=" + content.value +
         "&userEmail=" + userEmail.value +
@@ -77,7 +77,7 @@ insertBtn.addEventListener('click', () => {
 
 function likeUp() {
     const xhr = new XMLHttpRequest();
-    xhr.open('post', "ArticleLikeView.do?action=up&userEmail=" + userEmail.value + "&articleIndex=" + articleIndex.value)
+    xhr.open('post', "/article/like?action=up&userEmail=" + userEmail.value + "&articleIndex=" + articleIndex.value)
     xhr.send();
     xhr.onreadystatechange = () => {
 
@@ -94,7 +94,7 @@ function likeUp() {
 
 function likeDown() {
     const xhr = new XMLHttpRequest();
-    xhr.open('post', "ArticleLikeView.do?action=down&userEmail=" + userEmail.value + "&articleIndex=" + articleIndex.value)
+    xhr.open('post', "/article/like?action=down&userEmail=" + userEmail.value + "&articleIndex=" + articleIndex.value)
     xhr.send();
     xhr.onreadystatechange = () => {
 
@@ -112,7 +112,7 @@ function likeDown() {
 
 function selectLikeCount() {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', "ArticleLikeView.do?articleIndex=" + articleIndex.value);
+    xhr.open('GET', "/article/like?articleIndex=" + articleIndex.value);
     xhr.send();
     xhr.onreadystatechange = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) return;
@@ -134,7 +134,7 @@ btn_ellipsis.addEventListener("click", () => {
 
 function selectCommentList() {
     const xhr = new XMLHttpRequest();
-    xhr.open('get', 'commentListView.do?articleIndex=' + articleIndex.value);
+    xhr.open('get', '/comments?articleIndex=' + articleIndex.value);
     xhr.send();
 
     xhr.onreadystatechange = () => {
@@ -208,7 +208,7 @@ function deleteComment(comment, i) {
     console.log(comment_index, comment_boardId, comment_articleIndex);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('post', 'commentDelete.do?index=' + comment_index);
+    xhr.open('post', '/comment/delete?index=' + comment_index);
     xhr.send();
 
     xhr.onreadystatechange = () => {
@@ -232,7 +232,7 @@ function deleteArticle(boardId, articleIndex){
     if(confirm("게시글을 삭제하시 겠습니까?한번 삭제한 게시글은 복구할 수 없습니다.")){
         formDelete['boardId'].value = boardId;
         formDelete['articleIndex'].value = articleIndex;
-        formDelete.action  = "";
+        formDelete.action  = "/article/delete";
         formDelete.submit();
     }
 }

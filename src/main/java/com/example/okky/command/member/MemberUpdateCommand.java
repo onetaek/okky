@@ -29,7 +29,8 @@ public class MemberUpdateCommand implements Command {
 
         MemberDto existingMember = mdao.selectmember(email);
         if (existingMember == null || session.getAttribute("member") == null) {
-            resp.sendRedirect("login.do");
+//            resp.sendRedirect("login.do");
+            return new View("redirect:/member/login");
         }
 
         existingMember.setName(name);
@@ -45,6 +46,6 @@ public class MemberUpdateCommand implements Command {
 
         mdao.updatemember(existingMember);
         session.setAttribute("member", existingMember);
-        return new View("/memberMyView.do");
+        return new View("redirect:/member/my_page");
     }
 }

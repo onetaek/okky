@@ -44,6 +44,6 @@ public class RegisterCommand implements Command {
             mdto.setPolicyEmailSend(true);
         }
         mdao.insertmember(mdto);
-        return new View("/members/memberLogin.jsp");
+        return new View("redirect:/member/login");
     }
 }

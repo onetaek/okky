@@ -17,6 +17,6 @@ public class ArticleDeleteCommand implements Command {
         int boardId = Integer.parseInt(req.getParameter("boardId"));
         adao.deleteArticle(articleIndex);
         req.setAttribute("boardId",boardId);
-        return new View("/articleListView.do");
+        return new View("redirect:/article");
     }
 }

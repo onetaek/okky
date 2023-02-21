@@ -11,10 +11,10 @@
 <jsp:include page="/WEB-INF/layouts/header.jsp"/>
 <section class="section" id="community">
     <div id="write">
-        <form action="articleUpdate.do" method="post">
+        <form action="/article/update" method="post">
             <input type="hidden" name="boardId" value="${boardId}"/>
             <input type="hidden" name="articleIndex" value="${articleDto.index}"/>
-            <input type="hidden" name="userEmail" value="${user.email}"/>
+            <input type="hidden" name="userEmail" value="${sessionMember.email}"/>
             <h3>글수정하기</h3>
             <p>***님 지식공유 플랫폼 OKKY에서 최고의 개발자들과 함께 궁금증을 해결하세요.</p>
             <div id="wrap">

@@ -34,6 +34,6 @@ public class ArticleUpdateViewCommand implements Command {
         req.setAttribute("tagOfArticle",tagOfArticle);//작성자가 입력한 tag값들
         req.setAttribute("tags",tagDtoList);//전체 tag값들
 
-        return new View("/articles/update.jsp");
+        return new View("/article/update");
     }
 }

@@ -4,13 +4,13 @@
 <div id="headerWrap">
     <header id="header">
         <div class="left-nav">
-            <h1><a href="/welcome.do">로고</a></h1>
+            <h1><a href="/main/welcome">로고</a></h1>
             <nav>
                 <h2 class="hidden">주요이용메뉴</h2>
                 <ul class="gnb">
-                    <li><a href="articleListView.do?boardId=1">Q&A</a></li>
-                    <li class="left-line"><a href="articleListView.do?boardId=2">커뮤니티</a></li>
-                    <li class="left-line"><a href="articleListView.do?boardId=3">공지사항</a></li>
+                    <li><a href="/board?boardId=1">Q&A</a></li>
+                    <li class="left-line"><a href="/board?boardId=2">커뮤니티</a></li>
+                    <li class="left-line"><a href="/board?boardId=3">공지사항</a></li>
                 </ul>
             </nav>
         </div>
@@ -27,14 +27,14 @@
                         </label>
                     </form>
                 </li>
-                <c:if test="${user == null}">
-                    <li class="login admin"><a href="userLoginView.do">로그인</a></li>
-                    <li class="join admin"><a href="userRegisterView.do">회원가입</a></li>
+                <c:if test="${sessionMember == null}">
+                    <li class="login admin"><a href="/member/login">로그인</a></li>
+                    <li class="join admin"><a href="/member/register">회원가입</a></li>
                 </c:if>
 
-                <c:if test="${user != null}">
-                    <li class="login admin"><a href="userMyView.do">${user.nickName} 님</a></li>
-                    <li class="join admin"><a href="logout.do">로그 아웃</a></li>
+                <c:if test="${sessionMember != null}">
+                    <li class="login admin"><a href="/member/my">${sessionMember.nickName} 님</a></li>
+                    <li class="join admin"><a href="/member/logout">로그 아웃</a></li>
                 </c:if>
 
             </ul>

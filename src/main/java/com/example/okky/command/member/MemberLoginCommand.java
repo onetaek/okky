@@ -29,12 +29,12 @@ public class MemberLoginCommand implements Command {
         System.out.println("password = " + password);
         String hashPw = CryptoUtils.hashSha512(password);
         System.out.println("hashPw = " + hashPw);
-        PrintWriter out = resp.getWriter();
         MemberDto member = mdao.selectmemberById(id, hashPw);
         System.out.println("member = " + member);
-
+        System.out.println("member is empty? : "+(member==null));
         log.info("admin = {}",member.isAdmin());
-        if (member == null) {
+        PrintWriter out = resp.getWriter();
+        if (member==null) {
             out.print("failure");
             out.flush();
             out.close();
@@ -58,11 +58,12 @@ public class MemberLoginCommand implements Command {
                 out.close();
                 return null;
             } else {
+                req.getSession().setAttribute("sessionMember", member);
+                System.out.println("session에 들어간 member = " + member);
                 out.print("success");
                 out.flush();
                 out.close();
-                req.getSession().setAttribute("member", member);
-                return new View("나무시하지마!!!");
+                return null;
             }
         }
     }

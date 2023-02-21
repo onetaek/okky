@@ -10,6 +10,6 @@ public class MemberLogoutCommand implements Command {
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         req.getSession().invalidate();
-        return new View("/main/welcome.do");
+        return new View("redirect:/main/welcome");
     }
 }

@@ -24,14 +24,14 @@
     <div class="h2">
         <h2>My Page</h2>
     </div>
-    <form action="userUpdate.do" class="form" id="form">
+    <form action="/member/update" class="form" id="form">
         <div class="myContainer">
 
             <div class="explanation">
                 <div class="chr-container">
                     <span class="chr"></span>
                 </div>
-                <span class="user">[${user.nickName}] 님 반갑습니다.</span>
+                <span class="user">[${sessionMember.nickName}] 님 반갑습니다.</span>
                 <div class="text-container">
                     <span class="text">개인 정보를 수정하기 위해서 기존 비밀번호 인증이 필요합니다.</span>
                 </div>
@@ -49,28 +49,28 @@
                 <div>
                     <label>
                         <span class="labelTitle">Email :</span>
-                        <input type="email" name="email" class="email _input" id="email" value="${user.email}" readonly>
+                        <input type="email" name="email" class="email _input" id="email" value="${sessionMember.email}" readonly>
                     </label>
                 </div>
 
                 <div>
                     <label>
                         <span class="labelTitle">이 름 :</span>
-                        <input type="text" name="name" class="name _input" id="name" value="${user.name}">
+                        <input type="text" name="name" class="name _input" id="name" value="${sessionMember.name}">
                     </label>
                 </div>
 
                 <div>
                     <label>
                         <span class="labelTitle">별 명 :</span>
-                        <input type="text" name="nickName" class="nickName _input" id="nickName" value="${user.nickName}">
+                        <input type="text" name="nickName" class="nickName _input" id="nickName" value="${sessionMember.nickName}">
                     </label>
                 </div>
 
                 <div>
                     <label>
                         <span class="labelTitle">연락처 :</span>
-                        <input type="text" name="contact" class="contact _input" id="contact" value="${user.contact}" >
+                        <input type="text" name="contact" class="contact _input" id="contact" value="${sessionMember.contact}" >
                     </label>
                 </div>
 

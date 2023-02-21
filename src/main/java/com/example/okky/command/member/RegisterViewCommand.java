@@ -23,6 +23,6 @@ public class RegisterViewCommand implements Command {
 //        req.setAttribute("contactCountryDtoList",contactCountryDtoList);
         req.setAttribute("telecomDtoList",telecomDtoList);
 
-        return new View("/members/memberRegister.jsp");
+        return new View("/member/register");
     }
 }

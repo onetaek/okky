@@ -42,6 +42,6 @@ public class ArticleViewCommand implements Command {
         req.setAttribute("tagOfArticle",tagOfArticle);
         req.setAttribute("commentList", commentList);
 
-        return new View("/articles/article.jsp");
+        return new View("/article/article");
     }
 }

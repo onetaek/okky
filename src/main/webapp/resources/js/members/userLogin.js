@@ -40,7 +40,7 @@ form.onsubmit = e => {
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('post', `login.do?email=${form['email'].value}&password=${form['password'].value}`);
+    xhr.open('post', `/member/login?email=${form['email'].value}&password=${form['password'].value}`);
     xhr.send();
     xhr.onreadystatechange = () => {
 
@@ -54,11 +54,11 @@ form.onsubmit = e => {
             switch (responseJson) {
                 case "admin":
                     alert("관리자 로그인 성공하였습니다.");
-                    window.location.href ="/adminView.do";
+                    window.location.href ="/admin";
                     break;
                 case "success":
                     alert("로그인에 성공하였습니다.");
-                    window.location.href ="/main/welcome.do";
+                    window.location.href ="/main/welcome";
                     break;
                 case "failure":
                     alert("아이디 혹은 비밀번호를 잘못입력하였습니다. 확인후 다시 시도해 주세요.");

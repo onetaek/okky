@@ -92,7 +92,7 @@ public class ArticleDao {
 
     public void insertArticle(int boardId, String title, String content,
                               String memberEmail, String[] tags) throws SQLException, ClassNotFoundException {
-        System.out.println("insertArticles의 boardId: " + boardId);
+        log.info("insertArticle의 boardId = {}",boardId);
         String sql = "insert into `okky`.`articles` (boardId,memberEmail," +
                 "title,content ) values(?,?,?,?)";
 

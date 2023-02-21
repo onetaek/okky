@@ -11,8 +11,8 @@
 <jsp:include page="/WEB-INF/layouts/header.jsp"/>
 <section class="section" id="community">
   <div id="write">
-    <form id="form" action="/write.do" method="post">
-      <input type="hidden" name="email" value="${user.email}" >
+    <form id="form" action="/article/write" method="post">
+      <input type="hidden" name="email" value="${sessionMember.email}" >
       <input type="hidden" name="boardId" value="${boardId}"/>
       <h3>글작성하기</h3>
       <p>***님 지식공유 플랫폼 OKKY에서 최고의 개발자들과 함께 궁금증을 해결하세요.</p>

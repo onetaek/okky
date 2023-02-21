@@ -18,7 +18,7 @@
             <div class="article-user-info">
                 <a href="#" class="profile"><img src="#" alt="프로필"/></a>
                 <div class="article-user-info-etc">
-                    <a href="#">${user.name}</a>
+                    <a href="#">${sessionMember.name}</a>
                     <div>
                         <span>${articleDto.createdAt}</span>
                         <span>${articleDto.view}</span>
@@ -41,14 +41,14 @@
             </div>
 
 
-            <c:if test="${user.email == articleDto.userEmail}">
+            <c:if test="${sessionMember.email == articleDto.userEmail}">
                 <div class="btn-update-delete-wrap">
                     <button class="btn-ellipsis"><i class="fa-solid fa-ellipsis"></i></button>
                     <div class="btn-toggle off">
-                        <a href="articleUpdateView.do?boardId=${boardId}&articleIndex=${articleDto.index}" class="btn-update">
+                        <a href="/article/update?boardId=${boardId}&articleIndex=${articleDto.index}" class="btn-update">
                             <i class="fa-regular fa-pen-to-square"></i>수정하기
                         </a>
-                        <span href="articleDelete.do?articleIndex=${articleDto.index}&boardId=${boardId}" class="btn-delete">
+                        <span href="/article/delete?articleIndex=${articleDto.index}&boardId=${boardId}" class="btn-delete">
                             <i class="fa-regular fa-trash-can"></i>삭제하기
                         </span>
                     </div>
@@ -61,15 +61,15 @@
         </div>
 
         <form class="articleForm" id="form" method="post">
-            <c:if test="${user != null}">
+            <c:if test="${sessionMember != null}">
                 <textarea class="textContent" type="text" cols="90" rows="5" name="content"></textarea>
                 <input class="submitBtn" name="insertBtn" type="button" value="전송">
                 <input type="hidden" name="boardId" value="${boardId}">
                 <input class="articleIndex" type="hidden" name="articleIndex" value="${articleDto.index}">
-                <input type="hidden" name="userEmail" value="${user.email}">
-                <input type="hidden" name="userNickName" value="${user.nickName}">
+                <input type="hidden" name="userEmail" value="${sessionMember.email}">
+                <input type="hidden" name="userNickName" value="${sessionMember.nickName}">
             </c:if>
-            <c:if test="${user == null}">
+            <c:if test="${sessionMember == null}">
                 <textarea class="textContent" type="text" cols="90" rows="5" name="content" placeholder="로그인을 하여야만 작성하실 수 있습니다." disabled></textarea>
                 <input class="submitBtn" type="submit" value="전송" disabled>
             </c:if>

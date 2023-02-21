@@ -5,8 +5,8 @@
 <head>
     <title>JSP - Hello World</title>
     <jsp:include page="../layouts/head.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layouts/aside.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layouts/aside.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/main.css">
 </head>
 <body>
 <jsp:include page="../layouts/header.jsp"/>
@@ -30,7 +30,7 @@
                                         <li><span>${article.createdAt}</span></li>
                                     </ul>
                                     <div class="title-container">
-                                        <a href="articleView.do?articleIndex=${article.index}&boardId=${board.id}"><p>${article.title}</p></a>
+                                        <a href="/article?articleIndex=${article.index}&boardId=${board.id}"><p>${article.title}</p></a>
                                     </div>
                                     <ul class="tag-container">
                                         <c:forEach var="tag" items="${tagList}" >

@@ -5,7 +5,7 @@
     <ul>
         <c:forEach var="t" items="${tagRank}">
             <li>
-                <a href="articleListView.do?boardId=4&tagValue=${t.tagValue}">${t.tagValue}</a>
+                <a href="/board?boardId=4&tagValue=${t.tagValue}">${t.tagValue}</a>
                 <span>${t.tagRankCount}</span>
             </li>
         </c:forEach>

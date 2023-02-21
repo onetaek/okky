@@ -33,7 +33,7 @@ checkBtn.addEventListener("click", (e) => {
     // const formData = new FormData();
     // formData.append('email', form['email'].value);
     // formData.append('password', form['OldPw'].value);
-    xhr.open('post', 'userMyPwCheck.do?email='+email+'&password='+oldPw.value);
+    xhr.open('post', '/member/pwCheck?email='+email+'&password='+oldPw.value);
 
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {

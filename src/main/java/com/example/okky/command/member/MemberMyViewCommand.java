@@ -13,6 +13,6 @@ public class MemberMyViewCommand implements Command {
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         MemberDto member = (MemberDto)req.getSession().getAttribute("member");
         req.setAttribute("member",member);
-        return new View("/members/memberMy.jsp");
+        return new View("/member/my_page");
     }
 }

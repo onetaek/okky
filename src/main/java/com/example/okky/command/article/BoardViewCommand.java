@@ -6,22 +6,19 @@ import com.example.okky.daos.BoardDao;
 import com.example.okky.daos.TagDao;
 import com.example.okky.dtos.bbs.ArticleDto;
 import com.example.okky.dtos.bbs.BoardDto;
-import com.example.okky.dtos.bbs.TagDto;
 import com.example.okky.dtos.bbs.TagOfArticleDto;
 import com.example.okky.frontcontroller.View;
 import com.example.okky.utils.Pagination;
 import com.example.okky.vo.TagVo;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class ArticleListViewCommand implements Command {
+public class BoardViewCommand implements Command {
     ArticleDao adao = ArticleDao.getInstance();
     BoardDao bdao = BoardDao.getInstance();
     TagDao tdao = TagDao.getInstance();
@@ -60,7 +57,7 @@ public class ArticleListViewCommand implements Command {
         req.setAttribute("boardDto", boardDto);
         req.setAttribute("articleDtoList", articleDtoList);
         req.setAttribute("tagRank", tagRank);
-        return new View("/articles/board.jsp");
+        return new View("/article/board");
 
     }
 }

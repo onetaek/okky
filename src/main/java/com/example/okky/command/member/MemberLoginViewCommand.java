@@ -10,6 +10,6 @@ public class MemberLoginViewCommand implements Command {
 
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
-        return new View("/members/memberLogin.jsp");
+        return new View("/member/login");
     }
 }
