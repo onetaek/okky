@@ -27,7 +27,6 @@ public class MappingFactory {
         getMapping.put("/article/update",new ArticleUpdateViewCommand());//게시글 수정 페이지 이동
         getMapping.put("/member/my",new MemberMyViewCommand());//마이페이지 이동
         getMapping.put("/comments",new CommentListViewCommand());//댓글들 JSON으로 API 응답
-        getMapping.put("/article/like",new ArticleLikeViewCommand());//게시글 좋아요 갯수 API응답
         getMapping.put("/admin",new AdminViewCommand());//관리자 페이지 이동
 
         //POST
@@ -38,6 +37,7 @@ public class MappingFactory {
         postMapping.put("/article/delete",new ArticleDeleteCommand());//글 삭제 처리
         postMapping.put("/member/update", new MemberUpdateCommand());//유저 정보 수정 처리
         postMapping.put("/member/pwCheck",new MemberMyPwCheckCommand());//유저 비밀번호 일치 확인(api)
+        postMapping.put("/article/like",new ArticleLikeViewCommand());//게시글 좋아요 갯수 API응답
         postMapping.put("/comment/insert",new CommentInsertCommand());//댓글 작성 처리(api)
         postMapping.put("/comment/delete",new CommentDeleteCommand());//댓글 삭제 처리(api)
         postMapping.put("/reply/insert",new ReplyInsertCommand());//대댓글 작성 처리(api)

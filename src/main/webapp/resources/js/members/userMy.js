@@ -1,4 +1,3 @@
-console.log("userMy.sjp");
 const form = window.document.getElementById('form');
 const pwCheck = form['pwCheck'];
 const oldPw = form['OldPw'];

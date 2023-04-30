@@ -37,13 +37,7 @@
                             <span>요즘 핫한 키워드에 대해 함께 의견을 나누어 보아요!</span>
                         </c:when>
                     </c:choose>
-
-
             </div>
-
-
-
-
             <div id="top-container">
                 <div class="container">
                     <a class="w_btn" href="/article/write?boardId=${boardId}">

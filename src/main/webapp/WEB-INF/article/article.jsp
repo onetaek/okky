@@ -41,7 +41,7 @@
             </div>
 
 
-            <c:if test="${sessionMember.email == articleDto.userEmail}">
+            <c:if test="${sessionMember.email == articleDto.memberEmail}">
                 <div class="btn-update-delete-wrap">
                     <button class="btn-ellipsis"><i class="fa-solid fa-ellipsis"></i></button>
                     <div class="btn-toggle off">
@@ -66,7 +66,7 @@
                 <input class="submitBtn" name="insertBtn" type="button" value="전송">
                 <input type="hidden" name="boardId" value="${boardId}">
                 <input class="articleIndex" type="hidden" name="articleIndex" value="${articleDto.index}">
-                <input type="hidden" name="userEmail" value="${sessionMember.email}">
+                <input type="hidden" name="memberEmail" value="${sessionMember.email}">
                 <input type="hidden" name="userNickName" value="${sessionMember.nickName}">
             </c:if>
             <c:if test="${sessionMember == null}">
@@ -92,7 +92,7 @@
                 <input class="comment_level" type="hidden" value="" >
                 <input class="comment_boardId" type="hidden" value="" >
                 <input class="comment_articleIndex" type="hidden" value="">
-                <input class="comment_userEmail" type="hidden" value="" >
+                <input class="comment_memberEmail" type="hidden" value="" >
 
                 <textarea class="textContent" type="text" cols="90" rows="5" name="content"></textarea>
                 <input class="submitBtn" type="submit" value="전송">
@@ -117,12 +117,12 @@
 
 <%--    const form = window.document.getElementById('form');--%>
 <%--    const articleIndex = form['articleIndex'];--%>
-<%--    const userEmail = form['userEmail'];--%>
+<%--    const memberEmail = form['memberEmail'];--%>
 <%--    const likeCount = window.document.querySelector('.like-cnt');--%>
 <%--    console.log(up, down);--%>
 <%--    function likeUp () {--%>
 <%--        const xhr = new XMLHttpRequest();--%>
-<%--        xhr.open('post',"ArticleLikeView.do?action=up&userEmail="+userEmail.value+"&articleIndex="+articleIndex.value)--%>
+<%--        xhr.open('post',"ArticleLikeView.do?action=up&memberEmail="+memberEmail.value+"&articleIndex="+articleIndex.value)--%>
 <%--        xhr.send();--%>
 <%--        xhr.onreadystatechange = () => {--%>
 
@@ -139,7 +139,7 @@
 
 <%--    function likeDown() {--%>
 <%--        const xhr = new XMLHttpRequest();--%>
-<%--        xhr.open('post',"ArticleLikeView.do?action=down&userEmail="+userEmail.value+"&articleIndex="+articleIndex.value)--%>
+<%--        xhr.open('post',"ArticleLikeView.do?action=down&memberEmail="+memberEmail.value+"&articleIndex="+articleIndex.value)--%>
 <%--        xhr.send();--%>
 <%--        xhr.onreadystatechange = () => {--%>
 

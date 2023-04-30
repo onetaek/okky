@@ -121,7 +121,7 @@ public class MemberDao {
     }
 
 
-    public MemberDto selectmember(String email) throws SQLException, ClassNotFoundException {
+    public MemberDto selectMember(String email) throws SQLException, ClassNotFoundException {
         MemberDto dto = null;
         String sql = "select * from `okky`.`members` where email = ?";
 

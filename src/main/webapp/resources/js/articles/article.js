@@ -8,7 +8,7 @@ const insertBtn = form['insertBtn'];
 const content = form['content'];
 const boardId = form['boardId'];
 const articleIndex = form['articleIndex'];
-const userEmail = form['userEmail'];
+const memberEmail = form['memberEmail'];
 const userNickName = form['userNickName'];
 const likeCount = window.document.querySelector('.like-cnt');
 console.log(up, down);
@@ -29,7 +29,7 @@ insertBtn.addEventListener('click', () => {
     xhr.open('post', '/comment/insert?boardId=' + boardId.value +
         "&articleIndex=" + articleIndex.value +
         "&content=" + content.value +
-        "&userEmail=" + userEmail.value +
+        "&memberEmail=" + memberEmail.value +
         "&userNickName=" + userNickName.value);
     xhr.send();
     xhr.onreadystatechange = () => {
@@ -53,7 +53,7 @@ insertBtn.addEventListener('click', () => {
                     "                <input class=\"comment_level\" type=\"hidden\" value=\"\" >\n" +
                     "                <input class=\"comment_boardId\" type=\"hidden\" value=\"\" >\n" +
                     "                <input class=\"comment_articleIndex\" type=\"hidden\" value=\"\">\n" +
-                    "                <input class=\"comment_userEmail\" type=\"hidden\" value=\"\" >\n" +
+                    "                <input class=\"comment_memberEmail\" type=\"hidden\" value=\"\" >\n" +
                     "\n" +
                     "                <textarea class=\"textContent\" type=\"text\" cols=\"90\" rows=\"5\" name=\"content\"></textarea>\n" +
                     "                <input class=\"submitBtn\" type=\"submit\" value=\"전송\">\n" +
@@ -77,7 +77,7 @@ insertBtn.addEventListener('click', () => {
 
 function likeUp() {
     const xhr = new XMLHttpRequest();
-    xhr.open('post', "/article/like?action=up&userEmail=" + userEmail.value + "&articleIndex=" + articleIndex.value)
+    xhr.open('post', "/article/like?action=up&memberEmail=" + memberEmail.value + "&articleIndex=" + articleIndex.value)
     xhr.send();
     xhr.onreadystatechange = () => {
 
@@ -94,7 +94,7 @@ function likeUp() {
 
 function likeDown() {
     const xhr = new XMLHttpRequest();
-    xhr.open('post', "/article/like?action=down&userEmail=" + userEmail.value + "&articleIndex=" + articleIndex.value)
+    xhr.open('post', "/article/like?action=down&memberEmail=" + memberEmail.value + "&articleIndex=" + articleIndex.value)
     xhr.send();
     xhr.onreadystatechange = () => {
 
@@ -162,9 +162,7 @@ function selectCommentList() {
                     const comment_content = commentContainer[i].querySelector('.comment_content');
                     comment_content.innerText = comments[i]['content'];
                     const comment_delete_btn = commentContainer[i].querySelector('.comment_delete_btn');
-
                     const comment = comments[i];
-
                     const comment_group = commentContainer[i].querySelector('.comment_group');
                     comment_group.value = comments[i]['group'];
                     const comment_sequence = commentContainer[i].querySelector('.comment_sequence');
@@ -175,8 +173,8 @@ function selectCommentList() {
                     comment_boardId.value = comments[i]['boardId'];
                     const comment_articleIndex = commentContainer[i].querySelector('.comment_articleIndex');
                     comment_articleIndex.value = comments[i]['articleIndex'];
-                    const comment_userEmail = commentContainer[i].querySelector('.comment_userEmail');
-                    comment_userEmail.value = comments[i]['userEmail'];
+                    const comment_memberEmail = commentContainer[i].querySelector('.comment_memberEmail');
+                    comment_memberEmail.value = comments[i]['memberEmail'];
 
                     comment_delete_btn.addEventListener("click", () => {
                         deleteComment(comment, i);
@@ -189,11 +187,8 @@ function selectCommentList() {
                         comment_level,
                         comment_boardId,
                         comment_articleIndex,
-                        comment_userEmail);
-
-
+                        comment_memberEmail);
                 }
-
             } else {
                 alert("통신 오류");
             }

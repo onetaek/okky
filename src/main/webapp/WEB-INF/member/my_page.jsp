@@ -24,7 +24,7 @@
     <div class="h2">
         <h2>My Page</h2>
     </div>
-    <form action="/member/update" class="form" id="form">
+    <form action="/member/update" class="form" id="form" method="post">
         <div class="myContainer">
 
             <div class="explanation">

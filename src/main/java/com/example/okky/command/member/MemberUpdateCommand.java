@@ -27,9 +27,8 @@ public class MemberUpdateCommand implements Command {
         String pwCheck = req.getParameter("pwCheck");
         System.out.println("pwCheck = " + pwCheck);
 
-        MemberDto existingMember = mdao.selectmember(email);
-        if (existingMember == null || session.getAttribute("member") == null) {
-//            resp.sendRedirect("login.do");
+        MemberDto existingMember = mdao.selectMember(email);
+        if (existingMember == null || session.getAttribute("sessionMember") == null) {
             return new View("redirect:/member/login");
         }
 
@@ -46,6 +45,6 @@ public class MemberUpdateCommand implements Command {
 
         mdao.updatemember(existingMember);
         session.setAttribute("member", existingMember);
-        return new View("redirect:/member/my_page");
+        return new View("redirect:/member/my");
     }
 }
